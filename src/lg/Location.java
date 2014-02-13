@@ -1,5 +1,8 @@
 package lg;
 
+/**
+ *  Represents a discrete location in 3-dimensional space
+ */
 public class Location {
   
   public Integer x;

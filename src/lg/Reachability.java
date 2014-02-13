@@ -2,6 +2,10 @@ package lg;
 
 import java.util.ArrayList;
 
+/**
+ * These are the rules that define the movement of a LG piece
+ * in an ABG. 
+ */
 public class Reachability {
   
   private ArrayList<ReachabilityRule> rules;
@@ -15,10 +19,14 @@ public class Reachability {
   }
   
   // Methods
+  public void addRule( ReachabilityRule rule ){
+    rules.add( rule );
+  }
+  
   public Boolean isReachable( Location x,
                               Location y ){
     for( ReachabilityRule rule : rules){
-      if( !rule.rule(x,y) ) {
+      if( !rule.rule( x, y ) ){
         return false;
       }
     }

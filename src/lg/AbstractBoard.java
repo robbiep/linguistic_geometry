@@ -2,6 +2,14 @@ package lg;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a 1 to 3 dimensional board of locations.
+ * Some locations are "inaccessible", which are described
+ * as obstacles.
+ * <br><br>
+ * Modeling different types connections between the locations
+ * is done through the use of external logic.
+ */
 public class AbstractBoard {
   
   private Integer x_dim;

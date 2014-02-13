@@ -1,14 +1,19 @@
 package lg;
 
+/**
+ * LG game piece
+ */
 public class Piece {
   
   private String name;
-  private int value;
+  private String group;
+  private Integer value;
   private Reachability reachability;
   
   // Constructors
-  public Piece( String name, int value, Reachability reachability ){
+  public Piece( String name, String group, int value, Reachability reachability ){
     this.name = name;
+    this.group = group;
     this.value = value;
     this.reachability = reachability;
   }
@@ -17,8 +22,12 @@ public class Piece {
   public String getName() {
     return name;
   }
+  
+  public String getGroup() {
+    return group;
+  }
 
-  public int getValue() {
+  public Integer getValue() {
     return value;
   }
   
