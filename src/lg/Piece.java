@@ -8,14 +8,14 @@ public class Piece {
   private String name;
   private String group;
   private Integer value;
-  private Reachability reachability;
+  private Reachability reach;
   
   // Constructors
-  public Piece( String name, String group, int value, Reachability reachability ){
+  public Piece( String name, String group, int value, Reachability reach ){
     this.name = name;
     this.group = group;
     this.value = value;
-    this.reachability = reachability;
+    this.reach = reach;
   }
   
   // Methods
@@ -32,7 +32,7 @@ public class Piece {
   }
   
   public Boolean isReachable( Location x, Location y ){
-    return reachability.isReachable(x, y);
+    return reach.isReachable(x, y);
   }
   
 }
