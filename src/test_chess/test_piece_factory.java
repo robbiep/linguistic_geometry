@@ -15,8 +15,8 @@ public class test_piece_factory {
   public AbstractBoard ab;
   public ChessPieceFactory factory;
   
-  @Before 
-  public void initialize() {
+  @Before
+  public void initialize(){
     ab = new AbstractBoard( 10, 10, 10 );
     factory = new ChessPieceFactory( ab );
  }
