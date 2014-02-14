@@ -14,6 +14,10 @@ public class ReachabiltyTable {
   public ReachabiltyTable( AbstractBoard ab ) {
     this.ab = ab;
     reachablility_table = new Integer[ab.getX()][ab.getY()][ab.getZ()];
+    clearReachabilityTable();
+  }
+  
+  private void clearReachabilityTable(){
     for( int x = 0; x < ab.getX(); ++ x ){
       for( int y = 0; y < ab.getY(); ++ y ){
         for( int z = 0; z < ab.getZ(); ++ z ){
@@ -29,6 +33,7 @@ public class ReachabiltyTable {
     ArrayList<Location> reached_locations = new ArrayList<Location>();
     ArrayList<Location> temp_reached_locations = new ArrayList<Location>();
     reached_locations.add( location_x );
+    clearReachabilityTable();
     reachablility_table[location_x.x][location_x.y][location_x.z] = distance;
     while( reachable_location_found && distance < INFINITY ){
       ++ distance;

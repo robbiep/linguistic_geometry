@@ -14,10 +14,12 @@ public interface ChessConstants {
   public static final String  NAME_QUEEN    = "Queen";
   public static final String  NAME_KING     = "King";
   
+  public static final Integer INFINITY      = Integer.MAX_VALUE;
+  
   public static final Integer VALUE_PAWN    = 1;
   public static final Integer VALUE_KNIGHT  = 3;
   public static final Integer VALUE_BISHOP  = 3;
   public static final Integer VALUE_ROOK    = 5;
   public static final Integer VALUE_QUEEN   = 9;
-  public static final Integer VALUE_KING    = Integer.MAX_VALUE;
+  public static final Integer VALUE_KING    = INFINITY;
 }
