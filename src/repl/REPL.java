@@ -114,12 +114,16 @@ public class REPL {
           "Dimension x = " + abg.getAbstractBoard().getX() +
           "\nDimension y = " + abg.getAbstractBoard().getY() +
           "\nDimension z = " + abg.getAbstractBoard().getZ() 
-        );       
+        );    
+        System.out.println( "Center: " );
+        System.out.print( "\nObstacles: " );
         if( !abg.getAbstractBoard().getObstacles().isEmpty() ){
-          System.out.print( "\nObstacles: " );
+          
           for( Location obstacle : abg.getAbstractBoard().getObstacles() ){
             System.out.print( "(" + obstacle.getX() + ", " + obstacle.getY() + ", " + obstacle.getZ() + ") " );
           }
+        } else {
+          System.out.println( "None" );
         }
         System.out.print( "\n" );
       }
