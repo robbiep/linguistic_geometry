@@ -1,4 +1,4 @@
-package test_lg_cp_1;
+package test.chess;
 
 import static org.junit.Assert.*;
 import lg.AbstractBoard;
