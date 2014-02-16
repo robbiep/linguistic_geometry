@@ -39,15 +39,17 @@ public class ReachabiltyTable {
       ++ distance;
       reachable_location_found = false;
       temp_reached_locations.clear();
-      for( Location location : reached_locations ){
+      for( Location current_location : reached_locations ){
         for( int x = 0; x < ab.getX(); ++ x ){
           for( int y = 0; y < ab.getY(); ++ y ){
             for( int z = 0; z < ab.getZ(); ++ z ){
-              if( piece.isReachable( location, new Location( x, y, z ) ) && 
-                  reachablility_table[x][y][z] > distance ){
+              Location next_location = new Location( x, y, z );
+              if( piece.isReachable( current_location, next_location ) && 
+                  reachablility_table[x][y][z] > distance &&
+                  ab.validLocation( next_location ) ){
                 reachablility_table[x][y][z] = distance;
                 reachable_location_found = true;
-                temp_reached_locations.add( new Location( x, y, z ) );
+                temp_reached_locations.add( next_location );
               }
             }
           }
@@ -57,8 +59,25 @@ public class ReachabiltyTable {
     }
   }
 
-  public Integer[][][] getReachablility_table(){
+  public Integer[][][] getReachability_table(){
     return reachablility_table;
+  }
+  
+  public void printReachabilityTable(){
+    for( int z = 0; z < ab.getZ(); ++ z ){
+      System.out.println( "Z dimension = " + z );
+      for( int y = 0; y < ab.getY(); ++ y ){
+        for( int x = 0; x < ab.getX(); ++ x ){
+          System.out.print( (reachablility_table[x][y][z].equals( INFINITY )) ? "X " : reachablility_table[x][y][z] + " " );
+        }
+        System.out.print( "\n" );
+      }
+      System.out.print( "\n\n" );
+    }
+  }
+  
+  public void printReachabilityTable( int dimensions ){
+    
   }
   
 }

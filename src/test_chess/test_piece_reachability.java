@@ -22,11 +22,14 @@ public class test_piece_reachability {
   public ArrayList<Location> valid_locations;
   public Piece piece;
   
+  public Integer DIM = 15;
+  public Integer CENTER = 7;
+  
   @Before
   public void initialize(){
-    ab          = new AbstractBoard( 15, 15, 15 );
+    ab          = new AbstractBoard( DIM, DIM, DIM );
     factory     = new ChessPieceFactory( ab );
-    location_x  = new Location( 8, 8, 8 );
+    location_x  = new Location( CENTER, CENTER, CENTER );
     valid_locations = new ArrayList<Location>();
   }
   
@@ -34,12 +37,12 @@ public class test_piece_reachability {
   public void testPawnReachability(){
     piece = factory.createPawn( ChessConstants.COLOR_BLACK );
     valid_locations.clear();
-    valid_locations.add( new Location( 8, 8, 8  ) );
-    valid_locations.add( new Location( 8, 7, 8 ) );
+    valid_locations.add( new Location( CENTER, CENTER, CENTER  ) );
+    valid_locations.add( new Location( CENTER, 6, CENTER ) );
     
-    for( int i = 1; i < 16; ++ i ){
-      for( int j = 1; j < 16; ++ j ){
-        for( int k = 1; k < 16; ++ k ){
+    for( int i = 0; i < DIM; ++ i ){
+      for( int j = 0; j < DIM; ++ j ){
+        for( int k = 0; k < DIM; ++ k ){
           Location test_location = new Location( i, j, k );
           if( valid_locations.contains( test_location ) ){
             assertTrue( piece.isReachable( location_x, test_location ));
@@ -52,12 +55,12 @@ public class test_piece_reachability {
     
     piece = factory.createPawn( ChessConstants.COLOR_WHITE );
     valid_locations.clear();
-    valid_locations.add( new Location( 8, 8, 8  ) );
-    valid_locations.add( new Location( 8, 9, 8 ) );
+    valid_locations.add( new Location( CENTER, CENTER, CENTER  ) );
+    valid_locations.add( new Location( CENTER, 8, CENTER ) );
     
-    for( int i = 1; i < 16; ++ i ){
-      for( int j = 1; j < 16; ++ j ){
-        for( int k = 1; k < 16; ++ k ){
+    for( int i = 0; i < DIM; ++ i ){
+      for( int j = 0; j < DIM; ++ j ){
+        for( int k = 0; k < DIM; ++ k ){
           Location test_location = new Location( i, j, k );
           if( valid_locations.contains( test_location ) ){
             assertTrue( piece.isReachable( location_x, test_location ));
@@ -73,39 +76,39 @@ public class test_piece_reachability {
   public void testKnightReachability(){
     Piece piece = factory.createKnight( ChessConstants.COLOR_BLACK );
     valid_locations.clear();
-    valid_locations.add( new Location( 8, 8, 8  ) );
-    valid_locations.add( new Location( 9,  10, 8  ) );
-    valid_locations.add( new Location( 7,  10, 8  ) );
-    valid_locations.add( new Location( 9,  6,  8  ) );
-    valid_locations.add( new Location( 7,  6,  8  ) );
-    valid_locations.add( new Location( 10, 7,  8  ) );
-    valid_locations.add( new Location( 10, 9,  8  ) );
-    valid_locations.add( new Location( 6,  7,  8  ) );
-    valid_locations.add( new Location( 6,  9,  8  ) );
+    valid_locations.add( new Location( CENTER, CENTER, CENTER  ) );
+    valid_locations.add( new Location( 8,  9,  CENTER  ) );
+    valid_locations.add( new Location( 6,  9,  CENTER  ) );
+    valid_locations.add( new Location( 8,  5,  CENTER  ) );
+    valid_locations.add( new Location( 6,  5,  CENTER  ) );
+    valid_locations.add( new Location( 9,  6,  CENTER  ) );
+    valid_locations.add( new Location( 9,  8,  CENTER  ) );
+    valid_locations.add( new Location( 5,  6,  CENTER  ) );
+    valid_locations.add( new Location( 5,  8,  CENTER  ) );
                                                     
-    valid_locations.add( new Location( 8,  9,  10 ) );
-    valid_locations.add( new Location( 8,  7,  10 ) );
-    valid_locations.add( new Location( 8,  9,  6  ) );
-    valid_locations.add( new Location( 8,  7,  6  ) );
-    valid_locations.add( new Location( 8,  10, 7  ) );
-    valid_locations.add( new Location( 8,  10, 9  ) );
-    valid_locations.add( new Location( 8,  6,  7  ) );
-    valid_locations.add( new Location( 8,  6,  9  ) );
+    valid_locations.add( new Location( CENTER,  8,  9 ) );
+    valid_locations.add( new Location( CENTER,  6,  9 ) );
+    valid_locations.add( new Location( CENTER,  8,  5 ) );
+    valid_locations.add( new Location( CENTER,  6,  5 ) );
+    valid_locations.add( new Location( CENTER,  9,  6 ) );
+    valid_locations.add( new Location( CENTER,  9,  8 ) );
+    valid_locations.add( new Location( CENTER,  5,  6 ) );
+    valid_locations.add( new Location( CENTER,  5,  8 ) );
                                                     
-    valid_locations.add( new Location( 9,  8,  10 ) );
-    valid_locations.add( new Location( 7,  8,  10 ) );
-    valid_locations.add( new Location( 9,  8,  6  ) );
-    valid_locations.add( new Location( 7,  8,  6  ) );
-    valid_locations.add( new Location( 10, 8,  7  ) );
-    valid_locations.add( new Location( 10, 8,  9  ) );
-    valid_locations.add( new Location( 6,  8,  7  ) );
-    valid_locations.add( new Location( 6,  8,  9  ) ); 
+    valid_locations.add( new Location( 8, CENTER,  9 ) );
+    valid_locations.add( new Location( 6, CENTER,  9 ) );
+    valid_locations.add( new Location( 8, CENTER,  5 ) );
+    valid_locations.add( new Location( 6, CENTER,  5 ) );
+    valid_locations.add( new Location( 9, CENTER,  6 ) );
+    valid_locations.add( new Location( 9, CENTER,  8 ) );
+    valid_locations.add( new Location( 5, CENTER,  6 ) );
+    valid_locations.add( new Location( 5, CENTER,  8 ) ); 
         
         
     
-    for( int i = 1; i < 16; ++ i ){
-      for( int j = 1; j < 16; ++ j ){
-        for( int k = 1; k < 16; ++ k ){
+    for( int i = 0; i < DIM; ++ i ){
+      for( int j = 0; j < DIM; ++ j ){
+        for( int k = 0; k < DIM; ++ k ){
           Location test_location = new Location( i, j, k );
           if( valid_locations.contains( test_location ) ){
             assertTrue( "Fails at (" + test_location.x + ", " + test_location.y + ", " + test_location.z + ")", 
@@ -123,17 +126,17 @@ public class test_piece_reachability {
   public void testRookReachability(){
     Piece piece = factory.createRook( ChessConstants.COLOR_BLACK );
     valid_locations.clear();
-    valid_locations.add( new Location( 8, 8, 8  ) );
-    for( int i = 1; i < 16; ++ i ){
-      valid_locations.add( new Location( 8, 8, 8  ) );
-      valid_locations.add( new Location( i, 8, 8  ) );
-      valid_locations.add( new Location( 8, i, 8  ) );
-      valid_locations.add( new Location( 8, 8, i  ) );
+    valid_locations.add( new Location( CENTER, CENTER, CENTER  ) );
+    for( int i = 0; i < DIM; ++ i ){
+      valid_locations.add( new Location( CENTER, CENTER, CENTER  ) );
+      valid_locations.add( new Location( i, CENTER, CENTER  ) );
+      valid_locations.add( new Location( CENTER, i, CENTER  ) );
+      valid_locations.add( new Location( CENTER, CENTER, i  ) );
     }
     
-    for( int i = 1; i < 16; ++ i ){
-      for( int j = 1; j < 16; ++ j ){
-        for( int k = 1; k < 16; ++ k ){
+    for( int i = 0; i < DIM; ++ i ){
+      for( int j = 0; j < DIM; ++ j ){
+        for( int k = 0; k < DIM; ++ k ){
           Location test_location = new Location( i, j, k );
           if( valid_locations.contains( test_location ) ){
             assertTrue( "Fails at (" + test_location.x + ", " + test_location.y + ", " + test_location.z + ")", 
@@ -151,26 +154,26 @@ public class test_piece_reachability {
   public void testBishopReachability(){
     Piece piece = factory.createBishop( ChessConstants.COLOR_BLACK );
     valid_locations.clear();
-    valid_locations.add( new Location( 8, 8, 8  ) );
-    for( int i = 1; i < 16; ++ i ){
-      valid_locations.add( new Location( i, i, 8  ));
-      valid_locations.add( new Location( 16-i, i, 8  ));
-      valid_locations.add( new Location( 8, i, i  ));
-      valid_locations.add( new Location( 8, 16-i, i  ));
-      valid_locations.add( new Location( i, 8, i  ));
-      valid_locations.add( new Location( i, 8, 16-i  ));
+    valid_locations.add( new Location( 7, 7, 7 ) );
+    for( int i = 0; i < DIM; ++ i ){
+      valid_locations.add( new Location( i, i, 7  ));
+      valid_locations.add( new Location( 14-i, i, 7  ));
+      valid_locations.add( new Location( 7, i, i  ));
+      valid_locations.add( new Location( 7, 14-i, i  ));
+      valid_locations.add( new Location( i, 7, i  ));
+      valid_locations.add( new Location( i, 7, 14-i  ));
     }
     
-    for( int i = 1; i < 16; ++ i ){
-      for( int j = 1; j < 16; ++ j ){
-        for( int k = 1; k < 16; ++ k ){
+    for( int i = 0; i < DIM; ++ i ){
+      for( int j = 0; j < DIM; ++ j ){
+        for( int k = 0; k < DIM; ++ k ){
           Location test_location = new Location( i, j, k );
           if( valid_locations.contains( test_location ) ){
             assertTrue( "Fails at (" + test_location.x + ", " + test_location.y + ", " + test_location.z + ")", 
-                        piece.isReachable( location_x, test_location ));
+                        piece.isReachable( new Location( 7, 7, 7 ), test_location ));
           } else {
             assertFalse( "Fails at (" + test_location.x + ", " + test_location.y + ", " + test_location.z + ")", 
-                          piece.isReachable( location_x, test_location ));
+                          piece.isReachable( new Location( 7, 7, 7 ), test_location ));
           }
         }
       }
@@ -181,17 +184,24 @@ public class test_piece_reachability {
   public void testQueenReachability(){
     Piece piece = factory.createQueen( ChessConstants.COLOR_BLACK );
     valid_locations.clear();
-    for( int i = 1; i < 16; ++ i ){
-      for( int j = 1; j < 16; ++ j ){
-        for( int k = 1; k < 16; ++ k ){
-          valid_locations.add( new Location( i, j, k  ));
-        }
-      }
+    for( int i = 0; i < DIM; ++ i ){
+      valid_locations.add( new Location( i, i, 7  ));
+      valid_locations.add( new Location( 14-i, i, 7  ));
+      valid_locations.add( new Location( 7, i, i  ));
+      valid_locations.add( new Location( 7, 14-i, i  ));
+      valid_locations.add( new Location( i, 7, i  ));
+      valid_locations.add( new Location( i, 7, 14-i  ));
+    }
+    for( int i = 0; i < DIM; ++ i ){
+      valid_locations.add( new Location( CENTER, CENTER, CENTER  ) );
+      valid_locations.add( new Location( i, CENTER, CENTER  ) );
+      valid_locations.add( new Location( CENTER, i, CENTER  ) );
+      valid_locations.add( new Location( CENTER, CENTER, i  ) );
     }
     
-    for( int i = 1; i < 16; ++ i ){
-      for( int j = 1; j < 16; ++ j ){
-        for( int k = 1; k < 16; ++ k ){
+    for( int i = 0; i < DIM; ++ i ){
+      for( int j = 0; j < DIM; ++ j ){
+        for( int k = 0; k < DIM; ++ k ){
           Location test_location = new Location( i, j, k );
           if( valid_locations.contains( test_location ) ){
             assertTrue( "Fails at (" + test_location.x + ", " + test_location.y + ", " + test_location.z + ")", 
@@ -209,17 +219,17 @@ public class test_piece_reachability {
   public void testKingReachability(){
     Piece piece = factory.createKing( ChessConstants.COLOR_BLACK );
     valid_locations.clear();
-    for( int i = 7; i < 10; ++ i ){
-      for( int j = 7; j < 10; ++ j ){
-        for( int k = 7; k < 10; ++ k ){
+    for( int i = 6; i < 9; ++ i ){
+      for( int j = 6; j < 9; ++ j ){
+        for( int k = 6; k < 9; ++ k ){
           valid_locations.add( new Location( i, j, k  ));
         }
       }
     }
     
-    for( int i = 1; i < 16; ++ i ){
-      for( int j = 1; j < 16; ++ j ){
-        for( int k = 1; k < 16; ++ k ){
+    for( int i = 0; i < DIM; ++ i ){
+      for( int j = 0; j < DIM; ++ j ){
+        for( int k = 0; k < DIM; ++ k ){
           Location test_location = new Location( i, j, k );
           if( valid_locations.contains( test_location ) ){
             assertTrue( "Fails at (" + test_location.x + ", " + test_location.y + ", " + test_location.z + ")", 

@@ -26,10 +26,10 @@ public class test_reachability_table {
         for( int z = 0; z < ab.getZ(); ++ z ){
           if( x == 3 && y == 3 && z == 3 ){
             assertTrue( "Fails at (" + x + ", " + y + ", " + z + ")",
-                r_table.getReachablility_table()[x][y][z] == 0 );
+                r_table.getReachability_table()[x][y][z] == 0 );
           } else {
             assertTrue( "Fails at (" + x + ", " + y + ", " + z + ")",
-                        r_table.getReachablility_table()[x][y][z] == 1 );       
+                        r_table.getReachability_table()[x][y][z] == 1 );       
           }
         }
       }
@@ -58,18 +58,18 @@ public class test_reachability_table {
         for( int z = 0; z < ab.getZ(); ++ z ){
           if( x == 3 && y == 3 && z == 3 ){
             assertTrue( "Fails at (" + x + ", " + y + ", " + z + ")",
-                r_table.getReachablility_table()[x][y][z] == 0 );
+                r_table.getReachability_table()[x][y][z] == 0 );
           } else if(  Math.abs(3 - x) == 1 && 
                       Math.abs(3 - y) == 1 && 
                       Math.abs(3 - z) == 1 ){
             assertTrue( "Fails at (" + x + ", " + y + ", " + z + ")",
-                        r_table.getReachablility_table()[x][y][z] == 1 );       
+                        r_table.getReachability_table()[x][y][z] == 1 );       
           } else if(  Math.abs(3 - x) == 2 && 
                       Math.abs(3 - y) == 2 && 
                       Math.abs(3 - z) == 2 ){
             assertTrue( "Fails at (" + x + ", " + y + ", " + z + ") ... " + 
-                          r_table.getReachablility_table()[x][y][z],
-                        r_table.getReachablility_table()[x][y][z] == 2 );       
+                          r_table.getReachability_table()[x][y][z],
+                        r_table.getReachability_table()[x][y][z] == 2 );       
           }
         }
       }

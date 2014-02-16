@@ -86,12 +86,12 @@ public class ChessPieceFactory {
     reach.addRule( new ReachabilityRule() {
       @Override
       public Boolean rule( Location x, Location y ){
-        return( ( x.x != y.x && x.y != y.y && x.z == y.z && y.x == y.y ) ||
-                ( x.x != y.x && x.y != y.y && x.z == y.z && y.x + y.y == ab.getX() + 1 ) ||
-                ( x.y != y.y && x.z != y.z && x.x == y.x && y.y == y.z ) ||
-                ( x.y != y.y && x.z != y.z && x.x == y.x && y.y + y.z == ab.getY() + 1 ) ||
-                ( x.x != y.x && x.z != y.z && x.y == y.y && y.x == y.z ) ||
-                ( x.x != y.x && x.z != y.z && x.y == y.y && y.x + y.z == ab.getZ() + 1 ) ||
+        return( ( x.x + y.x == x.y + y.y && x.z == y.z ) ||
+                ( Math.abs(x.x - y.x) == Math.abs(x.y - y.y) && x.z == y.z ) ||
+                ( x.y + y.y == x.z + y.z && x.x == y.x ) ||
+                ( Math.abs(x.z - y.z) == Math.abs(x.y - y.y) && x.x == y.x ) ||
+                ( x.x + y.x == x.z + y.z && x.y == y.y ) ||
+                ( Math.abs(x.x - y.x) == Math.abs(x.z - y.z) && x.y == y.y ) ||
                 x.equals(y) );
       }
     });
@@ -120,6 +120,21 @@ public class ChessPieceFactory {
     Reachability reach = new Reachability();
     reach.addRule( getFullRange() );
     
+    reach.addRule( new ReachabilityRule() {
+      @Override
+      public Boolean rule( Location x, Location y ){
+        return( (x.x == y.x && x.y == y.y) ||
+                (x.z == y.z && x.y == y.y) ||
+                (x.x == y.x && x.z == y.z) ||
+                ( x.x + y.x == x.y + y.y && x.z == y.z ) ||
+                ( Math.abs(x.x - y.x) == Math.abs(x.y - y.y) && x.z == y.z ) ||
+                ( x.y + y.y == x.z + y.z && x.x == y.x ) ||
+                ( Math.abs(x.z - y.z) == Math.abs(x.y - y.y) && x.x == y.x ) ||
+                ( x.x + y.x == x.z + y.z && x.y == y.y ) ||
+                ( Math.abs(x.x - y.x) == Math.abs(x.z - y.z) && x.y == y.y ) ||
+                x.equals(y) );
+      }
+    });
     Piece piece = new Piece( ChessConstants.NAME_QUEEN, color, ChessConstants.VALUE_QUEEN, reach);
     return piece;
   }
@@ -142,9 +157,9 @@ public class ChessPieceFactory {
     return new ReachabilityRule() {
       @Override
       public Boolean rule( Location x, Location y ){
-        return( x.x >= 1 && x.x <= ab.getX() &&
-                x.y >= 1 && x.y <= ab.getY() &&
-                x.z >= 1 && x.z <= ab.getZ() ||
+        return( x.x >= 0 && x.x < ab.getX() &&
+                x.y >= 0 && x.y < ab.getY() &&
+                x.z >= 0 && x.z < ab.getZ() ||
                 x.equals(y) );
       }
     };

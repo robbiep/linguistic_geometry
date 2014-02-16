@@ -24,6 +24,7 @@ public class AbstractBoard {
     this.x_dim = x_dim;
     this.y_dim = 1;
     this.z_dim = 1;
+    obstacles = new ArrayList<Location>();
   }
 
   public AbstractBoard( Integer x_dim, 
@@ -32,6 +33,7 @@ public class AbstractBoard {
     this.x_dim = x_dim;
     this.y_dim = y_dim;
     this.z_dim = 1;
+    obstacles = new ArrayList<Location>();
   }
   
   public AbstractBoard( Integer x_dim, 
@@ -41,6 +43,7 @@ public class AbstractBoard {
     this.x_dim = x_dim;
     this.y_dim = y_dim;
     this.z_dim = z_dim;
+    obstacles = new ArrayList<Location>();
   }
 
   public AbstractBoard( Integer x_dim, 
@@ -69,9 +72,9 @@ public class AbstractBoard {
   }
   
   public Boolean validLocation( Location location ){
-    return( location.x <= x_dim && location.x > 0 &&
-            location.y <= y_dim && location.y > 0 &&
-            location.z <= z_dim && location.z > 0 &&
+    return( location.x < x_dim && location.x >= 0 &&
+            location.y < y_dim && location.y >= 0 &&
+            location.z < z_dim && location.z >= 0 &&
             !obstacles.contains(location) );
   }
   
