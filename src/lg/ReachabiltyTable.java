@@ -56,7 +56,7 @@ public class ReachabiltyTable {
           for( int y = 0; y < ab.getY(); ++ y ){
             for( int z = 0; z < ab.getZ(); ++ z ){
               
-              Location next_location = new Location( x, y, z );
+               Location next_location = new Location( x, y, z );
               if( piece.isReachable( current_location, next_location ) && 
                   reachablility_table[x][y][z] > distance &&
                   ab.validLocation( next_location ) ){

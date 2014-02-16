@@ -146,7 +146,7 @@ public class ChessPieceFactory {
     reach.addRule( new ReachabilityRule() {
       @Override
       public Boolean rule( Location x, Location y ){
-        return( Math.abs(x.x - y.x) <= 1 && Math.abs(x.y - y.y) <= 1 && Math.abs(x.x - y.z) <= 1 );
+        return( Math.abs(x.x - y.x) <= 1 && Math.abs(x.y - y.y) <= 1 && Math.abs(x.z - y.z) <= 1 );
       }
     });
     Piece piece = new Piece( ChessConstants.NAME_KING, color, ChessConstants.VALUE_KING, reach);

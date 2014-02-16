@@ -168,7 +168,7 @@ public class test_piece_reach_table {
     r_table.generateReachablityTable( piece, central_location );
     r_table.printReachabilityTable();
     
-    // TODO finish test for distance 2 and 3
+    // TODO create valid tests
     for( int x = 0; x < ab.getX(); ++ x ){
       for( int y = 0; y < ab.getY(); ++ y ){
         for( int z = 0; z < ab.getZ(); ++ z ){
@@ -199,6 +199,32 @@ public class test_piece_reach_table {
                         r_table.getReachability_table()[x][y][z],
                         r_table.getReachability_table()[x][y][z] == 3 );       
           }
+        }
+      }
+    }
+  }
+  
+  @Test
+  public void testKingReach(){
+    
+    piece = chessPieceFactory.createKing( ChessConstants.COLOR_BLACK );
+    r_table.generateReachablityTable( piece, central_location );
+    r_table.printReachabilityTable();
+    
+    // TODO finish test for distance 2 and 3
+    for( int x = 0; x < ab.getX(); ++ x ){
+      for( int y = 0; y < ab.getY(); ++ y ){
+        for( int z = 0; z < ab.getZ(); ++ z ){
+          if( x == CENTER && y == CENTER && z == CENTER ){
+            assertTrue( "Fails at (" + x + ", " + y + ", " + z + ") ... " + 
+                r_table.getReachability_table()[x][y][z],
+                r_table.getReachability_table()[x][y][z] == 0 );
+          } else {
+            assertTrue( "Fails at (" + x + ", " + y + ", " + z + ") ... " + 
+                        r_table.getReachability_table()[x][y][z],
+                        r_table.getReachability_table()[x][y][z] 
+                            == Math.max( Math.max( Math.abs(CENTER - x),Math.abs(CENTER - y) ), Math.abs(CENTER - z) ));       
+          } 
         }
       }
     }
