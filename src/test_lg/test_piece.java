@@ -5,8 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import chess.ChessConstants;
-import lg.Piece;
-import lg.Reachability;
+import lg.data_objects.Piece;
+import lg.reachability.Reachability;
 
 
 

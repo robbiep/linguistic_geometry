@@ -1,4 +1,6 @@
-package lg;
+package lg.reachability;
+
+import lg.data_objects.Location;
 
 /**
  * General reachability rule.

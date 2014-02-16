@@ -5,8 +5,8 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import lg.AbstractBoard;
-import lg.Location;
-import lg.Piece;
+import lg.data_objects.Location;
+import lg.data_objects.Piece;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -111,10 +111,10 @@ public class test_piece_reachability {
         for( int k = 0; k < DIM; ++ k ){
           Location test_location = new Location( i, j, k );
           if( valid_locations.contains( test_location ) ){
-            assertTrue( "Fails at (" + test_location.x + ", " + test_location.y + ", " + test_location.z + ")", 
+            assertTrue( "Fails at (" + test_location.getX() + ", " + test_location.getY() + ", " + test_location.getZ() + ")", 
                 piece.isReachable( location_x, test_location ));
           } else {
-            assertFalse( "Fails at (" + test_location.x + ", " + test_location.y + ", " + test_location.z + ")", 
+            assertFalse( "Fails at (" + test_location.getX() + ", " + test_location.getY() + ", " + test_location.getZ() + ")", 
                           piece.isReachable( location_x, test_location ));
           }
         }
@@ -139,10 +139,10 @@ public class test_piece_reachability {
         for( int k = 0; k < DIM; ++ k ){
           Location test_location = new Location( i, j, k );
           if( valid_locations.contains( test_location ) ){
-            assertTrue( "Fails at (" + test_location.x + ", " + test_location.y + ", " + test_location.z + ")", 
+            assertTrue( "Fails at (" + test_location.getX() + ", " + test_location.getY() + ", " + test_location.getZ() + ")", 
                 piece.isReachable( location_x, test_location ));
           } else {
-            assertFalse( "Fails at (" + test_location.x + ", " + test_location.y + ", " + test_location.z + ")", 
+            assertFalse( "Fails at (" + test_location.getX() + ", " + test_location.getY() + ", " + test_location.getZ() + ")", 
                           piece.isReachable( location_x, test_location ));
           }
         }
@@ -169,10 +169,10 @@ public class test_piece_reachability {
         for( int k = 0; k < DIM; ++ k ){
           Location test_location = new Location( i, j, k );
           if( valid_locations.contains( test_location ) ){
-            assertTrue( "Fails at (" + test_location.x + ", " + test_location.y + ", " + test_location.z + ")", 
+            assertTrue( "Fails at (" + test_location.getX() + ", " + test_location.getY() + ", " + test_location.getZ() + ")", 
                         piece.isReachable( new Location( 7, 7, 7 ), test_location ));
           } else {
-            assertFalse( "Fails at (" + test_location.x + ", " + test_location.y + ", " + test_location.z + ")", 
+            assertFalse( "Fails at (" + test_location.getX() + ", " + test_location.getY() + ", " + test_location.getZ() + ")", 
                           piece.isReachable( new Location( 7, 7, 7 ), test_location ));
           }
         }
@@ -204,10 +204,10 @@ public class test_piece_reachability {
         for( int k = 0; k < DIM; ++ k ){
           Location test_location = new Location( i, j, k );
           if( valid_locations.contains( test_location ) ){
-            assertTrue( "Fails at (" + test_location.x + ", " + test_location.y + ", " + test_location.z + ")", 
+            assertTrue( "Fails at (" + test_location.getX() + ", " + test_location.getY() + ", " + test_location.getZ() + ")", 
                         piece.isReachable( location_x, test_location ));
           } else {
-            assertFalse( "Fails at (" + test_location.x + ", " + test_location.y + ", " + test_location.z + ")", 
+            assertFalse( "Fails at (" + test_location.getX() + ", " + test_location.getY() + ", " + test_location.getZ() + ")", 
                           piece.isReachable( location_x, test_location ));
           }
         }
@@ -232,10 +232,10 @@ public class test_piece_reachability {
         for( int k = 0; k < DIM; ++ k ){
           Location test_location = new Location( i, j, k );
           if( valid_locations.contains( test_location ) ){
-            assertTrue( "Fails at (" + test_location.x + ", " + test_location.y + ", " + test_location.z + ")", 
+            assertTrue( "Fails at (" + test_location.getX() + ", " + test_location.getY() + ", " + test_location.getZ() + ")", 
                         piece.isReachable( location_x, test_location ));
           } else {
-            assertFalse( "Fails at (" + test_location.x + ", " + test_location.y + ", " + test_location.z + ")", 
+            assertFalse( "Fails at (" + test_location.getX() + ", " + test_location.getY() + ", " + test_location.getZ() + ")", 
                           piece.isReachable( location_x, test_location ));
           }
         }

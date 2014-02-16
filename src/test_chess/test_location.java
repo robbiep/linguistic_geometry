@@ -1,7 +1,7 @@
 package test_chess;
 
 import static org.junit.Assert.*;
-import lg.Location;
+import lg.data_objects.Location;
 
 import org.junit.Test;
 

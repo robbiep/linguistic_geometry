@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import lg.AbstractBoard;
-import lg.Location;
+import lg.data_objects.Location;
 
 import org.junit.Test;
 

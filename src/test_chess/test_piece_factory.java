@@ -2,7 +2,7 @@ package test_chess;
 
 import static org.junit.Assert.*;
 import lg.AbstractBoard;
-import lg.Piece;
+import lg.data_objects.Piece;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,13 +1,13 @@
-package lg;
+package lg.data_objects;
 
 /**
  *  Represents a discrete location in 3-dimensional space
  */
 public class Location {
   
-  public Integer x;
-  public Integer y;
-  public Integer z;
+  private Integer x;
+  private Integer y;
+  private Integer z;
   
   public Location(Integer x) {
     super();
@@ -30,6 +30,30 @@ public class Location {
     this.z = z;
   }
   
+  public Integer getX(){
+    return x;
+  }
+
+  public void setX( Integer x ){
+    this.x = x;
+  }
+
+  public Integer getY(){
+    return y;
+  }
+
+  public void setY( Integer y ){
+    this.y = y;
+  }
+
+  public Integer getZ(){
+    return z;
+  }
+
+  public void setZ( Integer z ){
+    this.z = z;
+  }
+
   @Override
   public boolean equals(Object object){
     

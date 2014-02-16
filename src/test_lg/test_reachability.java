@@ -4,9 +4,9 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-import lg.Location;
-import lg.Reachability;
-import lg.ReachabilityRule;
+import lg.data_objects.Location;
+import lg.reachability.Reachability;
+import lg.reachability.ReachabilityRule;
 
 import org.junit.Test;
 
@@ -28,7 +28,7 @@ public class test_reachability {
     ReachabilityRule rule = new ReachabilityRule(){ 
       @Override
       public Boolean rule(Location x, Location y) {
-        return ( x.x == y.x );
+        return ( x.getX() == y.getX() );
       } 
     };
     assertTrue( "rule.rule does not work", 
@@ -54,13 +54,13 @@ public class test_reachability {
     rules.add( new ReachabilityRule(){ 
       @Override
       public Boolean rule(Location x, Location y) {
-        return ( x.x == y.x );
+        return ( x.getX() == y.getX() );
       } 
     });
     rules.add( new ReachabilityRule(){ 
       @Override
       public Boolean rule(Location x, Location y) {
-        return ( x.y == y.y );
+        return ( x.getY() == y.getY() );
       } 
     });
     Reachability reachability = new Reachability( rules );

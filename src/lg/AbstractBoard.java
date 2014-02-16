@@ -2,6 +2,8 @@ package lg;
 
 import java.util.ArrayList;
 
+import lg.data_objects.Location;
+
 /**
  * Represents a 1 to 3 dimensional board of locations.
  * Some locations are "inaccessible", which are described
@@ -72,9 +74,9 @@ public class AbstractBoard {
   }
   
   public Boolean validLocation( Location location ){
-    return( location.x < x_dim && location.x >= 0 &&
-            location.y < y_dim && location.y >= 0 &&
-            location.z < z_dim && location.z >= 0 &&
+    return( location.getX() < x_dim && location.getX() >= 0 &&
+            location.getY() < y_dim && location.getY() >= 0 &&
+            location.getZ() < z_dim && location.getZ() >= 0 &&
             !obstacles.contains(location) );
   }
   

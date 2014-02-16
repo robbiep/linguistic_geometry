@@ -3,10 +3,10 @@ package chess;
 import java.lang.Math;
 
 import lg.AbstractBoard;
-import lg.Location;
-import lg.Piece;
-import lg.Reachability;
-import lg.ReachabilityRule;
+import lg.data_objects.Location;
+import lg.data_objects.Piece;
+import lg.reachability.Reachability;
+import lg.reachability.ReachabilityRule;
 
 /**
  * Simple non-abstract class instantiation factory for creating LG chess pieces
@@ -29,9 +29,9 @@ public class ChessPieceFactory {
       @Override
       public Boolean rule( Location x, Location y ){
         int direction_value = ( color == ChessConstants.COLOR_BLACK ) ? -1 : 1;
-        return( x.y + direction_value == y.y &&
-                x.x == y.x &&
-                x.z == y.z ||
+        return( x.getY() + direction_value == y.getY() &&
+                x.getX() == y.getX() &&
+                x.getZ() == y.getZ() ||
                 x.equals(y) );
       }
     });
@@ -47,29 +47,29 @@ public class ChessPieceFactory {
     reach.addRule( new ReachabilityRule() {
       @Override
       public Boolean rule( Location x, Location y ){
-        return( ( Math.abs(y.x - x.x) == 1 && 
-                  Math.abs(y.y - x.y) == 2 &&
-                  Math.abs(y.z - x.z) == 0 ) ||
+        return( ( Math.abs(y.getX() - x.getX()) == 1 && 
+                  Math.abs(y.getY() - x.getY()) == 2 &&
+                  Math.abs(y.getZ() - x.getZ()) == 0 ) ||
                   
-                ( Math.abs(y.x - x.x) == 2 && 
-                  Math.abs(y.y - x.y) == 1 &&
-                  Math.abs(y.z - x.z) == 0 ) ||
+                ( Math.abs(y.getX() - x.getX()) == 2 && 
+                  Math.abs(y.getY() - x.getY()) == 1 &&
+                  Math.abs(y.getZ() - x.getZ()) == 0 ) ||
                   
-                ( Math.abs(y.x - x.x) == 1 && 
-                  Math.abs(y.y - x.y) == 0 &&
-                  Math.abs(y.z - x.z) == 2 ) ||
+                ( Math.abs(y.getX() - x.getX()) == 1 && 
+                  Math.abs(y.getY() - x.getY()) == 0 &&
+                  Math.abs(y.getZ() - x.getZ()) == 2 ) ||
                   
-                ( Math.abs(y.x - x.x) == 2 && 
-                  Math.abs(y.y - x.y) == 0 &&
-                  Math.abs(y.z - x.z) == 1 ) ||
+                ( Math.abs(y.getX() - x.getX()) == 2 && 
+                  Math.abs(y.getY() - x.getY()) == 0 &&
+                  Math.abs(y.getZ() - x.getZ()) == 1 ) ||
                   
-                ( Math.abs(y.x - x.x) == 0 && 
-                  Math.abs(y.y - x.y) == 2 &&
-                  Math.abs(y.z - x.z) == 1 ) ||
+                ( Math.abs(y.getX() - x.getX()) == 0 && 
+                  Math.abs(y.getY() - x.getY()) == 2 &&
+                  Math.abs(y.getZ() - x.getZ()) == 1 ) ||
                   
-                ( Math.abs(y.x - x.x) == 0 && 
-                  Math.abs(y.y - x.y) == 1 &&
-                  Math.abs(y.z - x.z) == 2 ) ||
+                ( Math.abs(y.getX() - x.getX()) == 0 && 
+                  Math.abs(y.getY() - x.getY()) == 1 &&
+                  Math.abs(y.getZ() - x.getZ()) == 2 ) ||
                   x.equals(y) );
                
       }
@@ -86,9 +86,9 @@ public class ChessPieceFactory {
     reach.addRule( new ReachabilityRule() {
       @Override
       public Boolean rule( Location x, Location y ){
-        return( ( Math.abs(x.x - y.x) == Math.abs(x.y - y.y) && x.z == y.z ) ||
-                ( Math.abs(x.z - y.z) == Math.abs(x.y - y.y) && x.x == y.x ) ||
-                ( Math.abs(x.x - y.x) == Math.abs(x.z - y.z) && x.y == y.y ) ||
+        return( ( Math.abs(x.getX() - y.getX()) == Math.abs(x.getY() - y.getY()) && x.getZ() == y.getZ() ) ||
+                ( Math.abs(x.getZ() - y.getZ()) == Math.abs(x.getY() - y.getY()) && x.getX() == y.getX() ) ||
+                ( Math.abs(x.getX() - y.getX()) == Math.abs(x.getZ() - y.getZ()) && x.getY() == y.getY() ) ||
                 x.equals(y) );
       }
     });
@@ -103,9 +103,9 @@ public class ChessPieceFactory {
     reach.addRule( new ReachabilityRule() {
       @Override
       public Boolean rule( Location x, Location y ){
-        return( (x.x == y.x && x.y == y.y) ||
-                (x.z == y.z && x.y == y.y) ||
-                (x.x == y.x && x.z == y.z) ||
+        return( (x.getX() == y.getX() && x.getY() == y.getY()) ||
+                (x.getZ() == y.getZ() && x.getY() == y.getY()) ||
+                (x.getX() == y.getX() && x.getZ() == y.getZ()) ||
                 x.equals(y) );
       }
     });
@@ -121,17 +121,17 @@ public class ChessPieceFactory {
       @Override
       public Boolean rule( Location x, Location y ){
         return( // 1D
-                (x.x == y.x && x.y == y.y) ||
-                (x.z == y.z && x.y == y.y) ||
-                (x.x == y.x && x.z == y.z) ||
+                (x.getX() == y.getX() && x.getY() == y.getY()) ||
+                (x.getZ() == y.getZ() && x.getY() == y.getY()) ||
+                (x.getX() == y.getX() && x.getZ() == y.getZ()) ||
                 // 2D
-                ( Math.abs(x.x - y.x) == Math.abs(x.y - y.y) && x.z == y.z ) ||
-                ( Math.abs(x.z - y.z) == Math.abs(x.y - y.y) && x.x == y.x ) ||
-                ( Math.abs(x.x - y.x) == Math.abs(x.z - y.z) && x.y == y.y ) ||
+                ( Math.abs(x.getX() - y.getX()) == Math.abs(x.getY() - y.getY()) && x.getZ() == y.getZ() ) ||
+                ( Math.abs(x.getZ() - y.getZ()) == Math.abs(x.getY() - y.getY()) && x.getX() == y.getX() ) ||
+                ( Math.abs(x.getX() - y.getX()) == Math.abs(x.getZ() - y.getZ()) && x.getY() == y.getY() ) ||
                 // 3D
-                ( Math.abs(x.x - y.x) == Math.abs(x.y - y.y) &&
-                  Math.abs(x.x - y.x) == Math.abs(x.z - y.z) &&
-                  Math.abs(x.y - y.y) == Math.abs(x.z - y.z) ) ||
+                ( Math.abs(x.getX() - y.getX()) == Math.abs(x.getY() - y.getY()) &&
+                  Math.abs(x.getX() - y.getX()) == Math.abs(x.getZ() - y.getZ()) &&
+                  Math.abs(x.getY() - y.getY()) == Math.abs(x.getZ() - y.getZ()) ) ||
                 x.equals(y) );
       }
     });
@@ -146,7 +146,7 @@ public class ChessPieceFactory {
     reach.addRule( new ReachabilityRule() {
       @Override
       public Boolean rule( Location x, Location y ){
-        return( Math.abs(x.x - y.x) <= 1 && Math.abs(x.y - y.y) <= 1 && Math.abs(x.z - y.z) <= 1 );
+        return( Math.abs(x.getX() - y.getX()) <= 1 && Math.abs(x.getY() - y.getY()) <= 1 && Math.abs(x.getZ() - y.getZ()) <= 1 );
       }
     });
     Piece piece = new Piece( ChessConstants.NAME_KING, color, ChessConstants.VALUE_KING, reach);
@@ -157,9 +157,9 @@ public class ChessPieceFactory {
     return new ReachabilityRule() {
       @Override
       public Boolean rule( Location x, Location y ){
-        return( x.x >= 0 && x.x < ab.getX() &&
-                x.y >= 0 && x.y < ab.getY() &&
-                x.z >= 0 && x.z < ab.getZ() ||
+        return( x.getX() >= 0 && x.getX() < ab.getX() &&
+                x.getY() >= 0 && x.getY() < ab.getY() &&
+                x.getZ() >= 0 && x.getZ() < ab.getZ() ||
                 x.equals(y) );
       }
     };

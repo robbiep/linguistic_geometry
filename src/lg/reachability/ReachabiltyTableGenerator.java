@@ -1,17 +1,21 @@
-package lg;
+package lg.reachability;
 
 import java.util.ArrayList;
+
+import lg.AbstractBoard;
+import lg.data_objects.Location;
+import lg.data_objects.Piece;
 
 /**
  * This describes the reachability of an LG piece within an abstract board game.
  */
-public class ReachabiltyTable {
+public class ReachabiltyTableGenerator {
 
   private AbstractBoard ab;
   private Integer reachablility_table[][][];
   private final Integer INFINITY = Integer.MAX_VALUE;
 
-  public ReachabiltyTable( AbstractBoard ab ) {
+  public ReachabiltyTableGenerator( AbstractBoard ab ) {
     this.ab = ab;
     reachablility_table = new Integer[ab.getX()][ab.getY()][ab.getZ()];
     clearReachabilityTable();
@@ -45,7 +49,7 @@ public class ReachabiltyTable {
     ArrayList<Location> temp_reached_locations = new ArrayList<Location>();
     
     reached_locations.add( location_x );
-    reachablility_table[location_x.x][location_x.y][location_x.z] = distance;
+    reachablility_table[location_x.getX()][location_x.getY()][location_x.getZ()] = distance;
     
     while( reachable_location_found && distance < INFINITY ){
       ++ distance;
@@ -79,13 +83,7 @@ public class ReachabiltyTable {
   
   public void printReachabilityTable(){
     for( int z = 0; z < ab.getZ(); ++ z ){
-      System.out.println( "Z dimension = " + z );
-      for( int y = 0; y < ab.getY(); ++ y ){
-        for( int x = 0; x < ab.getX(); ++ x ){
-          System.out.print( (reachablility_table[x][y][z].equals( INFINITY )) ? "x " : reachablility_table[x][y][z] + " " );
-        }
-        System.out.print( "\n" );
-      }
+      printTwoDimTable( z );
       System.out.print( "\n\n" );
     }
   }
@@ -94,7 +92,7 @@ public class ReachabiltyTable {
   * Prints the 2 dimensional table at a specific offset for dimension Z
   * @param z - offset in dimension z
   */
-  public void printReachabilityTable( Integer z ){
+  public void printTwoDimTable( Integer z ){
     System.out.println( "Z dimension = " + z );
     for( int y = 0; y < ab.getY(); ++ y ){
       for( int x = 0; x < ab.getX(); ++ x ){

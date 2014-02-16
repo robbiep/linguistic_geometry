@@ -1,4 +1,6 @@
-package lg;
+package lg.data_objects;
+
+import lg.reachability.Reachability;
 
 /**
  * LG game piece

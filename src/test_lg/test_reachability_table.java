@@ -2,11 +2,11 @@ package test_lg;
 
 import static org.junit.Assert.*;
 import lg.AbstractBoard;
-import lg.Location;
-import lg.Piece;
-import lg.Reachability;
-import lg.ReachabilityRule;
-import lg.ReachabiltyTable;
+import lg.data_objects.Location;
+import lg.data_objects.Piece;
+import lg.reachability.Reachability;
+import lg.reachability.ReachabilityRule;
+import lg.reachability.ReachabiltyTableGenerator;
 
 import org.junit.Test;
 
@@ -18,7 +18,7 @@ public class test_reachability_table {
     Reachability reach = new Reachability();
     Piece piece = new Piece( "Test", "Test", 1, reach );
     
-    ReachabiltyTable r_table = new ReachabiltyTable( ab );
+    ReachabiltyTableGenerator r_table = new ReachabiltyTableGenerator( ab );
     r_table.generateReachablityTable( piece, new Location( 3, 3, 3 ) );
     
     for( int x = 0; x < ab.getX(); ++ x ){
@@ -43,14 +43,14 @@ public class test_reachability_table {
     reach.addRule( new ReachabilityRule() {
       @Override
       public Boolean rule( Location x, Location y ){
-        return( Math.abs(x.x - y.x) <= 1 &&  
-                Math.abs(x.y - y.y) <= 1 &&  
-                Math.abs(x.z - y.z) <= 1 );
+        return( Math.abs(x.getX() - y.getX()) <= 1 &&  
+                Math.abs(x.getY() - y.getY()) <= 1 &&  
+                Math.abs(x.getZ() - y.getZ()) <= 1 );
       }
     });
     Piece piece = new Piece( "Test", "Test", 1, reach );
     
-    ReachabiltyTable r_table = new ReachabiltyTable( ab );
+    ReachabiltyTableGenerator r_table = new ReachabiltyTableGenerator( ab );
     r_table.generateReachablityTable( piece, new Location( 3, 3, 3 ) );
     
     for( int x = 0; x < ab.getX(); ++ x ){

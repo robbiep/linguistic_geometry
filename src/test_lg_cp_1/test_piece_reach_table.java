@@ -2,10 +2,10 @@ package test_lg_cp_1;
 
 import static org.junit.Assert.*;
 import lg.AbstractBoard;
-import lg.Location;
-import lg.Piece;
-import lg.Reachability;
-import lg.ReachabiltyTable;
+import lg.data_objects.Location;
+import lg.data_objects.Piece;
+import lg.reachability.Reachability;
+import lg.reachability.ReachabiltyTableGenerator;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +19,7 @@ public class test_piece_reach_table {
   public Integer CENTER = 7;
   public AbstractBoard ab;
   public ChessPieceFactory chessPieceFactory;
-  ReachabiltyTable r_table;
+  ReachabiltyTableGenerator r_table;
   Piece piece;
   Location central_location;
   
@@ -31,7 +31,7 @@ public class test_piece_reach_table {
   public void initialize(){
     ab = new AbstractBoard( DIM, DIM, DIM );
     chessPieceFactory = new ChessPieceFactory( ab );
-    r_table = new ReachabiltyTable( ab );
+    r_table = new ReachabiltyTableGenerator( ab );
     central_location = new Location( CENTER, CENTER, CENTER );
   }
 
