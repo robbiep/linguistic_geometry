@@ -182,9 +182,9 @@ public class test_piece_reach_table {
             assertTrue( "Fails at (" + x + ", " + y + ", " + z + ") ... " + 
                         r_table.getReachability_table()[x][y][z],
                         r_table.getReachability_table()[x][y][z]  == 1 );       
-          } else if( (x == CENTER && z == CENTER) ||
-              (y == CENTER && z == CENTER) || 
-              (x == CENTER && y == CENTER) ){
+          } else if(  (x == CENTER && z == CENTER) ||
+                      (y == CENTER && z == CENTER) || 
+                      (x == CENTER && y == CENTER) ){
             assertTrue( "Fails at (" + x + ", " + y + ", " + z + ") ... " + 
                         r_table.getReachability_table()[x][y][z],
                         r_table.getReachability_table()[x][y][z] == 1 );

@@ -86,11 +86,8 @@ public class ChessPieceFactory {
     reach.addRule( new ReachabilityRule() {
       @Override
       public Boolean rule( Location x, Location y ){
-        return( ( x.x + y.x == x.y + y.y && x.z == y.z ) ||
-                ( Math.abs(x.x - y.x) == Math.abs(x.y - y.y) && x.z == y.z ) ||
-                ( x.y + y.y == x.z + y.z && x.x == y.x ) ||
+        return( ( Math.abs(x.x - y.x) == Math.abs(x.y - y.y) && x.z == y.z ) ||
                 ( Math.abs(x.z - y.z) == Math.abs(x.y - y.y) && x.x == y.x ) ||
-                ( x.x + y.x == x.z + y.z && x.y == y.y ) ||
                 ( Math.abs(x.x - y.x) == Math.abs(x.z - y.z) && x.y == y.y ) ||
                 x.equals(y) );
       }
@@ -123,15 +120,18 @@ public class ChessPieceFactory {
     reach.addRule( new ReachabilityRule() {
       @Override
       public Boolean rule( Location x, Location y ){
-        return( (x.x == y.x && x.y == y.y) ||
+        return( // 1D
+                (x.x == y.x && x.y == y.y) ||
                 (x.z == y.z && x.y == y.y) ||
                 (x.x == y.x && x.z == y.z) ||
-                ( x.x + y.x == x.y + y.y && x.z == y.z ) ||
+                // 2D
                 ( Math.abs(x.x - y.x) == Math.abs(x.y - y.y) && x.z == y.z ) ||
-                ( x.y + y.y == x.z + y.z && x.x == y.x ) ||
                 ( Math.abs(x.z - y.z) == Math.abs(x.y - y.y) && x.x == y.x ) ||
-                ( x.x + y.x == x.z + y.z && x.y == y.y ) ||
                 ( Math.abs(x.x - y.x) == Math.abs(x.z - y.z) && x.y == y.y ) ||
+                // 3D
+                ( Math.abs(x.x - y.x) == Math.abs(x.y - y.y) &&
+                  Math.abs(x.x - y.x) == Math.abs(x.z - y.z) &&
+                  Math.abs(x.y - y.y) == Math.abs(x.z - y.z) ) ||
                 x.equals(y) );
       }
     });

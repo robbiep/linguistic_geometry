@@ -27,14 +27,26 @@ public class ReachabiltyTable {
     }
   }
   
-  public void generateReachablityTable( Piece piece, Location location_x ){
+  /**
+   * Creates a x by y by z reachability table, returns it, and stores it within the class
+   * @param piece - piece to generate the table for
+   * @param location_x - initial position to create the table from
+   * @return the reachability table
+   */
+  public Integer[][][] generateReachablityTable( Piece piece, Location location_x ){
+    clearReachabilityTable();
+    if( !ab.validLocation(location_x ) ){
+      return reachablility_table;
+    }
+    
     Integer distance = 0;
     Boolean reachable_location_found = true;
     ArrayList<Location> reached_locations = new ArrayList<Location>();
     ArrayList<Location> temp_reached_locations = new ArrayList<Location>();
+    
     reached_locations.add( location_x );
-    clearReachabilityTable();
     reachablility_table[location_x.x][location_x.y][location_x.z] = distance;
+    
     while( reachable_location_found && distance < INFINITY ){
       ++ distance;
       reachable_location_found = false;
@@ -43,6 +55,7 @@ public class ReachabiltyTable {
         for( int x = 0; x < ab.getX(); ++ x ){
           for( int y = 0; y < ab.getY(); ++ y ){
             for( int z = 0; z < ab.getZ(); ++ z ){
+              
               Location next_location = new Location( x, y, z );
               if( piece.isReachable( current_location, next_location ) && 
                   reachablility_table[x][y][z] > distance &&
@@ -57,6 +70,7 @@ public class ReachabiltyTable {
       }
       reached_locations = new ArrayList<Location>(temp_reached_locations);
     }
+    return reachablility_table;
   }
 
   public Integer[][][] getReachability_table(){
@@ -68,7 +82,7 @@ public class ReachabiltyTable {
       System.out.println( "Z dimension = " + z );
       for( int y = 0; y < ab.getY(); ++ y ){
         for( int x = 0; x < ab.getX(); ++ x ){
-          System.out.print( (reachablility_table[x][y][z].equals( INFINITY )) ? "X " : reachablility_table[x][y][z] + " " );
+          System.out.print( (reachablility_table[x][y][z].equals( INFINITY )) ? "x " : reachablility_table[x][y][z] + " " );
         }
         System.out.print( "\n" );
       }
@@ -76,8 +90,18 @@ public class ReachabiltyTable {
     }
   }
   
-  public void printReachabilityTable( int dimensions ){
-    
+ /**
+  * Prints the 2 dimensional table at a specific offset for dimension Z
+  * @param z - offset in dimension z
+  */
+  public void printReachabilityTable( Integer z ){
+    System.out.println( "Z dimension = " + z );
+    for( int y = 0; y < ab.getY(); ++ y ){
+      for( int x = 0; x < ab.getX(); ++ x ){
+        System.out.print( (reachablility_table[x][y][z].equals( INFINITY )) ? "x " : reachablility_table[x][y][z] + " " );
+      }
+      System.out.print( "\n" );
+    }
   }
   
 }
