@@ -20,6 +20,24 @@ public class ChessPieceFactory {
     this.ab = ab;
   }
   
+  public Piece createChessPiece( final String name, final String color ) {
+    if( name.toLowerCase().equals("pawn") ){
+      return createPawn( color );
+    } else if( name.toLowerCase().equals("rook") ){
+      return createRook( color );
+    } else if( name.toLowerCase().equals("bishop") ){
+      return createBishop( color );
+    } else if( name.toLowerCase().equals("knight") ){
+      return createKnight( color );
+    } else if( name.toLowerCase().equals("queen") ){
+      return createQueen( color );
+    } else if( name.toLowerCase().equals("king") ){
+      return createKing( color );
+    } else {
+      return null;
+    }
+  }
+  
   public Piece createPawn( final String color ){
     Reachability reach = new Reachability();
     reach.addRule( getFullRange() );

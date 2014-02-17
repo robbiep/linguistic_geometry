@@ -46,6 +46,6 @@ public class AbstractBoardGame {
     table_generator.generateReachablityTable( piece, location );
     table_generator.printReachabilityTable();
   }
- 
+  
 
 }
