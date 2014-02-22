@@ -1,25 +1,28 @@
 package lg.reachability;
 
-import lg.data_objects.Dimensions;
+import lg.data_objects.Piece;
 
 public class ReachabilityTable {
   
+  private Piece piece;
   private Integer table[][][];
-  private Dimensions dimensions;
   private final Integer INFINITY = Integer.MAX_VALUE;
   
-  public ReachabilityTable( Integer[][][] table, Dimensions dimensions ) {
-    super();
+  public ReachabilityTable( Piece piece, Integer[][][] table ) {
+    this.piece = piece;
     this.table = table;
-    this.dimensions = dimensions;
   }
   
   public Integer[][][] getTable(){
     return table;
   }
   
+  public Piece getPiece(){
+    return piece;
+  }
+  
   public void printReachabilityTable(){
-    for( int z = 0; z < dimensions.getZ_dim(); ++ z ){
+    for( int z = 0; z < table[0][0].length; ++ z ){
       printTwoDimTable( z );
       System.out.print( "\n\n" );
     }
@@ -31,8 +34,8 @@ public class ReachabilityTable {
   */
   public void printTwoDimTable( Integer z ){
     System.out.println( "Z dimension = " + z );
-    for( int y = 0; y < dimensions.getY_dim(); ++ y ){
-      for( int x = 0; x < dimensions.getX_dim(); ++ x ){
+    for( int y = 0; y < table[0].length; ++ y ){
+      for( int x = 0; x < table.length; ++ x ){
         System.out.print( (table[x][y][z].equals( INFINITY )) ? "x " : table[x][y][z] + " " );
       }
       System.out.print( "\n" );

@@ -37,10 +37,10 @@ public class ReachabiltyTableGenerator {
    * @param location_x - initial position to create the table from
    * @return the reachability table
    */
-  public Integer[][][] generateReachablityTable( Piece piece, Location location_x ){
+  public ReachabilityTable generateReachablityTable( Piece piece, Location location_x ){
     clearReachabilityTable();
-    if( !ab.validLocation(location_x ) ){
-      return reachablility_table;
+    if( !ab.validLocation( location_x ) ){
+      return null;
     }
     
     Integer distance = 0;
@@ -74,7 +74,7 @@ public class ReachabiltyTableGenerator {
       }
       reached_locations = new ArrayList<Location>(temp_reached_locations);
     }
-    return reachablility_table;
+    return new ReachabilityTable( piece, reachablility_table );
   }
 
   public Integer[][][] getReachability_table(){

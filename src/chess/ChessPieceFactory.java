@@ -5,6 +5,7 @@ import java.lang.Math;
 import lg.AbstractBoard;
 import lg.data_objects.Location;
 import lg.data_objects.Piece;
+import lg.data_objects.PieceFactory;
 import lg.reachability.Reachability;
 import lg.reachability.ReachabilityRule;
 
@@ -12,7 +13,7 @@ import lg.reachability.ReachabilityRule;
  * Simple non-abstract class instantiation factory for creating LG chess pieces
  * based on reachability rules.
  */
-public class ChessPieceFactory {
+public class ChessPieceFactory extends PieceFactory {
   
   private AbstractBoard ab;
   

@@ -34,6 +34,9 @@ public class Piece {
   }
   
   public Boolean isReachable( Location x, Location y ){
+    if( reach == null ){
+      return null;
+    }
     return reach.isReachable(x, y);
   }
   
