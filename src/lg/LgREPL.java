@@ -1,17 +1,11 @@
-package repl;
+package lg;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.StringTokenizer;
-
+import repl.Command;
+import repl.REPL;
 import chess.ChessPieceFactory;
-import lg.AbstractBoard;
-import lg.AbstractBoardGame;
 import lg.data_objects.Color;
 import lg.data_objects.Location;
 import lg.data_objects.Piece;
-import lg.data_objects.PieceFactory;
 import lg.data_structures.GamePiece;
 
 public class LgREPL extends REPL {
@@ -24,8 +18,8 @@ public class LgREPL extends REPL {
   private final Integer DIMENSION_LENGTH = 15;
   private final Integer CENTER = 7;
   
-  public LgREPL( Scanner reader ) {
-    super(reader);
+  public LgREPL() {
+    super();
     this.abg          = new AbstractBoardGame( new AbstractBoard( DIMENSION_LENGTH,
                                                                   DIMENSION_LENGTH,
                                                                   DIMENSION_LENGTH ));

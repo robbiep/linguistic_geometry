@@ -1,4 +1,4 @@
-package lg_cp_1;
+package project;
 
 
 public class lg_cp_1 {

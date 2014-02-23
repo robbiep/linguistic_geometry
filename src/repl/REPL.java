@@ -10,9 +10,9 @@ public class REPL {
   protected String[] command_args;
   protected HashMap<String,Command> command_map;
   
-  public REPL( Scanner reader ) {
+  public REPL() {
     this.run          = true;
-    this.reader       = reader;
+    this.reader       = new Scanner(System.in);
     this.command_args = new String[0];
     this.command_map  = new HashMap<String,Command>();
   }

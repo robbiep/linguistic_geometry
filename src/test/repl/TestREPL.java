@@ -5,16 +5,15 @@ import static org.junit.Assert.*;
 import java.io.Console;
 import java.util.Scanner;
 
-import org.junit.Test;
+import lg.LgREPL;
 
-import repl.LgREPL;
+import org.junit.Test;
 
 public class TestREPL {
 
   @Test
   public void test(){
-    Scanner reader = new Scanner(System.in);
-    LgREPL repl = new LgREPL( reader );
+    LgREPL repl = new LgREPL();
     repl.run();
   }
 
