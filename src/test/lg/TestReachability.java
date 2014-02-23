@@ -10,7 +10,7 @@ import lg.reachability.ReachabilityRule;
 
 import org.junit.Test;
 
-public class test_reachability {
+public class TestReachability {
 
   @Test
   public void testReachabilityRuleNull() {

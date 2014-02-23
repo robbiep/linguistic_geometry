@@ -1,49 +1,53 @@
 package lg;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
+import lg.data_objects.Color;
 import lg.data_objects.Location;
 import lg.data_objects.Piece;
-import lg.reachability.ReachabiltyTableGenerator;
+import lg.data_structures.GameMap;
+import lg.data_structures.GamePiece;
+import lg.reachability.ReachabilityTable;
+import lg.reachability.ReachabilityTableGenerator;
 
-public class AbstractBoardGame {
+public class AbstractBoardGame implements ABG_Functions {
   
   AbstractBoard abstract_board;
-  ReachabiltyTableGenerator table_generator;
-  HashMap<Piece,Location> pieces;
-
-  private final Integer DEFAULT_DIM = 15;
-  
-  // TODO remove
-  public AbstractBoardGame() {
-    super();
-    this.abstract_board = new AbstractBoard( DEFAULT_DIM, DEFAULT_DIM, DEFAULT_DIM );
-    this.table_generator = new ReachabiltyTableGenerator( abstract_board );
-    pieces = new HashMap<Piece,Location>();
-  }
+  ReachabilityTableGenerator table_generator;
+  GameMap gameMap;
   
   public AbstractBoardGame( AbstractBoard ab ) {
-    super();
     this.abstract_board = ab;
-    this.table_generator = new ReachabiltyTableGenerator( ab );
-    pieces = new HashMap<Piece,Location>();
+    gameMap = new GameMap();
   }
 
   public AbstractBoard getAbstractBoard(){
     return abstract_board;
   }
+  
+  public Integer getDimX(){
+    return abstract_board.getX();
+  }
+  
+  public Integer getDimY(){
+    return abstract_board.getY();
+  }
+  
+  public Integer getDimZ(){
+    return abstract_board.getZ();
+  }
 
   /**
-   * Sets new abstract board. Removes any pieces no longer in range.
+   * Sets new abstract board. Removes any gameMap no longer in range.
    * @param abstract_board
    */
   public void setAbstractBoard( AbstractBoard abstract_board ){
     this.abstract_board = abstract_board;
     
-    // Remove out of range pieces
-    Iterator<Map.Entry<Piece,Location>> it = pieces.entrySet().iterator();
+    // Remove out of range gameMap
+    Iterator<Map.Entry<Piece,Location>> it = gameMap.entrySet().iterator();
     while( it.hasNext() ){
       if( !abstract_board.validLocation( it.next().getValue() )){
         it.remove();
@@ -51,46 +55,92 @@ public class AbstractBoardGame {
     }
   }
   
+  ///////////////////////////////////////////
+  // GamePiece FUNCTIONS
+  ///////////////////////////////////////////
+  
+  public GamePiece getByPiece( Piece piece ){
+    return gameMap.getByPiece( piece );
+  }
+  
+  public GamePiece getByLocation( Location location ){
+    return gameMap.getByLocation( location );
+  }
+  
+  public GamePiece[] getAllByColor( Color color ){
+    ArrayList<GamePiece> gamePieces = new ArrayList<GamePiece>();
+    Iterator<Map.Entry<Piece,Location>> it = gameMap.entrySet().iterator();
+    while( it.hasNext() ){
+      Map.Entry<Piece,Location> entry = it.next();
+      if( entry.getKey().getColor() == color ){
+        gamePieces.add( new GamePiece( entry.getKey(), entry.getValue() )); 
+      }
+    }
+    return (GamePiece[]) gamePieces.toArray();
+  }
+  
+  public void clearAllByColor( Color color ){
+    Iterator<Map.Entry<Piece,Location>> it = gameMap.entrySet().iterator();
+    while( it.hasNext() ){
+      Map.Entry<Piece,Location> entry = it.next();
+      if( entry.getKey().getColor() == color ){
+        it.remove();
+      }
+    }
+  }
+  
   public void addPiece( Piece piece, Location location ){
-    pieces.put( piece, location );
+    gameMap.put( piece, location );
   }
   
   public void removePiece( Piece piece ){
-    pieces.remove( piece );
+    gameMap.remove( piece );
   }
   
   public void clearPieces(){
-    pieces.clear();
+    gameMap.clear();
+  }
+ 
+  public Boolean validLocation( Location location ){
+    return( abstract_board.validLocation( location ) );
   }
   
   /**
    * Generates an x by y by z reachability table for a piece
    * @param location location 0 for reachability table
    */
-  public void getReachabilityTable( Piece piece, Location location ){
-    table_generator.generateReachablityTable( piece, location );
-    table_generator.printReachabilityTable();
+  public ReachabilityTable getReachabilityTable( Piece piece, Location location ){
+    return ReachabilityTableGenerator.generate( this, piece, location );
   }
   
-  public Boolean ( Location location ){
-    
-  }
+
   
-  
+  ///////////////////////////////////
   // ABSTRACT BOARD GAME FUNCTIONS //
+  ///////////////////////////////////
   
+  @Override
   public Boolean abg_R( Piece piece, Location origin, Location target ){
     return  piece.isReachable( origin, target ) && 
-            abstract_board.validLocation( location ) && 
-            ;
+            validLocation( target );
   }
-  
-  public Location abg_on( Piece piece ){
-    return pieces.get( piece );
+
+  @Override
+  public Location abg_ON( Piece piece ){
+    // TODO Auto-generated method stub
+    return null;
   }
-  
-  public Integer abg_map( Piece piece, Location location ){
-    // TODO finish
+
+  @Override
+  public Integer abg_TR( Piece piece, Location origin, Location target ){
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Integer abg_MAP( Piece piece, Location location ){
+    // TODO Auto-generated method stub
+    return null;
   }
   
 

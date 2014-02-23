@@ -3,6 +3,7 @@ package chess;
 import java.lang.Math;
 
 import lg.AbstractBoard;
+import lg.data_objects.Color;
 import lg.data_objects.Location;
 import lg.data_objects.Piece;
 import lg.data_objects.PieceFactory;
@@ -21,7 +22,7 @@ public class ChessPieceFactory extends PieceFactory {
     this.ab = ab;
   }
   
-  public Piece createChessPiece( final String name, final String color ) {
+  public Piece createChessPiece( final String name, final Color color ) {
     if( name.toLowerCase().equals("pawn") ){
       return createPawn( color );
     } else if( name.toLowerCase().equals("rook") ){
@@ -39,7 +40,7 @@ public class ChessPieceFactory extends PieceFactory {
     }
   }
   
-  public Piece createPawn( final String color ){
+  public Piece createPawn( final Color color ){
     Reachability reach = new Reachability();
     reach.addRule( getFullRange() );
     
@@ -47,7 +48,7 @@ public class ChessPieceFactory extends PieceFactory {
     reach.addRule( new ReachabilityRule() {
       @Override
       public Boolean rule( Location x, Location y ){
-        int direction_value = ( color == ChessConstants.COLOR_BLACK ) ? -1 : 1;
+        int direction_value = ( color == Color.BLACK ) ? -1 : 1;
         return( x.getY() + direction_value == y.getY() &&
                 x.getX() == y.getX() &&
                 x.getZ() == y.getZ() ||
@@ -59,7 +60,7 @@ public class ChessPieceFactory extends PieceFactory {
     return piece;
   }
   
-  public Piece createKnight( final String color ){
+  public Piece createKnight( final Color color ){
     Reachability reach = new Reachability();
     reach.addRule( getFullRange() );
     
@@ -98,7 +99,7 @@ public class ChessPieceFactory extends PieceFactory {
     return piece;
   }
   
-  public Piece createBishop( final String color ){
+  public Piece createBishop( final Color color ){
     Reachability reach = new Reachability();
     reach.addRule( getFullRange() );
     
@@ -115,7 +116,7 @@ public class ChessPieceFactory extends PieceFactory {
     return piece;
   }
   
-  public Piece createRook( final String color ){
+  public Piece createRook( final Color color ){
     Reachability reach = new Reachability();
     reach.addRule( getFullRange() );
     
@@ -132,7 +133,7 @@ public class ChessPieceFactory extends PieceFactory {
     return piece;
   }
   
-  public Piece createQueen( final String color ){
+  public Piece createQueen( final Color color ){
     Reachability reach = new Reachability();
     reach.addRule( getFullRange() );
     
@@ -158,7 +159,7 @@ public class ChessPieceFactory extends PieceFactory {
     return piece;
   }
   
-  public Piece createKing( final String color ){
+  public Piece createKing( final Color color ){
     Reachability reach = new Reachability();
     reach.addRule( getFullRange() );
     

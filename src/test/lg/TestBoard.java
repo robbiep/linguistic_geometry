@@ -9,7 +9,7 @@ import lg.data_objects.Location;
 
 import org.junit.Test;
 
-public class test_board {
+public class TestBoard {
 
   @Test
   public void testBoard() {

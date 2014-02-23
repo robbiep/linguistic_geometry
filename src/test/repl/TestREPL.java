@@ -7,14 +7,14 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
-import repl.REPL;
+import repl.LgREPL;
 
-public class test_REPL {
+public class TestREPL {
 
   @Test
   public void test(){
     Scanner reader = new Scanner(System.in);
-    REPL repl = new REPL( reader );
+    LgREPL repl = new LgREPL( reader );
     repl.run();
   }
 

@@ -4,9 +4,9 @@ import lg.data_objects.Piece;
 
 public class ReachabilityTable {
   
-  private Piece piece;
-  private Integer table[][][];
-  private final Integer INFINITY = Integer.MAX_VALUE;
+  private final Piece           piece;
+  private final Integer[][][]   table;
+  public  final static Integer  INFINITY = Integer.MAX_VALUE;
   
   public ReachabilityTable( Piece piece, Integer[][][] table ) {
     this.piece = piece;

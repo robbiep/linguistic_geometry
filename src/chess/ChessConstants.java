@@ -4,8 +4,6 @@ package chess;
  * Basic constants that define the game of chess.
  */
 public interface ChessConstants {
-  public static final String  COLOR_WHITE   = "White";
-  public static final String  COLOR_BLACK   = "Black";
   
   public static final String  NAME_PAWN     = "Pawn";
   public static final String  NAME_KNIGHT   = "Knight";

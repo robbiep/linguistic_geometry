@@ -8,14 +8,14 @@ import lg.reachability.Reachability;
 public class Piece {
   
   private String name;
-  private String group;
+  private Color color;
   private Integer value;
   private Reachability reach;
   
   // Constructors
-  public Piece( String name, String group, int value, Reachability reach ){
+  public Piece( String name, Color color, int value, Reachability reach ){
     this.name = name;
-    this.group = group;
+    this.color = color;
     this.value = value;
     this.reach = reach;
   }
@@ -25,8 +25,8 @@ public class Piece {
     return name;
   }
   
-  public String getGroup() {
-    return group;
+  public Color getColor() {
+    return color;
   }
 
   public Integer getValue() {
@@ -38,6 +38,19 @@ public class Piece {
       return null;
     }
     return reach.isReachable(x, y);
+  }
+  
+  @Override
+  public boolean equals(Object object){
+    
+    if (object != null && object instanceof Piece){
+      Piece piece = (Piece) object;
+      return( this.name.equals( piece.name ) &&
+              this.color.equals( piece.color ) &&
+              this.value.equals( piece.value) );
+    } else {
+      return false;
+    }
   }
   
 }

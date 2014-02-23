@@ -1,7 +1,5 @@
 package lg;
 
-import java.util.ArrayList;
-
 import lg.data_objects.Location;
 
 /**
