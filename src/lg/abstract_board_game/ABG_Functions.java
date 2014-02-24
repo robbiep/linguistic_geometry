@@ -8,5 +8,5 @@ public interface ABG_Functions {
   public Boolean    abg_R   ( Piece piece, Location origin, Location target );
   public Location   abg_ON  ( Piece piece );
   public Integer    abg_TR  ( Piece piece, Location origin, Location target );
-  public Integer    abg_MAP ( Piece piece, Location location );
+  public Integer    abg_MAP ( Piece piece, Location current_location, Location target_location );
 }

@@ -147,7 +147,7 @@ public class AbstractBoardGame implements ABG_Functions {
   }
 
   @Override
-  public Integer abg_MAP( Piece piece, Location location ){
+  public Integer abg_MAP( Piece piece, Location current_location, Location target_location ){
     // TODO Auto-generated method stub
     return null;
   }

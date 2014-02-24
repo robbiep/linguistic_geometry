@@ -53,6 +53,11 @@ public class Location {
   public void setZ( Integer z ){
     this.z = z;
   }
+  
+  @Override
+  public String toString(){
+    return "(" + x + ", " + y + ", " + z + ")";
+  }
 
   @Override
   public boolean equals(Object object){

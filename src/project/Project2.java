@@ -1,0 +1,126 @@
+package project;
+
+import grammar.GT2;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Scanner;
+
+import lg.abstract_board_game.AbstractBoardGame;
+import lg.data_objects.Color;
+import lg.data_objects.Location;
+import lg.data_objects.Piece;
+import lg.data_structures.GamePiece;
+import chess.ChessPieceFactory;
+
+public class Project2 {
+  
+  public static class Tuple{
+    public Piece piece;
+    public String trajectory;
+    public int length;
+    public Tuple( Piece piece, String trajectory, int length ) {
+      this.piece = piece;
+      this.trajectory = trajectory;
+      this.length = length;
+    }
+  }
+  
+  public static void run(){
+    System.out.println( 
+        "\nLG Project 2\n" +
+        "------------\n" +
+        "Outputs a trajectory from position 5,5,0 to 5,2,0 of length 1 and 2\n" );
+    
+    AbstractBoardGame abg = new AbstractBoardGame( 8, 8, 1 );
+    ChessPieceFactory factory = new ChessPieceFactory( abg.getAbstractBoard() );
+    GT2 gt2 = new GT2( abg );
+    Location location_x = new Location( 5, 5, 0 );
+    Location location_y = new Location( 5, 2, 0 );
+    
+    ArrayList<Tuple> trajectories = new ArrayList<Tuple>();
+    
+    //Scanner enter_to_continue = new Scanner(System.in);
+    Piece piece = factory.createPawn( Color.BLACK );
+    Integer length = 3;
+    trajectories.add( 
+        new Tuple( piece, new String( 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), location_y, length )), length));
+    length = 4;
+    trajectories.add( 
+        new Tuple( piece, new String( 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), location_y, length )), length));
+    
+    piece = factory.createRook( Color.BLACK );
+    length = 1;
+    trajectories.add( 
+        new Tuple( piece, new String( 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), location_y, length )), length));
+    length = 2;
+    trajectories.add( 
+        new Tuple( piece, new String( 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), location_y, length )), length));
+    
+    piece = factory.createBishop( Color.BLACK );
+    length = 2;
+    trajectories.add( 
+        new Tuple( piece, new String( 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), location_y, length )), length));
+    length = 3;
+    trajectories.add( 
+        new Tuple( piece, new String( 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), location_y, length )), length));
+    
+    piece = factory.createKnight( Color.BLACK );
+    length = 3;
+    trajectories.add( 
+        new Tuple( piece, new String( 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), location_y, length )), length));
+    length = 5;
+    trajectories.add( 
+        new Tuple( piece, new String( 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), location_y, length )), length));
+    
+    piece = factory.createQueen( Color.BLACK );
+    length = 1;
+    trajectories.add( 
+        new Tuple( piece, new String( 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), location_y, length )), length));
+    length = 2;
+    trajectories.add( 
+        new Tuple( piece, new String( 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), location_y, length )), length));
+    
+    piece = factory.createKing( Color.BLACK );
+    length = 3;
+    trajectories.add( 
+        new Tuple( piece, new String( 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), location_y, length )), length));
+    length = 4;
+    trajectories.add( 
+        new Tuple( piece, new String( 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), location_y, length )), length));
+
+    Iterator<Tuple> it = trajectories.iterator();
+    while( it.hasNext() ){
+      Tuple next = it.next();
+      System.out.println( "Piece: " + next.piece.getName() + 
+          " (" + next.piece.getColor().toString()+ ")" + " Length: " + next.length );
+      System.out.println( next.trajectory );
+      //System.out.println("Press enter to continue...");
+      //enter_to_continue.nextLine();
+    }
+  }
+}

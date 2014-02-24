@@ -1,6 +1,8 @@
 package lg;
 
+import grammar.GT2;
 import project.Project1;
+import project.Project2;
 import repl.Command;
 import repl.REPL;
 import chess.ChessPieceFactory;
@@ -37,7 +39,10 @@ public class LgREPL extends REPL {
   public void run(){
     System.out.print( "Linguitic Geometry REPL\n" +
                       "-----------------------\n\n" +
-                      "Type \"help\" to for a list of commands.\n\n" );
+                      "Type \"help\" to for a list of commands.\n" +
+                      "Type \"project 1\" to execute the reachailibty project\n" +
+                      "Type \"project 2\" to execute the trajectory project\n" +
+                      "Don't use quotes in commands\n\n" );
     super.run();
   }
   
@@ -68,9 +73,7 @@ public class LgREPL extends REPL {
               "\nDimension z = " + abg.getAbstractBoard().getZ() 
             );    
             System.out.print( "\nCenter: " + 
-                              "(" + center.getX() + 
-                              ", " + center.getY() + 
-                              ", " + center.getZ() + ")" );
+                              center.toString() );
             System.out.print( "\nObstacles: " );
             GamePiece[] obstacles = abg.getAllByColor( Color.OBSTACLE );
             if( obstacles.length > 0 ){
@@ -97,6 +100,9 @@ public class LgREPL extends REPL {
               try{
                 if( Integer.parseInt( args[1] ) == 1 ){
                   Project1.run();
+                  return;
+                } else if( Integer.parseInt( args[1] ) == 2 ){
+                  Project2.run();
                   return;
                 }
               } catch (Exception e){
@@ -297,6 +303,35 @@ public class LgREPL extends REPL {
             }
             // Invalid command format
             printCommandDescription( "table" );
+          }
+        });
+    
+    registerCommand( "traj",
+        "Prints the trjactory for a piece from location x to y\n" +
+        "    traj [piece] [color] [a] [b] [c] [x] [y] [z] [length]", 
+        new Command() {
+          @Override
+          public void execute( String[] args ){
+            if( args.length == 10 ){
+              try{
+                GT2 gt2 = new GT2( abg );
+                gt2.GenerateTrajectory( new GamePiece(
+                    chessPieceFactory.createChessPiece( args[1], 
+                    Color.get( args[2] ) ),
+                    new Location( Integer.parseInt( args[3] ), 
+                        Integer.parseInt( args[4] ), 
+                        Integer.parseInt( args[5] ) )), 
+                    new Location( Integer.parseInt( args[6] ), 
+                        Integer.parseInt( args[7] ), 
+                        Integer.parseInt( args[8] ) ),
+                        Integer.parseInt( args[9] ));
+                return;
+              } catch (Exception e){
+                // Do nothing
+              }
+            }
+            // Invalid command format
+            printCommandDescription( "traj" );
           }
         });
     
