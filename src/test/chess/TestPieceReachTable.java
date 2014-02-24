@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import javax.swing.text.rtf.RTFEditorKit;
 
-import lg.AbstractBoard;
-import lg.AbstractBoardGame;
+import lg.abstract_board_game.AbstractBoard;
+import lg.abstract_board_game.AbstractBoardGame;
 import lg.data_objects.Color;
 import lg.data_objects.Location;
 import lg.data_objects.Piece;
@@ -20,7 +20,7 @@ import test.MockData;
 import chess.ChessConstants;
 import chess.ChessPieceFactory;
 
-public class test_piece_reach_table {
+public class TestPieceReachTable {
 
   AbstractBoard       ab;
   AbstractBoardGame   abg;

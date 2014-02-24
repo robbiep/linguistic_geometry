@@ -2,7 +2,7 @@ package chess;
 
 import java.lang.Math;
 
-import lg.AbstractBoard;
+import lg.abstract_board_game.AbstractBoard;
 import lg.data_objects.Color;
 import lg.data_objects.Location;
 import lg.data_objects.Piece;
@@ -48,7 +48,7 @@ public class ChessPieceFactory extends PieceFactory {
     reach.addRule( new ReachabilityRule() {
       @Override
       public Boolean rule( Location x, Location y ){
-        int direction_value = ( color == Color.BLACK ) ? -1 : 1;
+        int direction_value = ( color == Color.BLACK ) ? 1 : -1;
         return( x.getY() + direction_value == y.getY() &&
                 x.getX() == y.getX() &&
                 x.getZ() == y.getZ() ||

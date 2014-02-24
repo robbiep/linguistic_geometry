@@ -66,4 +66,9 @@ public class Location {
       return false;
     }
   }
+  
+  @Override
+  public int hashCode(){
+    return (this.x * 7) + (this.y * 37) + (this.z * 373);
+  }
 }

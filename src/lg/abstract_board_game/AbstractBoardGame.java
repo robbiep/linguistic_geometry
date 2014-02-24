@@ -1,4 +1,4 @@
-package lg;
+package lg.abstract_board_game;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -20,6 +20,11 @@ public class AbstractBoardGame implements ABG_Functions {
   
   public AbstractBoardGame( AbstractBoard ab ) {
     this.abstract_board = ab;
+    gameMap = new GameMap();
+  }
+  
+  public AbstractBoardGame( Integer x_dim, Integer y_dim, Integer z_dim ) {
+    this.abstract_board = new AbstractBoard( x_dim, y_dim, z_dim );
     gameMap = new GameMap();
   }
 
@@ -47,9 +52,9 @@ public class AbstractBoardGame implements ABG_Functions {
     this.abstract_board = abstract_board;
     
     // Remove out of range gameMap
-    Iterator<Map.Entry<Piece,Location>> it = gameMap.entrySet().iterator();
+    Iterator<Map.Entry<Location,Piece>> it = gameMap.entrySet().iterator();
     while( it.hasNext() ){
-      if( !abstract_board.validLocation( it.next().getValue() )){
+      if( !abstract_board.validLocation( it.next().getKey() )){
         it.remove();
       }
     }
@@ -69,28 +74,28 @@ public class AbstractBoardGame implements ABG_Functions {
   
   public GamePiece[] getAllByColor( Color color ){
     ArrayList<GamePiece> gamePieces = new ArrayList<GamePiece>();
-    Iterator<Map.Entry<Piece,Location>> it = gameMap.entrySet().iterator();
+    Iterator<Map.Entry<Location,Piece>> it = gameMap.entrySet().iterator();
     while( it.hasNext() ){
-      Map.Entry<Piece,Location> entry = it.next();
-      if( entry.getKey().getColor() == color ){
-        gamePieces.add( new GamePiece( entry.getKey(), entry.getValue() )); 
+      Map.Entry<Location,Piece> entry = it.next();
+      if( entry.getValue().getColor() == color ){
+        gamePieces.add( new GamePiece( entry.getValue(), entry.getKey() )); 
       }
     }
-    return (GamePiece[]) gamePieces.toArray();
+    return gamePieces.toArray( new GamePiece[gamePieces.size()] );
   }
   
   public void clearAllByColor( Color color ){
-    Iterator<Map.Entry<Piece,Location>> it = gameMap.entrySet().iterator();
+    Iterator<Map.Entry<Location,Piece>> it = gameMap.entrySet().iterator();
     while( it.hasNext() ){
-      Map.Entry<Piece,Location> entry = it.next();
-      if( entry.getKey().getColor() == color ){
+      Map.Entry<Location,Piece> entry = it.next();
+      if( entry.getValue().getColor() == color ){
         it.remove();
       }
     }
   }
   
   public void addPiece( Piece piece, Location location ){
-    gameMap.put( piece, location );
+    gameMap.put( location, piece );
   }
   
   public void removePiece( Piece piece ){

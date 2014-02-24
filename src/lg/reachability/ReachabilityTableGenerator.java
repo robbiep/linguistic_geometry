@@ -2,8 +2,8 @@ package lg.reachability;
 
 import java.util.ArrayList;
 
-import lg.AbstractBoard;
-import lg.AbstractBoardGame;
+import lg.abstract_board_game.AbstractBoard;
+import lg.abstract_board_game.AbstractBoardGame;
 import lg.data_objects.Location;
 import lg.data_objects.Piece;
 

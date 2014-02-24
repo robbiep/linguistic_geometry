@@ -1,8 +1,8 @@
 package test.lg;
 
 import static org.junit.Assert.*;
-import lg.AbstractBoard;
-import lg.AbstractBoardGame;
+import lg.abstract_board_game.AbstractBoard;
+import lg.abstract_board_game.AbstractBoardGame;
 import lg.data_objects.Color;
 import lg.data_objects.Location;
 import lg.data_objects.Piece;

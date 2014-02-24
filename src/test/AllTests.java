@@ -4,24 +4,24 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import test.chess.test_location;
-import test.chess.test_piece_factory;
-import test.chess.test_piece_reach_table;
-import test.chess.test_piece_reachability;
+import test.chess.TestLocation;
+import test.chess.TestPieceFactory;
+import test.chess.TestPieceReachTable;
+import test.chess.TestPieceReachability;
 import test.lg.TestBoard;
 import test.lg.TestPiece;
 import test.lg.TestReachability;
 import test.lg.TestReachabilityTable;
 
 @RunWith( Suite.class )
-@SuiteClasses( {  test_location.class, 
-                  test_piece_factory.class,
-                  test_piece_reachability.class,
+@SuiteClasses( {  TestLocation.class, 
+                  TestPieceFactory.class,
+                  TestPieceReachability.class,
                   TestBoard.class,
                   TestPiece.class,
                   TestReachability.class,
                   TestReachabilityTable.class,
-                  test_piece_reach_table.class } )
+                  TestPieceReachTable.class } )
 public class AllTests {
 
 }

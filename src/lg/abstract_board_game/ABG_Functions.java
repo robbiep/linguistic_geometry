@@ -1,4 +1,4 @@
-package lg;
+package lg.abstract_board_game;
 
 import lg.data_objects.Location;
 import lg.data_objects.Piece;
