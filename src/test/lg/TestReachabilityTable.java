@@ -14,18 +14,21 @@ import lg.reachability.ReachabilityTableGenerator;
 import org.junit.Before;
 import org.junit.Test;
 
+import chess.ChessPieceFactory;
 import test.MockData;
 
 // TODO replace using MockDataFactory
 public class TestReachabilityTable {
   
   AbstractBoardGame abg;
-  Location location;
+  Location central_location;
+  ChessPieceFactory chessPieceFactory;
   
   @Before
   public void initialize(){
     abg = MockData.abstractBoardGame();
-    location = MockData.centerLocation();
+    central_location = MockData.centerLocation();
+    chessPieceFactory = new ChessPieceFactory( abg.getAbstractBoard() );
   }
 
   @Test
@@ -35,7 +38,7 @@ public class TestReachabilityTable {
     Piece piece = new Piece( "Test", Color.BLACK, 1, reach );
     
     
-    ReachabilityTable r_table = ReachabilityTableGenerator.generate( abg, piece, location );
+    ReachabilityTable r_table = ReachabilityTableGenerator.generate( abg, piece, central_location );
     
     for( int x = 0; x < abg.getDimX(); ++ x ){
       for( int y = 0; y < abg.getDimY(); ++ y ){
@@ -65,7 +68,7 @@ public class TestReachabilityTable {
     });
     Piece piece = new Piece( "Test", Color.BLACK, 1, reach );
     
-    ReachabilityTable r_table = ReachabilityTableGenerator.generate( abg, piece, location );
+    ReachabilityTable r_table = ReachabilityTableGenerator.generate( abg, piece, central_location );
     
     for( int x = 0; x < abg.getDimX(); ++ x ){
       for( int y = 0; y < abg.getDimY(); ++ y ){
@@ -89,5 +92,10 @@ public class TestReachabilityTable {
       }
     }
   }
-
+  
+  @Test
+  public void testReachabilityTableObstacle(){
+    abg.addPiece( chessPieceFactory.createObstacle(), new Location( 7, 8, 7 ) );
+    abg.getReachabilityTable( chessPieceFactory.createQueen( Color.WHITE ), central_location ).printReachabilityTable( 7 );
+  }
 }

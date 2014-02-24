@@ -110,6 +110,10 @@ public class AbstractBoardGame implements ABG_Functions {
     return( abstract_board.validLocation( location ) );
   }
   
+  public Boolean emptyLocation( Location next_location ){
+    return !gameMap.containsKey( next_location );
+  }
+  
   /**
    * Generates an x by y by z reachability table for a piece
    * @param location location 0 for reachability table
