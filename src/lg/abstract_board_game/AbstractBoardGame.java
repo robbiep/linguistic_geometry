@@ -122,35 +122,71 @@ public class AbstractBoardGame implements ABG_Functions {
     return ReachabilityTableGenerator.generate( this, piece, location );
   }
   
-
   
   ///////////////////////////////////
   // ABSTRACT BOARD GAME FUNCTIONS //
   ///////////////////////////////////
+
+  @Override
+  public Boolean abg_R(Piece piece, Location current_location,
+      Location target_location) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Location abg_ON(Piece piece) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Boolean abg_TR(Piece piece, Location current_location,
+      Location target_location) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Integer abg_MAP(Piece piece, Location current_location,
+      Location target_location) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Location[] abg_ST(Location current_location, Integer length) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Location[] abg_SUM(Piece piece, Location current_location,
+      Location target_location, Integer length) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Location[] abg_MOVE( Piece piece,
+                              Location start_location, 
+                              Location target_location,
+                              Location current_location,
+                              Integer total_length,
+                              Integer remaining_length ) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Location[] abg_DOCK(Piece piece, Location current_location,
+      Location target_location, Integer length) {
+    // TODO Auto-generated method stub
+    return null;
+  }
   
-  @Override
-  public Boolean abg_R( Piece piece, Location origin, Location target ){
-    return  piece.isReachable( origin, target ) && 
-            validLocation( target );
-  }
-
-  @Override
-  public Location abg_ON( Piece piece ){
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public Integer abg_TR( Piece piece, Location origin, Location target ){
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public Integer abg_MAP( Piece piece, Location current_location, Location target_location ){
-    // TODO Auto-generated method stub
-    return null;
-  }
+  
+  
   
 
 }

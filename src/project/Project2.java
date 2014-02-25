@@ -1,7 +1,5 @@
 package project;
 
-import grammar.GT2;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -11,6 +9,7 @@ import lg.data_objects.Color;
 import lg.data_objects.Location;
 import lg.data_objects.Piece;
 import lg.data_structures.GamePiece;
+import lg.grammar.GT2;
 import chess.ChessPieceFactory;
 
 public class Project2 {

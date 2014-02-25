@@ -1,6 +1,5 @@
 package lg;
 
-import grammar.GT2;
 import project.Project1;
 import project.Project2;
 import repl.Command;
@@ -12,6 +11,7 @@ import lg.data_objects.Color;
 import lg.data_objects.Location;
 import lg.data_objects.Piece;
 import lg.data_structures.GamePiece;
+import lg.grammar.GT2;
 
 public class LgREPL extends REPL {
 

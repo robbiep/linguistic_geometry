@@ -5,4 +5,4 @@
  * @author Robbie
  *
  */
-package grammar;
+package lg.grammar;

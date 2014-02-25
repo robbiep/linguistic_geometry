@@ -1,4 +1,4 @@
-package grammar;
+package lg.grammar;
 
 import lg.abstract_board_game.AbstractBoardGame;
 import lg.data_objects.Location;
@@ -10,6 +10,7 @@ public class GT2 {
   private AbstractBoardGame abg;
   private GamePiece game_piece;
   private Location y0;
+  private Integer total_length;
   private String trajectory;
   
   public GT2( AbstractBoardGame abg ) {
@@ -20,6 +21,7 @@ public class GT2 {
   public String GenerateTrajectory( GamePiece game_piece, Location target_location, Integer length){
     this.game_piece = game_piece;
     this.y0 = target_location;
+    this.total_length = length;
     trajectory = "";
     try{
       S( game_piece.location, target_location, length );
@@ -39,6 +41,7 @@ public class GT2 {
     }
   }
   
+  // TODO add index
   public void A2( Location start_location, Location target_location, Integer length){
     if( abg.abg_MAP( game_piece.piece, start_location, target_location ) != length ){
       A( start_location, med(start_location, target_location, length), lmed(start_location, target_location, length) );
@@ -48,6 +51,7 @@ public class GT2 {
     }
   }
 
+  // TODO add index
   public void A( Location start_location, Location target_location, Integer length){
     if( abg.abg_MAP( game_piece.piece, start_location, target_location ) == length && 
         length > 1 ){
@@ -68,30 +72,51 @@ public class GT2 {
     return trajectory;
   }
   
-  private void printTrajectory(){
+  public void printTrajectory(){
     System.out.println( trajectory );
   }
   
-  private Integer lmed( Location start_location, Location target_location,
-      Integer length ){
-    // TODO Auto-generated method stub
-    return null;
+  private Integer lmed( Location start_location, 
+                        Location target_location,
+                        Integer length ){
+    return abg.abg_MAP( game_piece.piece, 
+                        start_location, 
+                        med(start_location, target_location, length) );
   }
 
-  private Location med( Location start_location, Location target_location,
-      Integer length ){
-    // TODO Auto-generated method stub
-    return null;
+  // TODO add index
+  private Location med( Location start_location, 
+                        Location target_location,
+                        Integer length ){
+    Location[] dock = abg.abg_DOCK( game_piece.piece, 
+                                    start_location, 
+                                    target_location, 
+                                    length );
+    if( dock.length > 0 ){
+      return dock[0];
+    } else {
+      return start_location;
+    }
   }
-  
-  private Location next( Location start_location, Integer length ){
-    // TODO Auto-generated method stub
-    return null;
+
+  // TODO add index
+  private Location next( Location current_location, Integer remaining_length ){
+    Location[] move = abg.abg_MOVE( game_piece.piece, 
+                                    game_piece.location, 
+                                    y0, 
+                                    current_location, 
+                                    total_length, 
+                                    remaining_length );
+    
+    if( move.length > 0 ){
+      return move[0];
+    } else {
+      return current_location;
+    }
   }
   
   private Integer f( Integer length ){
-    // TODO Auto-generated method stub
-    return null;
+    return length - 1;
   }
 
 }
