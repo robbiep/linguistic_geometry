@@ -1,4 +1,4 @@
-package test.chess;
+package test.lg.data_objects;
 
 import static org.junit.Assert.*;
 import lg.data_objects.Location;

@@ -1,4 +1,4 @@
-package test.lg;
+package test.lg.abstract_board_game;
 
 import static org.junit.Assert.*;
 

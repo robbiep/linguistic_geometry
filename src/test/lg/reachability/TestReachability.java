@@ -1,4 +1,4 @@
-package test.lg;
+package test.lg.reachability;
 
 import static org.junit.Assert.*;
 

@@ -128,16 +128,23 @@ public class AbstractBoardGame implements ABG_Functions {
   ///////////////////////////////////
 
   @Override
-  public Boolean abg_R(Piece piece, Location current_location,
-      Location target_location) {
-    // TODO Auto-generated method stub
-    return null;
+  public Boolean abg_R( Piece piece, 
+                        Location current_location,
+                        Location target_location ){
+    return  piece.isReachable( current_location, target_location ) 
+            && validLocation( target_location )
+            && emptyLocation( target_location );
   }
 
+  // TODO unbreak, since there are multiple pieces of same type
   @Override
-  public Location abg_ON(Piece piece) {
-    // TODO Auto-generated method stub
-    return null;
+  public Location abg_ON( Piece piece ){
+    GamePiece game_piece = getByPiece( piece );
+    if( game_piece != null ){
+      return game_piece.location;
+    } else {
+      return null;
+    }
   }
 
   @Override

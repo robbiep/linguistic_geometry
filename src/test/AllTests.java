@@ -4,14 +4,14 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import test.chess.TestLocation;
 import test.chess.TestPieceFactory;
 import test.chess.TestPieceReachTable;
 import test.chess.TestPieceReachability;
-import test.lg.TestBoard;
-import test.lg.TestPiece;
-import test.lg.TestReachability;
-import test.lg.TestReachabilityTable;
+import test.lg.abstract_board_game.TestBoard;
+import test.lg.data_objects.TestLocation;
+import test.lg.data_objects.TestPiece;
+import test.lg.reachability.TestReachability;
+import test.lg.reachability.TestReachabilityTable;
 
 @RunWith( Suite.class )
 @SuiteClasses( {  TestLocation.class, 

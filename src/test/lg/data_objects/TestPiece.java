@@ -1,4 +1,4 @@
-package test.lg;
+package test.lg.data_objects;
 
 import static org.junit.Assert.*;
 
