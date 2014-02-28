@@ -194,12 +194,12 @@ public class LgREPL extends REPL {
                   return;
                 } else {
                   try {
-                    GamePiece gamePiece = abg.getByLocation(  
+                    Piece piece = abg.getByLocation(  
                         new Location( Integer.parseInt( args[2] ), 
                                       Integer.parseInt( args[3] ), 
                                       Integer.parseInt( args[4] )));
-                    if( gamePiece.piece.getColor() == Color.OBSTACLE ){
-                      abg.removePiece( gamePiece.piece );
+                    if( piece.getColor() == Color.OBSTACLE ){
+                      abg.removePiece( piece );
                     }
                     return;
                   } catch( Exception e ){

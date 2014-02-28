@@ -5,6 +5,7 @@ import lg.abstract_board_game.AbstractBoard;
 import lg.abstract_board_game.AbstractBoardGame;
 import lg.data_objects.Color;
 import lg.data_objects.Location;
+import lg.data_objects.Piece;
 import lg.data_structures.GamePiece;
 
 import org.junit.Before;
@@ -72,9 +73,9 @@ public class TestAbstractBoardGame {
 
   @Test
   public void testGetByLocation(){
-    GamePiece game_piece = abg.getByLocation( new Location( 7, 7, 0 ) );
-    assertTrue( game_piece.piece.getName().equals( ChessConstants.NAME_ROOK ));
-    assertTrue( game_piece.piece.getColor().equals( Color.BLACK ));
+    Piece piece = abg.getByLocation( new Location( 7, 7, 0 ) );
+    assertTrue( piece.getName().equals( ChessConstants.NAME_ROOK ));
+    assertTrue( piece.getColor().equals( Color.BLACK ));
   }
 
   @Test

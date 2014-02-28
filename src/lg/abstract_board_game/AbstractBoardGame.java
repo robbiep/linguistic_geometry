@@ -16,16 +16,16 @@ public class AbstractBoardGame implements ABG_Functions {
   
   AbstractBoard abstract_board;
   ReachabilityTableGenerator table_generator;
-  GameMap gameMap;
+  GameMap game_map;
   
   public AbstractBoardGame( AbstractBoard ab ) {
     this.abstract_board = ab;
-    gameMap = new GameMap();
+    game_map = new GameMap();
   }
   
   public AbstractBoardGame( Integer x_dim, Integer y_dim, Integer z_dim ) {
     this.abstract_board = new AbstractBoard( x_dim, y_dim, z_dim );
-    gameMap = new GameMap();
+    game_map = new GameMap();
   }
 
   public AbstractBoard getAbstractBoard(){
@@ -52,7 +52,7 @@ public class AbstractBoardGame implements ABG_Functions {
     this.abstract_board = abstract_board;
     
     // Remove out of range gameMap
-    Iterator<Map.Entry<Location,Piece>> it = gameMap.entrySet().iterator();
+    Iterator<Map.Entry<Location,Piece>> it = game_map.entrySet().iterator();
     while( it.hasNext() ){
       if( !abstract_board.validLocation( it.next().getKey() )){
         it.remove();
@@ -64,17 +64,18 @@ public class AbstractBoardGame implements ABG_Functions {
   // GamePiece FUNCTIONS
   ///////////////////////////////////////////
   
-  public GamePiece getByPiece( Piece piece ){
-    return gameMap.getByPiece( piece );
+  public Piece getByLocation( Location location ){
+    return game_map.get( location );
   }
   
-  public GamePiece getByLocation( Location location ){
-    return gameMap.getByLocation( location );
+  public Piece removeByLocation( Location location ){
+    return game_map.remove( location );
   }
+
   
   public GamePiece[] getAllByColor( Color color ){
     ArrayList<GamePiece> gamePieces = new ArrayList<GamePiece>();
-    Iterator<Map.Entry<Location,Piece>> it = gameMap.entrySet().iterator();
+    Iterator<Map.Entry<Location,Piece>> it = game_map.entrySet().iterator();
     while( it.hasNext() ){
       Map.Entry<Location,Piece> entry = it.next();
       if( entry.getValue().getColor() == color ){
@@ -85,7 +86,7 @@ public class AbstractBoardGame implements ABG_Functions {
   }
   
   public void clearAllByColor( Color color ){
-    Iterator<Map.Entry<Location,Piece>> it = gameMap.entrySet().iterator();
+    Iterator<Map.Entry<Location,Piece>> it = game_map.entrySet().iterator();
     while( it.hasNext() ){
       Map.Entry<Location,Piece> entry = it.next();
       if( entry.getValue().getColor() == color ){
@@ -95,15 +96,15 @@ public class AbstractBoardGame implements ABG_Functions {
   }
   
   public void addPiece( Piece piece, Location location ){
-    gameMap.put( location, piece );
+    game_map.put( location, piece );
   }
   
   public void removePiece( Piece piece ){
-    gameMap.remove( piece );
+    game_map.remove( piece );
   }
   
   public void clearPieces(){
-    gameMap.clear();
+    game_map.clear();
   }
  
   public Boolean validLocation( Location location ){
@@ -111,7 +112,7 @@ public class AbstractBoardGame implements ABG_Functions {
   }
   
   public Boolean emptyLocation( Location next_location ){
-    return !gameMap.containsKey( next_location );
+    return !game_map.containsKey( next_location );
   }
   
   /**
@@ -132,26 +133,32 @@ public class AbstractBoardGame implements ABG_Functions {
                         Location current_location,
                         Location target_location ){
     return  piece.isReachable( current_location, target_location ) 
-            && validLocation( target_location )
-            && emptyLocation( target_location );
+            && validLocation( target_location );
   }
 
   // TODO unbreak, since there are multiple pieces of same type
   @Override
-  public Location abg_ON( Piece piece ){
-    GamePiece game_piece = getByPiece( piece );
-    if( game_piece != null ){
-      return game_piece.location;
-    } else {
-      return null;
-    }
+  public Piece abg_ON( Location location ){
+    return getByLocation( location );
   }
 
   @Override
-  public Boolean abg_TR(Piece piece, Location current_location,
-      Location target_location) {
-    // TODO Auto-generated method stub
-    return null;
+  public Boolean abg_TR(  Piece piece, 
+                          Location current_location,
+                          Location target_location ){
+    
+    if( abg_ON( current_location ) != null &&
+        abg_ON( current_location ).equals(piece) &&
+        abg_R( piece, current_location, target_location ) ){
+        if( abg_ON( target_location ) == null || 
+            abg_OPPOSE( piece,  abg_ON( target_location ) )){
+          removeByLocation( target_location );
+          removeByLocation( current_location );
+          addPiece( piece, target_location );
+          return true;
+        }
+    } 
+    return false;
   }
 
   @Override
@@ -190,6 +197,15 @@ public class AbstractBoardGame implements ABG_Functions {
       Location target_location, Integer length) {
     // TODO Auto-generated method stub
     return null;
+  }
+
+  @Override
+  public Boolean abg_OPPOSE( Piece piece, Piece piece2 ){
+    if( piece.getColor() == Color.OBSTACLE || piece2.getColor() == Color.OBSTACLE ){
+      return false;
+    } else {
+      return piece.getColor() != piece2.getColor();
+    }
   }
   
   

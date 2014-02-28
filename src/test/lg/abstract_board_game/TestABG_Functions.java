@@ -50,8 +50,8 @@ public class TestABG_Functions {
   @Test
   public void testAbg_ON() {
     abg.addPiece( MockData.chessPieceFactory().createPawn( Color.WHITE ), MockData.centerLocation() );
-    assertTrue( abg.abg_ON( MockData.chessPieceFactory().createPawn( Color.WHITE )).equals( MockData.centerLocation() ));
-    assertTrue( abg.abg_ON( MockData.chessPieceFactory().createQueen( Color.WHITE )) == null );
+    assertTrue( abg.abg_ON( MockData.centerLocation() ).equals(MockData.chessPieceFactory().createPawn( Color.WHITE )));
+    assertTrue( abg.abg_ON( new Location( 1, 1, 1 ) ) == null );
   }
 
   /**
@@ -59,7 +59,55 @@ public class TestABG_Functions {
    */
   @Test
   public void testAbg_TR() {
-    fail("Not yet implemented");
+    abg.addPiece( MockData.chessPieceFactory().createPawn( Color.WHITE ), MockData.centerLocation() );
+    Location location2 = new Location( 7, 6, 7 );
+    
+    // Move piece to valid empty location
+    assertTrue(
+        abg.abg_TR( MockData.chessPieceFactory().createPawn( Color.WHITE ), 
+                    MockData.centerLocation(), 
+                    location2 )
+        );
+    assertTrue( abg.abg_ON( location2 ).equals( 
+        MockData.chessPieceFactory().createPawn( Color.WHITE ) ));
+    
+    // Move piece to non-reachable empty location
+    assertFalse(
+        abg.abg_TR( MockData.chessPieceFactory().createPawn( Color.WHITE ), 
+                    location2, 
+                    MockData.centerLocation() )
+        );
+    assertTrue( abg.abg_ON( location2 ).equals( 
+        MockData.chessPieceFactory().createPawn( Color.WHITE ) ));
+    
+    // No piece to move
+    assertFalse(
+        abg.abg_TR( MockData.chessPieceFactory().createPawn( Color.WHITE ), 
+                    MockData.centerLocation(), 
+                    location2 )
+        );
+    assertTrue( abg.abg_ON( location2 ).equals( 
+        MockData.chessPieceFactory().createPawn( Color.WHITE ) ));
+    
+    abg.addPiece( MockData.chessPieceFactory().createQueen( Color.BLACK ), MockData.centerLocation() );
+    // Move piece to enemy location
+    assertTrue(
+        abg.abg_TR( MockData.chessPieceFactory().createQueen( Color.BLACK ), 
+                    MockData.centerLocation(), 
+                    location2 )
+        );
+    assertTrue( abg.abg_ON( location2 ).equals( 
+        MockData.chessPieceFactory().createQueen( Color.BLACK ) ));
+    
+    abg.addPiece( MockData.chessPieceFactory().createQueen( Color.BLACK ), MockData.centerLocation() );
+    // Move piece to friendly location
+    assertFalse(
+        abg.abg_TR( MockData.chessPieceFactory().createQueen( Color.BLACK ), 
+                    MockData.centerLocation(), 
+                    location2 )
+        );
+    assertTrue( abg.abg_ON( location2 ).equals( 
+        MockData.chessPieceFactory().createQueen( Color.BLACK ) ));
   }
 
   /**

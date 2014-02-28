@@ -12,9 +12,9 @@ public interface ABG_Functions {
                                         Location current_location, 
                                         Location target_location );
   /**
-   * @return Location of the piece. Null otherwise.
+   * @return Piece on the Location. Null otherwise.
    */
-  public Location             abg_ON  ( Piece piece );
+  public Piece             abg_ON  ( Location location );
   /**
    * @return True if piece successfully moved to new Location
    */
@@ -64,4 +64,9 @@ public interface ABG_Functions {
                                         Location current_location, 
                                         Location target_location,
                                         Integer length );
+  
+  /**
+   * @return True if the pieces are opposing teams
+   */
+  public Boolean              abg_OPPOSE( Piece piece, Piece piece2 );
 }
