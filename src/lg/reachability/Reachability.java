@@ -59,7 +59,8 @@ public class Reachability {
           for( int y = 0; y < y_dim; ++ y ){
             for( int z = 0; z < z_dim; ++ z ){
               Location next_location = new Location( x, y, z );
-              if( !abg.emptyLocation( next_location ) ){
+              if( !abg.emptyLocation( next_location ) 
+                  && piece.isReachable( current_location, next_location ) ){
                 updateBlockedLocations( current_location, next_location );
               }
               updateReachableLocation( piece, current_location, next_location );
@@ -125,41 +126,29 @@ public class Reachability {
     }
   }
   
+  // TODO only works for straight lines, not irregular paths
   private static void updateBlockedLocations( Location current_location,
                                               Location next_location ){
-    if( !current_location.getX().equals( next_location.getX() )){
-      int increment = ( next_location.getX() > current_location.getX() ) ? 1:-1;
-      for(  int temp_x = next_location.getX(); 
-            temp_x < x_dim && temp_x >= 0; 
-            temp_x += increment ){
-        blocked_locations.add( new Location(  temp_x, 
-                                              next_location.getY(), 
-                                              next_location.getZ() ) );
-        revertReachability(temp_x, next_location.getY(), next_location.getZ());
-      }
+    blocked_locations.add( next_location );
+    int x_inc = next_location.getX() - current_location.getX();
+    int next_x = next_location.getX() + x_inc;
+    int y_inc = next_location.getY() - current_location.getY();
+    int next_y = next_location.getY() + y_inc;
+    int z_inc = next_location.getZ() - current_location.getZ();
+    int next_z = next_location.getZ() + z_inc;
+    
+    if( x_inc == 0 && y_inc == 0 && z_inc == 0){
+      return;
     }
-    if( !current_location.getY().equals( next_location.getY() )){
-      int increment = ( next_location.getY() > current_location.getY() ) ? 1:-1;
-      for(  int temp_y = next_location.getY(); 
-            temp_y < y_dim && temp_y >= 0; 
-            temp_y += increment ){
-        blocked_locations.add( new Location(  next_location.getX(), 
-                                              temp_y, 
-                                              next_location.getZ() ) );
-        revertReachability( next_location.getX(), temp_y, next_location.getZ());
-      }               
+    while( next_x >= 0 && next_y >= 0 && next_z >= 0 &&
+        next_x < x_dim && next_y < y_dim && next_z < z_dim ){
+      blocked_locations.add( new Location(  next_x, next_y, next_z ) );
+      revertReachability( next_x, next_y, next_z );
+      next_x = next_x + x_inc;
+      next_y = next_y + y_inc;
+      next_z = next_z + z_inc;
     }
-    if( !current_location.getZ().equals( next_location.getZ() ) ){
-      int increment = ( next_location.getZ() > current_location.getZ() ) ? 1:-1;
-      for(  int temp_z = next_location.getZ(); 
-            temp_z < z_dim && temp_z >= 0; 
-            temp_z += increment ){
-        blocked_locations.add( new Location(  next_location.getX(), 
-                                              next_location.getY(), 
-                                              temp_z ) );
-        revertReachability( next_location.getX(), next_location.getY(), temp_z);
-      }
-    }
+    
   }
   
   private static void revertReachability( int x, int y, int z ){
