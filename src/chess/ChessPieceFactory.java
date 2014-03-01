@@ -7,7 +7,7 @@ import lg.data_objects.Color;
 import lg.data_objects.Location;
 import lg.data_objects.Piece;
 import lg.data_objects.PieceFactory;
-import lg.reachability.Reachability;
+import lg.reachability.ReachabilityRules;
 import lg.reachability.ReachabilityRule;
 
 /**
@@ -41,7 +41,7 @@ public class ChessPieceFactory extends PieceFactory {
   }
   
   public Piece createPawn( final Color color ){
-    Reachability reach = new Reachability();
+    ReachabilityRules reach = new ReachabilityRules();
     reach.addRule( getFullRange() );
     
     // forward movement
@@ -61,7 +61,7 @@ public class ChessPieceFactory extends PieceFactory {
   }
   
   public Piece createKnight( final Color color ){
-    Reachability reach = new Reachability();
+    ReachabilityRules reach = new ReachabilityRules();
     reach.addRule( getFullRange() );
     
     reach.addRule( new ReachabilityRule() {
@@ -100,7 +100,7 @@ public class ChessPieceFactory extends PieceFactory {
   }
   
   public Piece createBishop( final Color color ){
-    Reachability reach = new Reachability();
+    ReachabilityRules reach = new ReachabilityRules();
     reach.addRule( getFullRange() );
     
     reach.addRule( new ReachabilityRule() {
@@ -117,7 +117,7 @@ public class ChessPieceFactory extends PieceFactory {
   }
   
   public Piece createRook( final Color color ){
-    Reachability reach = new Reachability();
+    ReachabilityRules reach = new ReachabilityRules();
     reach.addRule( getFullRange() );
     
     reach.addRule( new ReachabilityRule() {
@@ -134,7 +134,7 @@ public class ChessPieceFactory extends PieceFactory {
   }
   
   public Piece createQueen( final Color color ){
-    Reachability reach = new Reachability();
+    ReachabilityRules reach = new ReachabilityRules();
     reach.addRule( getFullRange() );
     
     reach.addRule( new ReachabilityRule() {
@@ -160,7 +160,7 @@ public class ChessPieceFactory extends PieceFactory {
   }
   
   public Piece createKing( final Color color ){
-    Reachability reach = new Reachability();
+    ReachabilityRules reach = new ReachabilityRules();
     reach.addRule( getFullRange() );
     
     reach.addRule( new ReachabilityRule() {

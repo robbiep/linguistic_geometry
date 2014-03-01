@@ -55,7 +55,7 @@ public class REPL {
   }
   
   private void printCommandError( String command ){
-    System.out.println( "Invalid command \"" + command + "\". Enter \"help\" "
+    println( "Invalid command \"" + command + "\". Enter \"help\" "
         + "for more information." );
   }
   

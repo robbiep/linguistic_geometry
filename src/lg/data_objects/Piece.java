@@ -1,6 +1,6 @@
 package lg.data_objects;
 
-import lg.reachability.Reachability;
+import lg.reachability.ReachabilityRules;
 
 /**
  * LG game piece
@@ -10,10 +10,10 @@ public class Piece {
   private String name;
   private Color color;
   private Integer value;
-  private Reachability reach;
+  private ReachabilityRules reach;
   
   // Constructors
-  public Piece( String name, Color color, int value, Reachability reach ){
+  public Piece( String name, Color color, int value, ReachabilityRules reach ){
     this.name = name;
     this.color = color;
     this.value = value;

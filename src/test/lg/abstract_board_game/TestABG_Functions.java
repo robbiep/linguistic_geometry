@@ -89,8 +89,8 @@ public class TestABG_Functions {
     assertTrue( abg.abg_ON( location2 ).equals( 
         MockData.chessPieceFactory().createPawn( Color.WHITE ) ));
     
+ // Move piece to enemy location
     abg.addPiece( MockData.chessPieceFactory().createQueen( Color.BLACK ), MockData.centerLocation() );
-    // Move piece to enemy location
     assertTrue(
         abg.abg_TR( MockData.chessPieceFactory().createQueen( Color.BLACK ), 
                     MockData.centerLocation(), 
@@ -99,8 +99,8 @@ public class TestABG_Functions {
     assertTrue( abg.abg_ON( location2 ).equals( 
         MockData.chessPieceFactory().createQueen( Color.BLACK ) ));
     
+ // Move piece to friendly location
     abg.addPiece( MockData.chessPieceFactory().createQueen( Color.BLACK ), MockData.centerLocation() );
-    // Move piece to friendly location
     assertFalse(
         abg.abg_TR( MockData.chessPieceFactory().createQueen( Color.BLACK ), 
                     MockData.centerLocation(), 

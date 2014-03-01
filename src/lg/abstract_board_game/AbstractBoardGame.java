@@ -10,12 +10,12 @@ import lg.data_objects.Piece;
 import lg.data_structures.GameMap;
 import lg.data_structures.GamePiece;
 import lg.reachability.ReachabilityTable;
-import lg.reachability.ReachabilityTableGenerator;
+import lg.reachability.Reachability;
 
 public class AbstractBoardGame implements ABG_Functions {
   
   AbstractBoard abstract_board;
-  ReachabilityTableGenerator table_generator;
+  Reachability table_generator;
   GameMap game_map;
   
   public AbstractBoardGame( AbstractBoard ab ) {
@@ -120,7 +120,7 @@ public class AbstractBoardGame implements ABG_Functions {
    * @param location location 0 for reachability table
    */
   public ReachabilityTable getReachabilityTable( Piece piece, Location location ){
-    return ReachabilityTableGenerator.generate( this, piece, location );
+    return Reachability.generateTable( this, piece, location );
   }
   
   
@@ -207,9 +207,6 @@ public class AbstractBoardGame implements ABG_Functions {
       return piece.getColor() != piece2.getColor();
     }
   }
-  
-  
-  
   
 
 }

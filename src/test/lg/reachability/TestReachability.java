@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import lg.data_objects.Location;
-import lg.reachability.Reachability;
+import lg.reachability.ReachabilityRules;
 import lg.reachability.ReachabilityRule;
 
 import org.junit.Test;
@@ -43,7 +43,7 @@ public class TestReachability {
   
   @Test
   public void testReachabilityDefaultCtor() {
-    Reachability reachability = new Reachability();
+    ReachabilityRules reachability = new ReachabilityRules();
     assertTrue( "Reachability default Ctor broken", 
                 reachability.isReachable(null, null) );
   }
@@ -63,7 +63,7 @@ public class TestReachability {
         return ( x.getY() == y.getY() );
       } 
     });
-    Reachability reachability = new Reachability( rules );
+    ReachabilityRules reachability = new ReachabilityRules( rules );
     
     assertTrue( "Reachability broken for multiple rules", 
                 reachability.isReachable(  

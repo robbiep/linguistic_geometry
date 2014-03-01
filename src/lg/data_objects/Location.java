@@ -54,6 +54,22 @@ public class Location {
     this.z = z;
   }
   
+  /**
+   * @return True if current location matches location arg
+   */
+  public Boolean at( Location location ){
+    return at( location.getX(), location.getY(), location.getZ() );
+  }
+  
+  /**
+   * @return True if current location matches args
+   */
+  public Boolean at( int x, int y, int z ){
+    return( this.x == x &&
+            this.y == y &&
+            this.z == z );
+  }
+  
   @Override
   public String toString(){
     return "(" + x + ", " + y + ", " + z + ")";
@@ -61,12 +77,8 @@ public class Location {
 
   @Override
   public boolean equals(Object object){
-    
     if (object != null && object instanceof Location){
-      Location location = (Location) object;
-      return( this.x == location.x &&
-              this.y == location.y &&
-              this.z == location.z );
+      return at( (Location) object );
     } else {
       return false;
     }

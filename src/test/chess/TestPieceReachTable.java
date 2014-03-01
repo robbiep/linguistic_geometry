@@ -9,9 +9,9 @@ import lg.abstract_board_game.AbstractBoardGame;
 import lg.data_objects.Color;
 import lg.data_objects.Location;
 import lg.data_objects.Piece;
-import lg.reachability.Reachability;
+import lg.reachability.ReachabilityRules;
 import lg.reachability.ReachabilityTable;
-import lg.reachability.ReachabilityTableGenerator;
+import lg.reachability.Reachability;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -67,7 +67,7 @@ public class TestPieceReachTable {
   public void testPawnReach(){
     
     piece = chessPieceFactory.createPawn( Color.WHITE );
-    ReachabilityTable r_table = ReachabilityTableGenerator.generate( abg, piece, central_location );
+    ReachabilityTable r_table = Reachability.generateTable( abg, piece, central_location );
     
     for( int x = 0; x < ab.getX(); ++ x ){
       for( int y = 0; y < ab.getY(); ++ y ){
@@ -85,7 +85,7 @@ public class TestPieceReachTable {
     }
     
     piece = chessPieceFactory.createPawn( Color.BLACK );
-    r_table = ReachabilityTableGenerator.generate( abg, piece, central_location );
+    r_table = Reachability.generateTable( abg, piece, central_location );
     
     for( int x = 0; x < ab.getX(); ++ x ){
       for( int y = 0; y < ab.getY(); ++ y ){
@@ -107,7 +107,7 @@ public class TestPieceReachTable {
   public void testRookReach(){
     
     piece = chessPieceFactory.createRook( Color.BLACK );
-    ReachabilityTable r_table = ReachabilityTableGenerator.generate( abg, piece, central_location );
+    ReachabilityTable r_table = Reachability.generateTable( abg, piece, central_location );
     
     for( int x = 0; x < ab.getX(); ++ x ){
       for( int y = 0; y < ab.getY(); ++ y ){
@@ -142,7 +142,7 @@ public class TestPieceReachTable {
   public void testKnightReach(){
     
     piece = chessPieceFactory.createKnight( Color.BLACK );
-    ReachabilityTable r_table = ReachabilityTableGenerator.generate( abg, piece, central_location );
+    ReachabilityTable r_table = Reachability.generateTable( abg, piece, central_location );
     
     // TODO replace with real test
     for( int x = 0; x < ab.getX(); ++ x ){
@@ -166,7 +166,7 @@ public class TestPieceReachTable {
   public void testBishopReach(){
     
     piece = chessPieceFactory.createBishop( Color.BLACK );
-    ReachabilityTable r_table = ReachabilityTableGenerator.generate( abg, piece, central_location );
+    ReachabilityTable r_table = Reachability.generateTable( abg, piece, central_location );
     
     // TODO finish test for distance 2 and 3
     for( int x = 0; x < ab.getX(); ++ x ){
@@ -192,7 +192,8 @@ public class TestPieceReachTable {
   public void testQueenReach(){
     
     piece = chessPieceFactory.createQueen( Color.BLACK );
-    ReachabilityTable r_table = ReachabilityTableGenerator.generate( abg, piece, central_location );
+    ReachabilityTable r_table = Reachability.generateTable( abg, piece, central_location );
+    r_table.printReachabilityTable(7);
     
     // TODO create valid tests
     for( int x = 0; x < ab.getX(); ++ x ){
@@ -234,7 +235,7 @@ public class TestPieceReachTable {
   public void testKingReach(){
     
     piece = chessPieceFactory.createKing( Color.BLACK );
-    ReachabilityTable r_table = ReachabilityTableGenerator.generate( abg, piece, central_location );
+    ReachabilityTable r_table = Reachability.generateTable( abg, piece, central_location );
     
     // TODO finish test for distance 2 and 3
     for( int x = 0; x < ab.getX(); ++ x ){

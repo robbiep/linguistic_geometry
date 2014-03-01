@@ -1,5 +1,6 @@
 package lg.reachability;
 
+import lg.data_objects.Location;
 import lg.data_objects.Piece;
 
 public class ReachabilityTable {
@@ -21,6 +22,13 @@ public class ReachabilityTable {
     return piece;
   }
   
+  /**
+   * @return Value at the location
+   */
+  public Integer getValue( Location location ){
+    return table[location.getX()][location.getY()][location.getZ()];
+  }
+  
   public void printReachabilityTable(){
     for( int z = 0; z < table[0][0].length; ++ z ){
       System.out.println( "Z dimension = " + z );
@@ -40,6 +48,7 @@ public class ReachabilityTable {
       }
       System.out.print( "\n" );
     }
+    System.out.print( "\n" );
   }
   
   
