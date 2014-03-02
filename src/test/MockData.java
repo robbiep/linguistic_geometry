@@ -15,58 +15,66 @@ public class MockData {
   public final static Integer CENTER          = 7;
   public final static Integer CHESS_DIMENSION = 8;
   
-  private static AbstractBoard      abstractBoard         = null;
-  private static AbstractBoardGame  abstractBoardGame     = null;
-  private static AbstractBoardGame  flatAbstractBoardGame = null;
-  private static ChessPieceFactory  chessPieceFactory     = null;
-  private static Location           centerLocation        = null;
+  private static AbstractBoard      abstract_board            = null;
+  private static AbstractBoardGame  abstract_board_game       = null;
+  private static AbstractBoardGame  flat_abstract_board_game  = null;
+  private static ChessPieceFactory  chess_piece_factory       = null;
+  private static Location           center_location           = null;
+  private static Location           flat_center_location      = null;
  
   
   public static AbstractBoard abstractBoard(){
-    if( abstractBoard == null ){
-      abstractBoard = new AbstractBoard( DIMENSION, DIMENSION, DIMENSION );
+    if( abstract_board == null ){
+      abstract_board = new AbstractBoard( DIMENSION, DIMENSION, DIMENSION );
     }
-    return abstractBoard;
+    return abstract_board;
   }
   
   public static AbstractBoard abstractBoardChess(){
-    if( abstractBoard == null ){
-      abstractBoard = new AbstractBoard(  CHESS_DIMENSION, 
+    if( abstract_board == null ){
+      abstract_board = new AbstractBoard(  CHESS_DIMENSION, 
                                           CHESS_DIMENSION, 
                                           1 );
     }
-    return abstractBoard;
+    return abstract_board;
   }
   
   
   
   public static ChessPieceFactory pieceFactory(){
-    if( chessPieceFactory == null ){
-      chessPieceFactory = new ChessPieceFactory( abstractBoard() );
+    if( chess_piece_factory == null ){
+      chess_piece_factory = new ChessPieceFactory( abstractBoard() );
     }
-    return chessPieceFactory;
+    return chess_piece_factory;
   }
   
   public static Location centerLocation(){
-    if( centerLocation == null ){
-      centerLocation = new Location( CENTER, CENTER, CENTER );
+    if( center_location == null ){
+      center_location = new Location( CENTER, CENTER, CENTER );
     }
-    return centerLocation;
+    return center_location;
+  }
+  
+  public static Location flatCenterLocation(){
+    if( flat_center_location == null ){
+      flat_center_location = new Location( CENTER, CENTER, 0 );
+    }
+    return flat_center_location;
   }
   
   public static AbstractBoardGame abstractBoardGame(){
-    if( abstractBoardGame == null ){
-      abstractBoardGame = new AbstractBoardGame( abstractBoard() );
+    if( abstract_board_game == null ){
+      abstract_board_game = new AbstractBoardGame( abstractBoard() );
     }
-    return abstractBoardGame;
+    return abstract_board_game;
   }
   
   public static AbstractBoardGame flatAbstractBoardGame(){
-    if( flatAbstractBoardGame  == null ){
-      flatAbstractBoardGame = new AbstractBoardGame( 
+    if( flat_abstract_board_game  == null ){
+      flat_abstract_board_game = new AbstractBoardGame( 
           new AbstractBoard( DIMENSION, DIMENSION, 1 ) );
     }
-    return flatAbstractBoardGame;
+    return flat_abstract_board_game;
   }
   
   public static AbstractBoardGame chessGame(){

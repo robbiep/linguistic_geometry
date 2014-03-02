@@ -1,5 +1,7 @@
 package lg.abstract_board_game;
 
+import java.util.Set;
+
 import lg.data_objects.Location;
 import lg.data_objects.Piece;
 
@@ -14,7 +16,7 @@ public interface ABG_Functions {
   /**
    * @return Piece on the Location. Null otherwise.
    */
-  public Piece             abg_ON  ( Location location );
+  public Piece                abg_ON  ( Location location );
   /**
    * @return True if piece successfully moved to new Location
    */
@@ -30,26 +32,28 @@ public interface ABG_Functions {
                                         Location target_location );
   
   /**
-   * @return Array of unoccupied locations a given length from the
+   * @param piece TODO
+   * @return Set of unoccupied locations a given length from the
    * current location
    */
-  public Location[]           abg_ST  ( Location current_location, 
+  public Set<Location>        abg_ST  ( Piece piece, 
+                                        Location current_location, 
                                         Integer length );
   
   /**
-   * @return Array of all unoccupied locations that connect the 
+   * @return Set of all unoccupied locations that connect the 
    * current and target locations of the given length
    */
-  public Location[]           abg_SUM ( Piece piece,
+  public Set<Location>        abg_SUM ( Piece piece,
                                         Location current_location, 
                                         Location target_location,
                                         Integer length );
   
   /**
-   * @return Array of locations which fall in the union of:<br>
+   * @return Set of locations which fall in the union of:<br>
    * ST( x, 1 ) U ST( x0, length_0 - length + 1) U SUM( p, x0, y0, l0 )
    */
-  public Location[]           abg_MOVE( Piece piece,
+  public Set<Location>        abg_MOVE( Piece piece,
                                         Location start_location, 
                                         Location target_location,
                                         Location current_location,
@@ -57,16 +61,16 @@ public interface ABG_Functions {
                                         Integer remaining_length );
   
   /**
-   * @return Array of locations where:<br>
+   * @return Set of locations where:<br>
    * MAP( p, x0, v ) + MAP( p, y0, v ) = l
    */
-  public Location[]           abg_DOCK( Piece piece,
+  public Set<Location>        abg_DOCK( Piece piece,
                                         Location current_location, 
                                         Location target_location,
                                         Integer length );
   
   /**
-   * @return True if the pieces are opposing teams
+   * @return True if the pieces are opposing teams. Obstacles are not opposing.
    */
   public Boolean              abg_OPPOSE( Piece piece, Piece piece2 );
 }

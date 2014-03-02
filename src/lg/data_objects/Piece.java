@@ -6,7 +6,7 @@ import lg.reachability.ReachabilityRules;
  * LG game piece
  */
 public class Piece {
-  
+
   private String name;
   private Color color;
   private Integer value;
@@ -31,6 +31,26 @@ public class Piece {
 
   public Integer getValue() {
     return value;
+  }
+  
+  public ReachabilityRules getReach(){
+    return reach;
+  }
+  
+  public void setReach( ReachabilityRules reach ){
+    this.reach = reach;
+  }
+
+  public void setName( String name ){
+    this.name = name;
+  }
+
+  public void setColor( Color color ){
+    this.color = color;
+  }
+
+  public void setValue( Integer value ){
+    this.value = value;
   }
   
   public Boolean isReachable( Location x, Location y ){

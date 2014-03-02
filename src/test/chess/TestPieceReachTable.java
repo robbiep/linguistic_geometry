@@ -236,6 +236,7 @@ public class TestPieceReachTable {
     
     piece = chessPieceFactory.createKing( Color.BLACK );
     ReachabilityTable r_table = Reachability.generateTable( abg, piece, central_location );
+    r_table.printReachabilityTable();
     
     // TODO finish test for distance 2 and 3
     for( int x = 0; x < ab.getX(); ++ x ){

@@ -1,5 +1,7 @@
 package lg.grammar;
 
+import java.util.Set;
+
 import lg.abstract_board_game.AbstractBoardGame;
 import lg.data_objects.Location;
 import lg.data_structures.GamePiece;
@@ -88,12 +90,12 @@ public class GT2 {
   private Location med( Location start_location, 
                         Location target_location,
                         Integer length ){
-    Location[] dock = abg.abg_DOCK( game_piece.piece, 
+    Set<Location> dock = abg.abg_DOCK( game_piece.piece, 
                                     start_location, 
                                     target_location, 
                                     length );
-    if( dock.length > 0 ){
-      return dock[0];
+    if( dock.size() > 0 ){
+      return dock.iterator().next();
     } else {
       return start_location;
     }
@@ -101,15 +103,15 @@ public class GT2 {
 
   // TODO add index
   private Location next( Location current_location, Integer remaining_length ){
-    Location[] move = abg.abg_MOVE( game_piece.piece, 
+    Set<Location> move = abg.abg_MOVE( game_piece.piece, 
                                     game_piece.location, 
                                     y0, 
                                     current_location, 
                                     total_length, 
                                     remaining_length );
     
-    if( move.length > 0 ){
-      return move[0];
+    if( move.size() > 0 ){
+      return move.iterator().next();
     } else {
       return current_location;
     }

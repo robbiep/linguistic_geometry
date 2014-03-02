@@ -29,6 +29,21 @@ public class ReachabilityTable {
     return table[location.getX()][location.getY()][location.getZ()];
   }
   
+  public Integer[][][] add( ReachabilityTable other_table ){
+    int x_dim = table.length;
+    int y_dim = table[0].length;
+    int z_dim = table[0][0].length;
+    Integer[][][] sum_table = new Integer[x_dim][y_dim][z_dim];
+    for( int x = 0; x < x_dim; ++ x ){
+      for( int y = 0; y < y_dim; ++ y ){
+        for( int z = 0; z < z_dim; ++ z ){
+          sum_table[x][y][z] = table[x][y][z] + other_table.getTable()[x][y][z];
+        }
+      }
+    }
+    return sum_table;
+  }
+  
   public void printReachabilityTable(){
     for( int z = 0; z < table[0][0].length; ++ z ){
       System.out.println( "Z dimension = " + z );

@@ -1,9 +1,11 @@
 package lg.abstract_board_game;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import lg.data_objects.Color;
 import lg.data_objects.Location;
@@ -182,31 +184,64 @@ public class AbstractBoardGame implements ABG_Functions {
   }
 
   @Override
-  public Location[] abg_ST(Location current_location, Integer length) {
-    // TODO Auto-generated method stub
-    return null;
+  public Set<Location> abg_ST(  Piece piece, 
+                                Location current_location, 
+                                Integer length ){
+    HashSet<Location> locations_st = new HashSet<Location>();
+    Integer[][][] r_table = getReachabilityTable( 
+        piece, current_location ).getTable();
+    for( int x = 0; x < abstract_board.getX(); ++ x ){
+      for( int y = 0; y < abstract_board.getY(); ++ y ){
+        for( int z = 0; z < abstract_board.getZ(); ++ z ){
+          if( r_table[x][y][z] == length ){
+            locations_st.add( new Location( x, y, z ) );
+          }
+        }
+      }
+    }
+    return locations_st;
+  }
+
+  // TODO fix for pawn
+  @Override
+  public Set<Location> abg_SUM( Piece piece, 
+                                Location current_location,
+                                Location target_location, 
+                                Integer length ){
+    HashSet<Location> locations_sum = new HashSet<Location>();
+    ReachabilityTable map_x0 = getReachabilityTable( piece, current_location );
+    piece.setColor( Color.getOpposite( piece.getColor() ));
+    ReachabilityTable map_y0 = getReachabilityTable( piece, target_location );
+    piece.setColor( Color.getOpposite( piece.getColor() ));
+    Integer[][][] summed_tables = map_x0.add( map_y0 );
+    for( int x = 0; x < abstract_board.getX(); ++ x ){
+      for( int y = 0; y < abstract_board.getY(); ++ y ){
+        for( int z = 0; z < abstract_board.getZ(); ++ z ){
+          if( summed_tables[x][y][z] == length ){
+            locations_sum.add( new Location( x, y, z) );
+          }
+        }
+      }
+    }
+    return locations_sum;
   }
 
   @Override
-  public Location[] abg_SUM(Piece piece, Location current_location,
-      Location target_location, Integer length) {
-    // TODO Auto-generated method stub
-    return null;
+  public Set<Location> abg_MOVE(  Piece piece,
+                                  Location start_location, 
+                                  Location target_location,
+                                  Location current_location,
+                                  Integer total_length,
+                                  Integer remaining_length ){
+    
+    Set<Location> locations_move = abg_SUM( piece, start_location, target_location, total_length );
+    locations_move.retainAll( abg_ST( piece, current_location, 1 ) );
+    locations_move.retainAll( abg_ST( piece, current_location, total_length - remaining_length + 1 ) );
+    return locations_move;
   }
 
   @Override
-  public Location[] abg_MOVE( Piece piece,
-                              Location start_location, 
-                              Location target_location,
-                              Location current_location,
-                              Integer total_length,
-                              Integer remaining_length ) {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public Location[] abg_DOCK(Piece piece, Location current_location,
+  public Set<Location> abg_DOCK(Piece piece, Location current_location,
       Location target_location, Integer length) {
     // TODO Auto-generated method stub
     return null;

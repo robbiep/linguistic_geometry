@@ -4,10 +4,14 @@
 package test.lg.abstract_board_game;
 
 import static org.junit.Assert.*;
+
+import java.util.Set;
+
 import lg.abstract_board_game.ABG_Functions;
 import lg.abstract_board_game.AbstractBoardGame;
 import lg.data_objects.Color;
 import lg.data_objects.Location;
+import lg.data_objects.Piece;
 import lg.reachability.ReachabilityTable;
 
 import org.junit.Before;
@@ -144,11 +148,36 @@ public class TestABG_Functions {
   }
 
   /**
-   * Test method for {@link lg.abstract_board_game.ABG_Functions#abg_ST(lg.data_objects.Location, java.lang.Integer)}.
+   * Test method for {@link lg.abstract_board_game.ABG_Functions#abg_ST(Piece, lg.data_objects.Location, java.lang.Integer)}.
    */
   @Test
   public void testAbg_ST() {
-    fail("Not yet implemented");
+    Set<Location> locations = abg.abg_ST( 
+        MockData.pieceFactory().createPawn( Color.WHITE ), 
+        MockData.centerLocation(), 
+        1 );
+    assertTrue( locations.size() == 1 );
+    assertTrue( locations.contains( new Location( 7, 6, 7 ) ));
+    
+    locations = abg.abg_ST( 
+        MockData.pieceFactory().createPawn( Color.BLACK ), 
+        MockData.centerLocation(), 
+        1 );
+    assertTrue( locations.size() == 1 );
+    assertTrue( locations.contains( new Location( 7, 8, 7 ) ));
+    
+    locations = abg.abg_ST( 
+        MockData.pieceFactory().createKing( Color.BLACK ), 
+        MockData.centerLocation(), 
+        1 );
+    assertTrue( locations.size() == 26 );
+    assertFalse( locations.contains( new Location( 7, 9, 7 ) ));
+    
+    locations = abg.abg_ST( 
+        MockData.pieceFactory().createKing( Color.BLACK ), 
+        MockData.centerLocation(), 
+        2 );
+    assertTrue( locations.size() == 98 );
   }
 
   /**
@@ -156,7 +185,44 @@ public class TestABG_Functions {
    */
   @Test
   public void testAbg_SUM() {
-    fail("Not yet implemented");
+    Set<Location> locations = abg.abg_SUM( 
+        MockData.pieceFactory().createPawn( Color.WHITE ), 
+        MockData.centerLocation(), 
+        new Location( 7, 6, 7 ),
+        1 );
+    assertTrue( locations.size() == 1 );
+    assertTrue( locations.contains( new Location( 7, 6, 7 ) ));
+    
+    locations = abg.abg_SUM( 
+        MockData.pieceFactory().createPawn( Color.WHITE ), 
+        MockData.centerLocation(), 
+        new Location( 7, 6, 7 ),
+        2 );
+    assertTrue( locations.size() == 0 );
+    
+    locations = abg.abg_SUM( 
+        MockData.pieceFactory().createQueen( Color.WHITE ), 
+        MockData.centerLocation(), 
+        new Location( 7, 6, 7 ),
+        1 );
+    assertTrue( locations.size() == 2 );
+    assertTrue( locations.contains( MockData.centerLocation() ));
+    assertTrue( locations.contains( new Location( 7, 6, 7 ) ));
+    
+    locations = abg.abg_SUM( 
+        MockData.pieceFactory().createKing( Color.WHITE ), 
+        MockData.centerLocation(), 
+        new Location( 7, 6, 7 ),
+        2 );
+    assertTrue( locations.size() == 16 );
+    assertTrue( locations.contains( MockData.centerLocation() ));
+    assertTrue( locations.contains( new Location( 7, 6, 7 ) ));
+    assertTrue( locations.contains( new Location( 6, 6, 7 ) ));
+    assertTrue( locations.contains( new Location( 8, 6, 7 ) ));
+    assertTrue( locations.contains( new Location( 6, 7, 7 ) ));
+    assertTrue( locations.contains( new Location( 8, 7, 7 ) ));
+    
+    
   }
 
   /**
@@ -164,7 +230,45 @@ public class TestABG_Functions {
    */
   @Test
   public void testAbg_MOVE() {
-    fail("Not yet implemented");
+    abg = MockData.flatAbstractBoardGame();
+    Set<Location> locations = 
+        abg.abg_MOVE( MockData.pieceFactory().createKing( Color.WHITE ), 
+                      MockData.flatCenterLocation(), 
+                      new Location( 7, 5, 0 ), 
+                      MockData.flatCenterLocation(), 
+                      2, 
+                      2 );
+    assertTrue( locations.size() == 3 );
+    assertTrue( locations.contains( new Location( 7, 6, 0 ) ));
+    assertTrue( locations.contains( new Location( 6, 6, 0 ) ));
+    assertTrue( locations.contains( new Location( 8, 6, 0 ) ));
+    
+    locations = 
+        abg.abg_MOVE( MockData.pieceFactory().createKing( Color.WHITE ), 
+                      MockData.flatCenterLocation(), 
+                      new Location( 7, 5, 0 ), 
+                      new Location( 7, 6, 0 ), 
+                      2, 
+                      1 );
+    assertTrue( locations.size() == 1 );
+    assertTrue( locations.contains( new Location( 7, 5, 0 ) ));
+    
+    abg.addPiece( MockData.pieceFactory().createObstacle(), new Location( 7, 6, 0) );
+    
+    locations = 
+        abg.abg_MOVE( MockData.pieceFactory().createKing( Color.WHITE ), 
+                      MockData.flatCenterLocation(), 
+                      new Location( 7, 5, 0 ), 
+                      MockData.flatCenterLocation(), 
+                      2, 
+                      2 );
+    assertTrue( locations.size() == 2 );
+    assertFalse( locations.contains( new Location( 7, 6, 0 ) ));
+    assertTrue( locations.contains( new Location( 6, 6, 0 ) ));
+    assertTrue( locations.contains( new Location( 8, 6, 0 ) ));
+    
+    abg.clearPieces();
+    
   }
 
   /**
