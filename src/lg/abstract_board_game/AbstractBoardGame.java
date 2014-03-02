@@ -236,15 +236,16 @@ public class AbstractBoardGame implements ABG_Functions {
     
     Set<Location> locations_move = abg_SUM( piece, start_location, target_location, total_length );
     locations_move.retainAll( abg_ST( piece, current_location, 1 ) );
-    locations_move.retainAll( abg_ST( piece, current_location, total_length - remaining_length + 1 ) );
+    locations_move.retainAll( abg_ST( piece, start_location, total_length - remaining_length + 1 ) );
     return locations_move;
   }
 
   @Override
-  public Set<Location> abg_DOCK(Piece piece, Location current_location,
-      Location target_location, Integer length) {
-    // TODO Auto-generated method stub
-    return null;
+  public Set<Location> abg_DOCK(  Piece piece, 
+                                  Location current_location,
+                                  Location target_location, 
+                                  Integer length ){
+    return abg_SUM( piece, current_location, target_location, length );
   }
 
   @Override

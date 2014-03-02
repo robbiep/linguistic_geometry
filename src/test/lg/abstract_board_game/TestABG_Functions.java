@@ -276,7 +276,8 @@ public class TestABG_Functions {
    */
   @Test
   public void testAbg_DOCK() {
-    fail("Not yet implemented");
+    // same as SUM 
+    // TODO remove
   }
 
 }
