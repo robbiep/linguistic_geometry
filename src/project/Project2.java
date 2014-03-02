@@ -40,7 +40,7 @@ public class Project2 {
     ArrayList<Tuple> trajectories = new ArrayList<Tuple>();
     
     //Scanner enter_to_continue = new Scanner(System.in);
-    Piece piece = factory.createPawn( Color.BLACK );
+    Piece piece = factory.createPawn( Color.WHITE );
     Integer length = 3;
     trajectories.add( 
         new Tuple( piece, new String( 
