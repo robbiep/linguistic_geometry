@@ -27,7 +27,7 @@ public class TestPieceReachability {
   @Before
   public void initialize(){
     ab          = MockData.abstractBoard();
-    factory     = MockData.chessPieceFactory();
+    factory     = MockData.pieceFactory();
     location_x  = MockData.centerLocation();
     valid_locations = new ArrayList<Location>();
   }

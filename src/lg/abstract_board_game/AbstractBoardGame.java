@@ -3,6 +3,7 @@ package lg.abstract_board_game;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import lg.data_objects.Color;
 import lg.data_objects.Location;
@@ -72,6 +73,9 @@ public class AbstractBoardGame implements ABG_Functions {
     return game_map.remove( location );
   }
 
+  public GamePiece[] getAll( ){
+    return game_map.getAll();
+  }
   
   public GamePiece[] getAllByColor( Color color ){
     ArrayList<GamePiece> gamePieces = new ArrayList<GamePiece>();
@@ -111,8 +115,8 @@ public class AbstractBoardGame implements ABG_Functions {
     return( abstract_board.validLocation( location ) );
   }
   
-  public Boolean emptyLocation( Location next_location ){
-    return !game_map.containsKey( next_location );
+  public Boolean emptyLocation( Location location ){
+    return !game_map.containsKey( location );
   }
   
   /**
@@ -121,6 +125,15 @@ public class AbstractBoardGame implements ABG_Functions {
    */
   public ReachabilityTable getReachabilityTable( Piece piece, Location location ){
     return Reachability.generateTable( this, piece, location );
+  }
+  
+  public Integer getDistance( Piece piece,
+                              Location current_location,
+                              Location target_location){
+    return Reachability.getDistance(  this, 
+                                      piece, 
+                                      current_location, 
+                                      target_location );
   }
   
   
@@ -162,10 +175,10 @@ public class AbstractBoardGame implements ABG_Functions {
   }
 
   @Override
-  public Integer abg_MAP(Piece piece, Location current_location,
-      Location target_location) {
-    // TODO Auto-generated method stub
-    return null;
+  public Integer abg_MAP( Piece piece, 
+                          Location current_location,
+                          Location target_location ){
+    return getDistance( piece, current_location, target_location );
   }
 
   @Override

@@ -36,7 +36,7 @@ public class TestPieceReachTable {
   public void initialize(){
     ab                = MockData.abstractBoard();
     abg               = MockData.abstractBoardGame();
-    chessPieceFactory = MockData.chessPieceFactory();
+    chessPieceFactory = MockData.pieceFactory();
     central_location  = MockData.centerLocation();
   }
 

@@ -18,7 +18,7 @@ public class TestPieceFactory {
   
   @Before
   public void initialize(){
-    factory = MockData.chessPieceFactory();
+    factory = MockData.pieceFactory();
  }
 
   @Test

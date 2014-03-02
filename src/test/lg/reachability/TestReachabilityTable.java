@@ -22,13 +22,13 @@ public class TestReachabilityTable {
   
   AbstractBoardGame abg;
   Location central_location;
-  ChessPieceFactory chessPieceFactory;
+  ChessPieceFactory pieceFactory;
   
   @Before
   public void initialize(){
     abg = MockData.abstractBoardGame();
     central_location = MockData.centerLocation();
-    chessPieceFactory = new ChessPieceFactory( abg.getAbstractBoard() );
+    pieceFactory = new ChessPieceFactory( abg.getAbstractBoard() );
   }
 
   @Test
@@ -95,24 +95,24 @@ public class TestReachabilityTable {
   
   @Test
   public void testReachabilityTableObstacle(){
-    abg.addPiece( chessPieceFactory.createObstacle(), new Location( 7, 8, 7 ) );
-    abg.getReachabilityTable( chessPieceFactory.createQueen( Color.WHITE ), central_location ).printReachabilityTable( 7 );
+    abg.addPiece( pieceFactory.createObstacle(), new Location( 7, 8, 7 ) );
+    abg.getReachabilityTable( pieceFactory.createQueen( Color.WHITE ), central_location ).printReachabilityTable( 7 );
     abg.clearPieces();
     
-    abg.addPiece( chessPieceFactory.createObstacle(), new Location( 8, 7, 7 ) );
-    abg.getReachabilityTable( chessPieceFactory.createQueen( Color.WHITE ), central_location ).printReachabilityTable( 7 );
+    abg.addPiece( pieceFactory.createObstacle(), new Location( 8, 7, 7 ) );
+    abg.getReachabilityTable( pieceFactory.createQueen( Color.WHITE ), central_location ).printReachabilityTable( 7 );
     abg.clearPieces();
     
-    abg.addPiece( chessPieceFactory.createObstacle(), new Location( 7, 6, 7 ) );
-    abg.getReachabilityTable( chessPieceFactory.createQueen( Color.WHITE ), central_location ).printReachabilityTable( 7 );
+    abg.addPiece( pieceFactory.createObstacle(), new Location( 7, 6, 7 ) );
+    abg.getReachabilityTable( pieceFactory.createQueen( Color.WHITE ), central_location ).printReachabilityTable( 7 );
     abg.clearPieces();
     
-    abg.addPiece( chessPieceFactory.createObstacle(), new Location( 6, 7, 7 ) );
-    abg.getReachabilityTable( chessPieceFactory.createQueen( Color.WHITE ), central_location ).printReachabilityTable( 7 );
+    abg.addPiece( pieceFactory.createObstacle(), new Location( 6, 7, 7 ) );
+    abg.getReachabilityTable( pieceFactory.createQueen( Color.WHITE ), central_location ).printReachabilityTable( 7 );
     abg.clearPieces();
     
-    abg.addPiece( chessPieceFactory.createObstacle(), new Location( 6, 8, 7 ) );
-    abg.getReachabilityTable( chessPieceFactory.createQueen( Color.WHITE ), central_location ).printReachabilityTable( 7 );
+    abg.addPiece( pieceFactory.createObstacle(), new Location( 6, 8, 7 ) );
+    abg.getReachabilityTable( pieceFactory.createQueen( Color.WHITE ), central_location ).printReachabilityTable( 7 );
   }
   
   @Test
@@ -120,25 +120,25 @@ public class TestReachabilityTable {
     assertTrue( 
       Reachability.getDistance( 
           abg, 
-          MockData.chessPieceFactory().createQueen( Color.WHITE ), 
+          MockData.pieceFactory().createQueen( Color.WHITE ), 
           MockData.centerLocation(), 
           new Location( 6, 2, 7) ) == 2 );
     assertTrue( 
         Reachability.getDistance( 
             abg, 
-            MockData.chessPieceFactory().createQueen( Color.WHITE ), 
+            MockData.pieceFactory().createQueen( Color.WHITE ), 
             MockData.centerLocation(), 
             new Location( 6, 7, 7) ) == 1 );
     assertTrue( 
         Reachability.getDistance( 
             abg, 
-            MockData.chessPieceFactory().createPawn( Color.WHITE ), 
+            MockData.pieceFactory().createPawn( Color.WHITE ), 
             MockData.centerLocation(), 
             new Location( 7, 2, 7) ) == 5 );
     assertTrue( 
         Reachability.getDistance( 
             abg, 
-            MockData.chessPieceFactory().createPawn( Color.BLACK ), 
+            MockData.pieceFactory().createPawn( Color.BLACK ), 
             MockData.centerLocation(), 
             new Location( 7, 2, 7) ) == ReachabilityTable.INFINITY );
     
@@ -146,32 +146,92 @@ public class TestReachabilityTable {
   
   @Test
   public void testDistanceObstacles(){
-    abg.addPiece( chessPieceFactory.createObstacle(), new Location( 6, 7, 7 ) );
-    abg.getReachabilityTable( MockData.chessPieceFactory().createQueen( Color.WHITE ), MockData.centerLocation() ).printReachabilityTable(7);
+    abg = MockData.flatAbstractBoardGame();
+    Location center = new Location( 7, 7, 0 );
+    
+    assertTrue( 
+        Reachability.getDistance( 
+            abg, 
+            MockData.pieceFactory().createQueen( Color.WHITE ), 
+            center,
+            new Location( 6, 2, 0) ) == 2 );
+    assertTrue( 
+        Reachability.getDistance( 
+            abg, 
+            MockData.pieceFactory().createQueen( Color.WHITE ), 
+            center,
+            new Location( 3, 7, 0) ) == 1 );
+    
+    abg.addPiece( pieceFactory.createObstacle(), new Location( 6, 7, 0 ) );
+    
     assertTrue( 
       Reachability.getDistance( 
           abg, 
-          MockData.chessPieceFactory().createQueen( Color.WHITE ), 
-          MockData.centerLocation(), 
-          new Location( 6, 2, 7) ) == 2 );
+          MockData.pieceFactory().createQueen( Color.WHITE ), 
+          center,
+          new Location( 6, 2, 0) ) == 2 );
+    
     assertTrue( 
         Reachability.getDistance( 
             abg, 
-            MockData.chessPieceFactory().createQueen( Color.WHITE ), 
-            MockData.centerLocation(), 
-            new Location( 3, 7, 7) ) == 2 );
+            MockData.pieceFactory().createQueen( Color.WHITE ), 
+            center, 
+            new Location( 3, 7, 0) ) == 2 );
+    
+    abg.addPiece( pieceFactory.createObstacle(), new Location( 3, 7, 0 ) );
+    Reachability.generateTable( 
+        abg, 
+        MockData.pieceFactory().createQueen( Color.WHITE ), 
+        center ).printReachabilityTable();
     assertTrue( 
         Reachability.getDistance( 
             abg, 
-            MockData.chessPieceFactory().createPawn( Color.WHITE ), 
-            MockData.centerLocation(), 
-            new Location( 7, 2, 7) ) == 5 );
+            MockData.pieceFactory().createQueen( Color.WHITE ), 
+            center, 
+            new Location( 3, 7, 0 ) ).equals(ReachabilityTable.INFINITY) );
+    
+    abg.addPiece( pieceFactory.createObstacle(), new Location( 3, 8, 0 ) );
+    abg.addPiece( pieceFactory.createObstacle(), new Location( 3, 6, 0 ) );
     assertTrue( 
         Reachability.getDistance( 
             abg, 
-            MockData.chessPieceFactory().createPawn( Color.BLACK ), 
-            MockData.centerLocation(), 
-            new Location( 7, 2, 7) ) == ReachabilityTable.INFINITY );
+            MockData.pieceFactory().createQueen( Color.WHITE ), 
+            center, 
+            new Location( 2, 7, 0) ) == 2 );
+    
+    abg.addPiece( pieceFactory.createObstacle(), new Location( 2, 8, 0 ) );
+    abg.addPiece( pieceFactory.createObstacle(), new Location( 2, 6, 0 ) );
+    assertTrue( 
+        Reachability.getDistance( 
+            abg, 
+            MockData.pieceFactory().createQueen( Color.WHITE ), 
+            center, 
+            new Location( 2, 7, 0 )) == 3 );
+    
+    abg.addPiece( pieceFactory.createObstacle(), new Location( 1, 8, 0 ) );
+    abg.addPiece( pieceFactory.createObstacle(), new Location( 1, 6, 0 ) );
+    abg.addPiece( pieceFactory.createObstacle(), new Location( 0, 8, 0 ) );
+    abg.addPiece( pieceFactory.createObstacle(), new Location( 0, 6, 0 ) );
+    assertTrue( 
+        Reachability.getDistance( 
+            abg, 
+            MockData.pieceFactory().createQueen( Color.WHITE ), 
+            center, 
+            new Location( 2, 7, 0) ).equals(ReachabilityTable.INFINITY) );
+    
+    
+    assertTrue( 
+        Reachability.getDistance( 
+            abg, 
+            MockData.pieceFactory().createPawn( Color.WHITE ), 
+            center, 
+            new Location( 7, 2, 0) ) == 5 );
+    assertTrue( 
+        Reachability.getDistance( 
+            abg, 
+            MockData.pieceFactory().createPawn( Color.BLACK ), 
+            center, 
+            new Location( 7, 2, 0) ) == ReachabilityTable.INFINITY );
     
   }
 }

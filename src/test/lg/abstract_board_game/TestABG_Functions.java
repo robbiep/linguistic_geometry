@@ -8,6 +8,7 @@ import lg.abstract_board_game.ABG_Functions;
 import lg.abstract_board_game.AbstractBoardGame;
 import lg.data_objects.Color;
 import lg.data_objects.Location;
+import lg.reachability.ReachabilityTable;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,14 +33,14 @@ public class TestABG_Functions {
    */
   @Test
   public void testAbg_R() {
-    abg.addPiece( MockData.chessPieceFactory().createPawn( Color.WHITE ), MockData.centerLocation() );
-    assertTrue( abg.abg_R(  MockData.chessPieceFactory().createPawn( Color.WHITE ), 
+    abg.addPiece( MockData.pieceFactory().createPawn( Color.WHITE ), MockData.centerLocation() );
+    assertTrue( abg.abg_R(  MockData.pieceFactory().createPawn( Color.WHITE ), 
                             MockData.centerLocation(), 
                             new Location( 7, 6, 7 ) ));
-    assertFalse( abg.abg_R( MockData.chessPieceFactory().createPawn( Color.WHITE ), 
+    assertFalse( abg.abg_R( MockData.pieceFactory().createPawn( Color.WHITE ), 
                             MockData.centerLocation(), 
                             new Location( 7, 8, 7 ) ));
-    assertFalse( abg.abg_R( MockData.chessPieceFactory().createPawn( Color.WHITE ), 
+    assertFalse( abg.abg_R( MockData.pieceFactory().createPawn( Color.WHITE ), 
                             new Location( 7, 8, 7 ),
                             MockData.centerLocation() ));
   }
@@ -49,8 +50,8 @@ public class TestABG_Functions {
    */
   @Test
   public void testAbg_ON() {
-    abg.addPiece( MockData.chessPieceFactory().createPawn( Color.WHITE ), MockData.centerLocation() );
-    assertTrue( abg.abg_ON( MockData.centerLocation() ).equals(MockData.chessPieceFactory().createPawn( Color.WHITE )));
+    abg.addPiece( MockData.pieceFactory().createPawn( Color.WHITE ), MockData.centerLocation() );
+    assertTrue( abg.abg_ON( MockData.centerLocation() ).equals(MockData.pieceFactory().createPawn( Color.WHITE )));
     assertTrue( abg.abg_ON( new Location( 1, 1, 1 ) ) == null );
   }
 
@@ -59,55 +60,55 @@ public class TestABG_Functions {
    */
   @Test
   public void testAbg_TR() {
-    abg.addPiece( MockData.chessPieceFactory().createPawn( Color.WHITE ), MockData.centerLocation() );
+    abg.addPiece( MockData.pieceFactory().createPawn( Color.WHITE ), MockData.centerLocation() );
     Location location2 = new Location( 7, 6, 7 );
     
     // Move piece to valid empty location
     assertTrue(
-        abg.abg_TR( MockData.chessPieceFactory().createPawn( Color.WHITE ), 
+        abg.abg_TR( MockData.pieceFactory().createPawn( Color.WHITE ), 
                     MockData.centerLocation(), 
                     location2 )
         );
     assertTrue( abg.abg_ON( location2 ).equals( 
-        MockData.chessPieceFactory().createPawn( Color.WHITE ) ));
+        MockData.pieceFactory().createPawn( Color.WHITE ) ));
     
     // Move piece to non-reachable empty location
     assertFalse(
-        abg.abg_TR( MockData.chessPieceFactory().createPawn( Color.WHITE ), 
+        abg.abg_TR( MockData.pieceFactory().createPawn( Color.WHITE ), 
                     location2, 
                     MockData.centerLocation() )
         );
     assertTrue( abg.abg_ON( location2 ).equals( 
-        MockData.chessPieceFactory().createPawn( Color.WHITE ) ));
+        MockData.pieceFactory().createPawn( Color.WHITE ) ));
     
     // No piece to move
     assertFalse(
-        abg.abg_TR( MockData.chessPieceFactory().createPawn( Color.WHITE ), 
+        abg.abg_TR( MockData.pieceFactory().createPawn( Color.WHITE ), 
                     MockData.centerLocation(), 
                     location2 )
         );
     assertTrue( abg.abg_ON( location2 ).equals( 
-        MockData.chessPieceFactory().createPawn( Color.WHITE ) ));
+        MockData.pieceFactory().createPawn( Color.WHITE ) ));
     
  // Move piece to enemy location
-    abg.addPiece( MockData.chessPieceFactory().createQueen( Color.BLACK ), MockData.centerLocation() );
+    abg.addPiece( MockData.pieceFactory().createQueen( Color.BLACK ), MockData.centerLocation() );
     assertTrue(
-        abg.abg_TR( MockData.chessPieceFactory().createQueen( Color.BLACK ), 
+        abg.abg_TR( MockData.pieceFactory().createQueen( Color.BLACK ), 
                     MockData.centerLocation(), 
                     location2 )
         );
     assertTrue( abg.abg_ON( location2 ).equals( 
-        MockData.chessPieceFactory().createQueen( Color.BLACK ) ));
+        MockData.pieceFactory().createQueen( Color.BLACK ) ));
     
  // Move piece to friendly location
-    abg.addPiece( MockData.chessPieceFactory().createQueen( Color.BLACK ), MockData.centerLocation() );
+    abg.addPiece( MockData.pieceFactory().createQueen( Color.BLACK ), MockData.centerLocation() );
     assertFalse(
-        abg.abg_TR( MockData.chessPieceFactory().createQueen( Color.BLACK ), 
+        abg.abg_TR( MockData.pieceFactory().createQueen( Color.BLACK ), 
                     MockData.centerLocation(), 
                     location2 )
         );
     assertTrue( abg.abg_ON( location2 ).equals( 
-        MockData.chessPieceFactory().createQueen( Color.BLACK ) ));
+        MockData.pieceFactory().createQueen( Color.BLACK ) ));
   }
 
   /**
@@ -115,7 +116,31 @@ public class TestABG_Functions {
    */
   @Test
   public void testAbg_MAP() {
-    fail("Not yet implemented");
+    assertTrue(
+        abg.abg_MAP(  MockData.pieceFactory().createPawn( Color.WHITE ), 
+                      MockData.centerLocation(), 
+                      new Location( 7, 0, 7 ) ) == 7 ); 
+    assertTrue(
+        abg.abg_MAP(  MockData.pieceFactory().createPawn( Color.WHITE ), 
+                      MockData.centerLocation(), 
+                      new Location( 7, 1, 7 ) ) == 6 ); 
+    
+    abg.addPiece( MockData.pieceFactory().createPawn( Color.WHITE ),
+                  new Location( 7, 1, 7 ) );
+    assertTrue(
+        abg.abg_MAP(  MockData.pieceFactory().createPawn( Color.WHITE ), 
+                      MockData.centerLocation(), 
+                      new Location( 7, 0, 7 ) 
+        ).equals( ReachabilityTable.INFINITY )); 
+    
+    assertTrue(
+        abg.abg_MAP(  MockData.pieceFactory().createQueen( Color.WHITE ), 
+                      MockData.centerLocation(), 
+                      new Location( 7, 0, 7 )) == 2); 
+    assertTrue(
+        abg.abg_MAP(  MockData.pieceFactory().createQueen( Color.WHITE ), 
+                      MockData.centerLocation(), 
+                      new Location( 7, 14, 7 )) == 1); 
   }
 
   /**
