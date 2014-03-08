@@ -28,7 +28,7 @@ public class TestReachabilityTable {
   public void initialize(){
     abg = MockData.abstractBoardGame();
     central_location = MockData.centerLocation();
-    pieceFactory = new ChessPieceFactory( abg.getAbstractBoard() );
+    pieceFactory = MockData.pieceFactory();
   }
 
   @Test
@@ -246,7 +246,7 @@ public class TestReachabilityTable {
       }
     }
     table1[0][0][0] = 5;
-    table2[0][0][0] = 5;
+    table2[0][0][0] = 3;
     ReachabilityTable r_table1 = new ReachabilityTable( 
         MockData.pieceFactory().createPawn( Color.WHITE ), 
         table1 );
@@ -256,7 +256,7 @@ public class TestReachabilityTable {
     
     Integer[][][] table3 = r_table1.add( r_table2 );
     
-    assertTrue( table3[0][0][0] == 10 );
+    assertTrue( table3[0][0][0] == 8 );
     for( int i = 0; i < 2; ++ i ){
       for( int j = 0; j < 2; ++ j ){
         if( i != 0 && j != 0 ){

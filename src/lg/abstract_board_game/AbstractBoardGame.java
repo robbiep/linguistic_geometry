@@ -7,9 +7,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import chess.ChessPieceFactory;
 import lg.data_objects.Color;
 import lg.data_objects.Location;
 import lg.data_objects.Piece;
+import lg.data_objects.PieceFactory;
 import lg.data_structures.GameMap;
 import lg.data_structures.GamePiece;
 import lg.reachability.ReachabilityTable;
@@ -20,14 +22,20 @@ public class AbstractBoardGame implements ABG_Functions {
   AbstractBoard abstract_board;
   Reachability table_generator;
   GameMap game_map;
+  PieceFactory pieceFactory;
   
-  public AbstractBoardGame( AbstractBoard ab ) {
+  public AbstractBoardGame( AbstractBoard ab, PieceFactory pieceFactory ){
     this.abstract_board = ab;
+    this.pieceFactory = pieceFactory;
     game_map = new GameMap();
   }
   
-  public AbstractBoardGame( Integer x_dim, Integer y_dim, Integer z_dim ) {
+  public AbstractBoardGame( Integer x_dim, 
+                            Integer y_dim, 
+                            Integer z_dim, 
+                            PieceFactory pieceFactory ){
     this.abstract_board = new AbstractBoard( x_dim, y_dim, z_dim );
+    this.pieceFactory = pieceFactory;
     game_map = new GameMap();
   }
 
@@ -211,8 +219,8 @@ public class AbstractBoardGame implements ABG_Functions {
     HashSet<Location> locations_sum = new HashSet<Location>();
     
     ReachabilityTable map_x0 = getReachabilityTable( piece, current_location );
-    piece.setColor( Color.getOpposite( piece.getColor() ));
-    ReachabilityTable map_y0 = getReachabilityTable( piece, target_location );
+    Piece alt_piece = pieceFactory.createOpposite( piece );
+    ReachabilityTable map_y0 = getReachabilityTable( alt_piece, target_location );
     piece.setColor( Color.getOpposite( piece.getColor() ));
     
     Integer[][][] summed_tables = map_x0.add( map_y0 );

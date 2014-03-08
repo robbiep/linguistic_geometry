@@ -16,13 +16,8 @@ import lg.reachability.ReachabilityRule;
  */
 public class ChessPieceFactory extends PieceFactory {
   
-  private AbstractBoard ab;
-  
-  public ChessPieceFactory( AbstractBoard ab ){
-    this.ab = ab;
-  }
-  
-  public Piece createChessPiece( final String name, final Color color ) {
+  @Override
+  public Piece createPiece( String name, Color color ) {
     if( name.toLowerCase().equals("pawn") ){
       return createPawn( color );
     } else if( name.toLowerCase().equals("rook") ){
@@ -40,9 +35,8 @@ public class ChessPieceFactory extends PieceFactory {
     }
   }
   
-  public Piece createPawn( final Color color ){
+  public static Piece createPawn( final Color color ){
     ReachabilityRules reach = new ReachabilityRules();
-    reach.addRule( getFullRange() );
     
     // forward movement
     reach.addRule( new ReachabilityRule() {
@@ -60,9 +54,8 @@ public class ChessPieceFactory extends PieceFactory {
     return piece;
   }
   
-  public Piece createKnight( final Color color ){
+  public static Piece createKnight( final Color color ){
     ReachabilityRules reach = new ReachabilityRules();
-    reach.addRule( getFullRange() );
     
     reach.addRule( new ReachabilityRule() {
       @Override
@@ -99,9 +92,8 @@ public class ChessPieceFactory extends PieceFactory {
     return piece;
   }
   
-  public Piece createBishop( final Color color ){
+  public static Piece createBishop( final Color color ){
     ReachabilityRules reach = new ReachabilityRules();
-    reach.addRule( getFullRange() );
     
     reach.addRule( new ReachabilityRule() {
       @Override
@@ -116,9 +108,8 @@ public class ChessPieceFactory extends PieceFactory {
     return piece;
   }
   
-  public Piece createRook( final Color color ){
+  public static Piece createRook( final Color color ){
     ReachabilityRules reach = new ReachabilityRules();
-    reach.addRule( getFullRange() );
     
     reach.addRule( new ReachabilityRule() {
       @Override
@@ -133,9 +124,8 @@ public class ChessPieceFactory extends PieceFactory {
     return piece;
   }
   
-  public Piece createQueen( final Color color ){
+  public static Piece createQueen( final Color color ){
     ReachabilityRules reach = new ReachabilityRules();
-    reach.addRule( getFullRange() );
     
     reach.addRule( new ReachabilityRule() {
       @Override
@@ -159,9 +149,8 @@ public class ChessPieceFactory extends PieceFactory {
     return piece;
   }
   
-  public Piece createKing( final Color color ){
+  public static Piece createKing( final Color color ){
     ReachabilityRules reach = new ReachabilityRules();
-    reach.addRule( getFullRange() );
     
     reach.addRule( new ReachabilityRule() {
       @Override
@@ -172,17 +161,12 @@ public class ChessPieceFactory extends PieceFactory {
     Piece piece = new Piece( ChessConstants.NAME_KING, color, ChessConstants.VALUE_KING, reach);
     return piece;
   }
-  
-  private ReachabilityRule getFullRange(){
-    return new ReachabilityRule() {
-      @Override
-      public Boolean rule( Location x, Location y ){
-        return( x.getX() >= 0 && x.getX() < ab.getX() &&
-                x.getY() >= 0 && x.getY() < ab.getY() &&
-                x.getZ() >= 0 && x.getZ() < ab.getZ() ||
-                x.equals(y) );
-      }
-    };
+
+  @Override
+  public Piece createOpposite( Piece piece ){
+    return createPiece( 
+        piece.getName(), 
+        Color.getOpposite( piece.getColor() ));
   }
 
 }

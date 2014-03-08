@@ -25,14 +25,15 @@ public class TestAbstractBoardGame {
   
   @Test
   public void testAbstractBoardGameAbstractBoard(){
-    abg = new AbstractBoardGame( MockData.abstractBoard() );
+    abg = new AbstractBoardGame( MockData.abstractBoard(), MockData.pieceFactory() );
   }
 
   @Test
   public void testAbstractBoardGameIntegerIntegerInteger(){
     abg = new AbstractBoardGame(  MockData.CHESS_DIMENSION, 
-                                                    MockData.CHESS_DIMENSION, 
-                                                    MockData.CHESS_DIMENSION );
+                                  MockData.CHESS_DIMENSION, 
+                                  MockData.CHESS_DIMENSION,
+                                  MockData.pieceFactory());
   }
 
   @Test

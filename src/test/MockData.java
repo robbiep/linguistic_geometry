@@ -43,7 +43,7 @@ public class MockData {
   
   public static ChessPieceFactory pieceFactory(){
     if( chess_piece_factory == null ){
-      chess_piece_factory = new ChessPieceFactory( abstractBoard() );
+      chess_piece_factory = new ChessPieceFactory();
     }
     return chess_piece_factory;
   }
@@ -64,7 +64,8 @@ public class MockData {
   
   public static AbstractBoardGame abstractBoardGame(){
     if( abstract_board_game == null ){
-      abstract_board_game = new AbstractBoardGame( abstractBoard() );
+      abstract_board_game = new AbstractBoardGame(  abstractBoard(), 
+                                                    pieceFactory() );
     }
     return abstract_board_game;
   }
@@ -72,13 +73,15 @@ public class MockData {
   public static AbstractBoardGame flatAbstractBoardGame(){
     if( flat_abstract_board_game  == null ){
       flat_abstract_board_game = new AbstractBoardGame( 
-          new AbstractBoard( DIMENSION, DIMENSION, 1 ) );
+          new AbstractBoard( DIMENSION, DIMENSION, 1 ),
+          pieceFactory() );
     }
     return flat_abstract_board_game;
   }
   
   public static AbstractBoardGame chessGame(){
-    AbstractBoardGame abg = new AbstractBoardGame( abstractBoardChess() );
+    AbstractBoardGame abg = new AbstractBoardGame(  abstractBoardChess(), 
+                                                    pieceFactory() );
     // Pawns
     for( int i = 0; i < CHESS_DIMENSION; ++ i ){
       abg.addPiece( pieceFactory().createPawn( Color.WHITE ),

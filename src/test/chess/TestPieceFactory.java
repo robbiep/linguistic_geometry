@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import lg.abstract_board_game.AbstractBoard;
 import lg.data_objects.Color;
 import lg.data_objects.Piece;
+import lg.data_objects.PieceFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,16 +15,16 @@ import chess.ChessPieceFactory;
 
 public class TestPieceFactory {
   
-  public ChessPieceFactory factory;
+  public ChessPieceFactory pieceFactory;
   
   @Before
   public void initialize(){
-    factory = MockData.pieceFactory();
- }
-
+    pieceFactory = MockData.pieceFactory();
+  }
+  
   @Test
   public void testCreatePawn(){
-    Piece piece = factory.createPawn( Color.BLACK );
+    Piece piece = pieceFactory.createPawn( Color.BLACK );
     assertEquals( "Set/Get 'name'",   ChessConstants.NAME_PAWN,   piece.getName() );
     assertEquals( "Set/Get 'group'",  Color.BLACK,  piece.getColor() );
     assertEquals( "Set/Get 'value'",  ChessConstants.VALUE_PAWN,   piece.getValue() );
@@ -31,7 +32,7 @@ public class TestPieceFactory {
   
   @Test
   public void testCreateKnight(){
-    Piece piece = factory.createKnight( Color.BLACK );
+    Piece piece = pieceFactory.createKnight( Color.BLACK );
     assertEquals( "Set/Get 'name'",   ChessConstants.NAME_KNIGHT, piece.getName() );
     assertEquals( "Set/Get 'group'",  Color.BLACK,  piece.getColor() );
     assertEquals( "Set/Get 'value'",  ChessConstants.VALUE_KNIGHT, piece.getValue() );
@@ -39,7 +40,7 @@ public class TestPieceFactory {
   
   @Test
   public void testCreateBishop(){
-    Piece piece = factory.createBishop( Color.BLACK );
+    Piece piece = pieceFactory.createBishop( Color.BLACK );
     assertEquals( "Set/Get 'name'",   ChessConstants.NAME_BISHOP, piece.getName() );
     assertEquals( "Set/Get 'group'",  Color.BLACK,  piece.getColor() );
     assertEquals( "Set/Get 'value'",  ChessConstants.VALUE_BISHOP, piece.getValue() );
@@ -47,7 +48,7 @@ public class TestPieceFactory {
   
   @Test
   public void testCreateRook(){
-    Piece piece = factory.createRook( Color.BLACK );
+    Piece piece = pieceFactory.createRook( Color.BLACK );
     assertEquals( "Set/Get 'name'",   ChessConstants.NAME_ROOK, piece.getName() );
     assertEquals( "Set/Get 'group'",  Color.BLACK,  piece.getColor() );
     assertEquals( "Set/Get 'value'",  ChessConstants.VALUE_ROOK, piece.getValue() );
@@ -55,7 +56,7 @@ public class TestPieceFactory {
   
   @Test
   public void testCreateQueen(){
-    Piece piece = factory.createQueen( Color.BLACK );
+    Piece piece = pieceFactory.createQueen( Color.BLACK );
     assertEquals( "Set/Get 'name'",   ChessConstants.NAME_QUEEN, piece.getName() );
     assertEquals( "Set/Get 'group'",  Color.BLACK,  piece.getColor() );
     assertEquals( "Set/Get 'value'",  ChessConstants.VALUE_QUEEN, piece.getValue() );
@@ -63,7 +64,7 @@ public class TestPieceFactory {
   
   @Test
   public void testCreateKing(){
-    Piece piece = factory.createKing( Color.BLACK );
+    Piece piece = pieceFactory.createKing( Color.BLACK );
     assertEquals( "Set/Get 'name'",   ChessConstants.NAME_KING, piece.getName() );
     assertEquals( "Set/Get 'group'",  Color.BLACK,  piece.getColor() );
     assertEquals( "Set/Get 'value'",  ChessConstants.VALUE_KING, piece.getValue() );

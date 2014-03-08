@@ -10,6 +10,7 @@ import lg.abstract_board_game.AbstractBoardGame;
 import lg.data_objects.Color;
 import lg.data_objects.Location;
 import lg.data_objects.Piece;
+import lg.data_objects.PieceFactory;
 import lg.data_structures.GamePiece;
 import lg.grammar.GT2;
 
@@ -18,20 +19,21 @@ public class LgREPL extends REPL {
   
   private AbstractBoardGame abg;
   private Location          center;
-  private ChessPieceFactory chessPieceFactory;
+  private PieceFactory      pieceFactory;
   
   private final Integer     DIMENSION_LENGTH = 15;
   private final Integer     CENTER = 7;
   
   public LgREPL() {
     super();
+    pieceFactory = new ChessPieceFactory();
     this.abg = new AbstractBoardGame( DIMENSION_LENGTH,
                                       DIMENSION_LENGTH,
-                                      DIMENSION_LENGTH );
+                                      DIMENSION_LENGTH,
+                                      pieceFactory );
     this.center = new Location( CENTER, 
                                 CENTER, 
                                 CENTER );
-    chessPieceFactory = new ChessPieceFactory( abg.getAbstractBoard() );
     initializeCommands();
   }
   
@@ -179,7 +181,7 @@ public class LgREPL extends REPL {
               }
             } else if( args.length == 4 )  {
               try {
-                abg.addPiece( chessPieceFactory.createObstacle(),  
+                abg.addPiece( pieceFactory.createObstacle(),  
                               new Location( Integer.parseInt( args[1] ), 
                                             Integer.parseInt( args[2] ), 
                                             Integer.parseInt( args[3] ) ));
@@ -229,9 +231,7 @@ public class LgREPL extends REPL {
         public void execute( String[] args ){
           if( args.length == 6 )  {
             try { 
-              ChessPieceFactory factory = new ChessPieceFactory( 
-                  abg.getAbstractBoard() );
-              Piece piece = factory.createChessPiece( 
+              Piece piece = pieceFactory.createPiece( 
                   args[1], 
                   Color.get( args[2] ));
               System.out.println( piece.isReachable( center, 
@@ -245,9 +245,7 @@ public class LgREPL extends REPL {
             }
           } else if( args.length == 9 )  {
             try { 
-              ChessPieceFactory factory = new ChessPieceFactory( 
-                  abg.getAbstractBoard() );
-              Piece piece = factory.createChessPiece( 
+              Piece piece = pieceFactory.createPiece( 
                   args[1], Color.get( args[2] ) );
               System.out.println( piece.isReachable(  
                   new Location( Integer.parseInt( args[3] ), 
@@ -279,18 +277,14 @@ public class LgREPL extends REPL {
           public void execute( String[] args ){
             try{
               if( args.length == 3 )  {
-                ChessPieceFactory factory = new ChessPieceFactory( 
-                    abg.getAbstractBoard() );
-                Piece piece = factory.createChessPiece( 
+                Piece piece = pieceFactory.createPiece( 
                     args[1], 
                     Color.get( args[2] ) );
                 abg.getReachabilityTable( piece, center 
                     ).printReachabilityTable();
                 return;
               } else if( args.length == 4 )  {
-                ChessPieceFactory factory = new ChessPieceFactory( 
-                    abg.getAbstractBoard() );
-                Piece piece = factory.createChessPiece( 
+                Piece piece = pieceFactory.createPiece( 
                     args[1], 
                     Color.get( args[2] ) );
                 abg.getReachabilityTable( piece, center 
@@ -316,7 +310,7 @@ public class LgREPL extends REPL {
               try{
                 GT2 gt2 = new GT2( abg );
                 gt2.GenerateTrajectory( new GamePiece(
-                    chessPieceFactory.createChessPiece( args[1], 
+                    pieceFactory.createPiece( args[1], 
                     Color.get( args[2] ) ),
                     new Location( Integer.parseInt( args[3] ), 
                         Integer.parseInt( args[4] ), 

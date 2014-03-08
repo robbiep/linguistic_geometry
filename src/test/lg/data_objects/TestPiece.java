@@ -26,11 +26,10 @@ public class TestPiece {
   
   @Test
   public void testPieceFactoryObstacle(){
-    PieceFactory pieceFactory = new PieceFactory();
-    Piece piece = pieceFactory.createObstacle();
-    assertEquals( "Set/Get 'name'", pieceFactory.OBSTACLE, piece.getName() );
-    assertEquals( "Set/Get 'group'", pieceFactory.COLOR, piece.getColor() );
-    assertEquals( "Set/Get 'value'", pieceFactory.VALUE, piece.getValue() );
+    Piece piece = MockData.pieceFactory().createObstacle();
+    assertEquals( "Set/Get 'name'", MockData.pieceFactory().OBSTACLE, piece.getName() );
+    assertEquals( "Set/Get 'group'", MockData.pieceFactory().COLOR, piece.getColor() );
+    assertEquals( "Set/Get 'value'", MockData.pieceFactory().VALUE, piece.getValue() );
     assertTrue( "Reachability", piece.isReachable( null, null ) == null );
   }
   
