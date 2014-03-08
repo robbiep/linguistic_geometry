@@ -234,4 +234,47 @@ public class TestReachabilityTable {
             new Location( 7, 2, 0) ) == ReachabilityTable.INFINITY );
     
   }
+  
+  @Test
+  public void testRachabilityAdd(){
+    Integer[][][] table1 = new Integer[2][2][1];
+    Integer[][][] table2 = new Integer[2][2][1];
+    for( int i = 0; i < 2; ++ i ){
+      for( int j = 0; j < 2; ++ j ){
+        table1[i][j][0] = ReachabilityTable.INFINITY;
+        table2[i][j][0] = ReachabilityTable.INFINITY;
+      }
+    }
+    table1[0][0][0] = 5;
+    table2[0][0][0] = 5;
+    ReachabilityTable r_table1 = new ReachabilityTable( 
+        MockData.pieceFactory().createPawn( Color.WHITE ), 
+        table1 );
+    ReachabilityTable r_table2 = new ReachabilityTable( 
+        MockData.pieceFactory().createPawn( Color.WHITE ), 
+        table2 );
+    
+    Integer[][][] table3 = r_table1.add( r_table2 );
+    
+    assertTrue( table3[0][0][0] == 10 );
+    for( int i = 0; i < 2; ++ i ){
+      for( int j = 0; j < 2; ++ j ){
+        if( i != 0 && j != 0 ){
+          assertTrue( table3[i][j][0] == ReachabilityTable.INFINITY );
+        }
+      }
+    } 
+  }
+  
+  @Test
+  public void testOppositeReach(){
+    Piece piece = MockData.pieceFactory().createPawn( Color.WHITE );
+    Location current_location = MockData.centerLocation();
+    ReachabilityTable map_x0 = Reachability.generateTable( abg, piece, current_location );
+    map_x0.printReachabilityTable(7);
+    piece.setColor( Color.getOpposite( piece.getColor() ));
+    ReachabilityTable map_y0 = Reachability.generateTable( abg, piece, current_location );
+    map_y0.printReachabilityTable(7);
+    piece.setColor( Color.getOpposite( piece.getColor() ));
+  }
 }

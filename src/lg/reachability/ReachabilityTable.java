@@ -37,7 +37,12 @@ public class ReachabilityTable {
     for( int x = 0; x < x_dim; ++ x ){
       for( int y = 0; y < y_dim; ++ y ){
         for( int z = 0; z < z_dim; ++ z ){
-          sum_table[x][y][z] = table[x][y][z] + other_table.getTable()[x][y][z];
+          if( table[x][y][z] == INFINITY 
+              || other_table.getTable()[x][y][z] == INFINITY ){
+            sum_table[x][y][z] = INFINITY;
+          } else {
+            sum_table[x][y][z] = table[x][y][z] + other_table.getTable()[x][y][z];
+          }
         }
       }
     }

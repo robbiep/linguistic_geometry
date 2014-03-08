@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import test.MockData;
 import chess.ChessConstants;
 import lg.data_objects.Color;
 import lg.data_objects.Piece;
@@ -32,5 +33,11 @@ public class TestPiece {
     assertEquals( "Set/Get 'value'", pieceFactory.VALUE, piece.getValue() );
     assertTrue( "Reachability", piece.isReachable( null, null ) == null );
   }
-
+  
+  @Test
+  public void testPieceSetColor(){
+    Piece piece = MockData.pieceFactory().createPawn( Color.WHITE );
+    piece.setColor( Color.getOpposite( piece.getColor()  ));
+    assertTrue( piece.getColor() == Color.BLACK );
+  }
 }

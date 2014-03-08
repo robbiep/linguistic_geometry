@@ -117,7 +117,7 @@ public class Project2 {
       Tuple next = it.next();
       System.out.println( "Piece: " + next.piece.getName() + 
           " (" + next.piece.getColor().toString()+ ")" + " Length: " + next.length );
-      System.out.println( next.trajectory );
+      System.out.println( next.trajectory + "\n" );
       //System.out.println("Press enter to continue...");
       //enter_to_continue.nextLine();
     }

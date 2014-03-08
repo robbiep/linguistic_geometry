@@ -44,7 +44,7 @@ public class TestABG_Functions {
     assertFalse( abg.abg_R( MockData.pieceFactory().createPawn( Color.WHITE ), 
                             MockData.centerLocation(), 
                             new Location( 7, 8, 7 ) ));
-    assertFalse( abg.abg_R( MockData.pieceFactory().createPawn( Color.WHITE ), 
+    assertTrue( abg.abg_R( MockData.pieceFactory().createPawn( Color.WHITE ), 
                             new Location( 7, 8, 7 ),
                             MockData.centerLocation() ));
   }
@@ -188,9 +188,9 @@ public class TestABG_Functions {
     Set<Location> locations = abg.abg_SUM( 
         MockData.pieceFactory().createPawn( Color.WHITE ), 
         MockData.centerLocation(), 
-        new Location( 7, 6, 7 ),
-        1 );
-    assertTrue( locations.size() == 1 );
+        new Location( 7, 5, 7 ),
+        2 );
+    assertTrue( locations.size() == 3 );
     assertTrue( locations.contains( new Location( 7, 6, 7 ) ));
     
     locations = abg.abg_SUM( 
@@ -223,6 +223,18 @@ public class TestABG_Functions {
     assertTrue( locations.contains( new Location( 8, 7, 7 ) ));
     
     
+  }
+  
+  @Test
+  public void testAbg_SUM_case2(){
+    abg = MockData.flatAbstractBoardGame();
+    Set<Location> locations = abg.abg_SUM( 
+        MockData.pieceFactory().createPawn( Color.WHITE ), 
+        MockData.flatCenterLocation(),
+        new Location( 7, 5, 0 ),
+        2 );
+    assertTrue( locations.size() == 3 );
+    assertTrue( locations.contains( new Location( 7, 6, 0 ) ));
   }
 
   /**

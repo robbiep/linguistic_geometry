@@ -209,11 +209,14 @@ public class AbstractBoardGame implements ABG_Functions {
                                 Location target_location, 
                                 Integer length ){
     HashSet<Location> locations_sum = new HashSet<Location>();
+    
     ReachabilityTable map_x0 = getReachabilityTable( piece, current_location );
     piece.setColor( Color.getOpposite( piece.getColor() ));
     ReachabilityTable map_y0 = getReachabilityTable( piece, target_location );
     piece.setColor( Color.getOpposite( piece.getColor() ));
+    
     Integer[][][] summed_tables = map_x0.add( map_y0 );
+    
     for( int x = 0; x < abstract_board.getX(); ++ x ){
       for( int y = 0; y < abstract_board.getY(); ++ y ){
         for( int z = 0; z < abstract_board.getZ(); ++ z ){
