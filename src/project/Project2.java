@@ -31,8 +31,8 @@ public class Project2 {
         "------------\n" +
         "Outputs a trajectory from position 5,5,0 to 5,2,0 of length 1 and 2\n" );
     
-    AbstractBoardGame abg = new AbstractBoardGame( 8, 8, 1 );
-    ChessPieceFactory factory = new ChessPieceFactory( abg.getAbstractBoard() );
+    ChessPieceFactory factory = new ChessPieceFactory();
+    AbstractBoardGame abg = new AbstractBoardGame( 8, 8, 1, factory );
     GT2 gt2 = new GT2( abg );
     Location location_x = new Location( 5, 5, 0 );
     Location location_y = new Location( 5, 2, 0 );

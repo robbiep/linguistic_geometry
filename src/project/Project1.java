@@ -20,8 +20,8 @@ public class Project1 {
         "Prints a 15x15x1 reachability table for each chess piece.\n" +
         "The starting location for each piece is set in the center.\n");
  
-    AbstractBoardGame abg = new AbstractBoardGame( 15, 15, 1 );
-    ChessPieceFactory factory = new ChessPieceFactory( abg.getAbstractBoard() );
+    ChessPieceFactory factory = new ChessPieceFactory();
+    AbstractBoardGame abg = new AbstractBoardGame( 15, 15, 1, factory );
     Location center = new Location( 7, 7, 0 );
     ArrayList<ReachabilityTable> tables = new ArrayList<ReachabilityTable>();
     //Scanner enter_to_continue = new Scanner(System.in);

@@ -35,7 +35,7 @@ public class ChessPieceFactory extends PieceFactory {
     }
   }
   
-  public static Piece createPawn( final Color color ){
+  public Piece createPawn( final Color color ){
     ReachabilityRules reach = new ReachabilityRules();
     
     // forward movement
@@ -54,7 +54,7 @@ public class ChessPieceFactory extends PieceFactory {
     return piece;
   }
   
-  public static Piece createKnight( final Color color ){
+  public Piece createKnight( final Color color ){
     ReachabilityRules reach = new ReachabilityRules();
     
     reach.addRule( new ReachabilityRule() {
@@ -92,7 +92,7 @@ public class ChessPieceFactory extends PieceFactory {
     return piece;
   }
   
-  public static Piece createBishop( final Color color ){
+  public Piece createBishop( final Color color ){
     ReachabilityRules reach = new ReachabilityRules();
     
     reach.addRule( new ReachabilityRule() {
@@ -108,7 +108,7 @@ public class ChessPieceFactory extends PieceFactory {
     return piece;
   }
   
-  public static Piece createRook( final Color color ){
+  public Piece createRook( final Color color ){
     ReachabilityRules reach = new ReachabilityRules();
     
     reach.addRule( new ReachabilityRule() {
@@ -124,7 +124,7 @@ public class ChessPieceFactory extends PieceFactory {
     return piece;
   }
   
-  public static Piece createQueen( final Color color ){
+  public Piece createQueen( final Color color ){
     ReachabilityRules reach = new ReachabilityRules();
     
     reach.addRule( new ReachabilityRule() {
@@ -149,7 +149,7 @@ public class ChessPieceFactory extends PieceFactory {
     return piece;
   }
   
-  public static Piece createKing( final Color color ){
+  public Piece createKing( final Color color ){
     ReachabilityRules reach = new ReachabilityRules();
     
     reach.addRule( new ReachabilityRule() {
