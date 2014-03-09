@@ -43,11 +43,8 @@ public class Project1 {
     Iterator<ReachabilityTable> it = tables.iterator();
     while( it.hasNext() ){
       ReachabilityTable table = it.next();
-      System.out.println( "Piece: " + table.getPiece().getName() + 
-          " (" + table.getPiece().getColor().toString()+ ")" );
+      System.out.println( table.getPiece() );
       table.printReachabilityTable(0);
-     // System.out.println("Press enter to continue...");
-      //enter_to_continue.nextLine();
     }
   }
 }

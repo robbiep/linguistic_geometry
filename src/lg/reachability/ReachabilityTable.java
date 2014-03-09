@@ -50,11 +50,7 @@ public class ReachabilityTable {
   }
   
   public void printReachabilityTable(){
-    for( int z = 0; z < table[0][0].length; ++ z ){
-      System.out.println( "Z dimension = " + z );
-      printReachabilityTable( z );
-      System.out.print( "\n\n" );
-    }
+      System.out.println( toString() );
   }
   
  /**
@@ -62,14 +58,27 @@ public class ReachabilityTable {
   * @param z - offset in dimension z
   */
   public void printReachabilityTable( Integer z ){
-    for( int y = 0; y < table[0].length; ++ y ){
-      for( int x = 0; x < table.length; ++ x ){
-        System.out.print( (table[x][y][z].equals( INFINITY )) ? "x " : table[x][y][z] + " " );
-      }
-      System.out.print( "\n" );
-    }
-    System.out.print( "\n" );
+    System.out.println( toString( z ) );
   }
   
+  @Override
+  public String toString(){
+    String table_str = "";
+    for( int z = 0; z < table[0][0].length; ++ z ){
+      table_str += toString( z ) + "\n";
+    }
+    return table_str;
+  }
+  
+  public String toString( Integer z ){
+    String table_str = "";
+    for( int y = 0; y < table[0].length; ++ y ){
+      for( int x = 0; x < table.length; ++ x ){
+        table_str += (table[x][y][z].equals( INFINITY )) ? "x " : table[x][y][z] + " " ;
+      }
+      table_str += "\n" ;
+    }
+    return table_str + "\n";
+  }
   
 }

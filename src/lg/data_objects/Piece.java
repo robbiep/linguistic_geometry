@@ -73,4 +73,9 @@ public class Piece {
     }
   }
   
+  @Override
+  public String toString(){
+    return "(" + getName() + ", " + getColor() + ", " + getValue() + ")";
+  }
+  
 }

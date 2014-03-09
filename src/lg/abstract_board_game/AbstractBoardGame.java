@@ -221,7 +221,6 @@ public class AbstractBoardGame implements ABG_Functions {
     ReachabilityTable map_x0 = getReachabilityTable( piece, current_location );
     Piece alt_piece = pieceFactory.createOpposite( piece );
     ReachabilityTable map_y0 = getReachabilityTable( alt_piece, target_location );
-    piece.setColor( Color.getOpposite( piece.getColor() ));
     
     Integer[][][] summed_tables = map_x0.add( map_y0 );
     

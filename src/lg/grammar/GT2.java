@@ -66,10 +66,10 @@ public class GT2 {
       A_3_4_5(next(start_location,length), target_location, f(length));
     } 
     // Q4 = (y = yo)
-    else if ( target_location == y0 ){
+    else if ( target_location.equals(y0) ){
       a( target_location );
     } 
-    // Q4 = (y ≠ yo)
+    // Q5 = (y ≠ yo)
     else {
       // Do nothing
     }
