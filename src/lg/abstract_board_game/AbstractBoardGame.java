@@ -159,7 +159,6 @@ public class AbstractBoardGame implements ABG_Functions {
             && validLocation( target_location );
   }
 
-  // TODO unbreak, since there are multiple pieces of same type
   @Override
   public Piece abg_ON( Location location ){
     return getByLocation( location );

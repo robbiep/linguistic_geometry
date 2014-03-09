@@ -17,7 +17,6 @@ import org.junit.Test;
 import chess.ChessPieceFactory;
 import test.MockData;
 
-// TODO replace using MockDataFactory
 public class TestReachabilityTable {
   
   AbstractBoardGame abg;

@@ -30,6 +30,9 @@ public class GT2 {
     try{
       S( game_piece.location, target_location, length );
     } catch (Exception e){
+      //trajectory.getTrajectoryList().clear();
+    }
+    if( trajectory.size() != length + 1 ){
       trajectory.getTrajectoryList().clear();
     }
     return trajectory;
