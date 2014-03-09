@@ -17,9 +17,9 @@ public class Project2 {
   
   public static class Tuple{
     public Piece piece;
-    public Trajectory trajectory;
+    public String trajectory;
     public int length;
-    public Tuple( Piece piece, Trajectory trajectory, int length ) {
+    public Tuple( Piece piece, String trajectory, int length ) {
       this.piece = piece;
       this.trajectory = trajectory;
       this.length = length;
@@ -44,69 +44,117 @@ public class Project2 {
     Piece piece = factory.createPawn( Color.WHITE );
     Integer length = 3;
     trajectories.add( 
-        new Tuple( piece, gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), location_y, length ), length));
+        new Tuple( piece, 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), 
+                location_y, 
+                length ).toString(), 
+            length));
     length = 4;
     trajectories.add( 
-        new Tuple( piece, gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), location_y, length ), length));
+        new Tuple( piece, 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), 
+                location_y, 
+                length ).toString(), 
+            length));
     
     piece = factory.createRook( Color.BLACK );
     length = 1;
     trajectories.add( 
-        new Tuple( piece, gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), location_y, length ), length));
+        new Tuple( piece, 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), 
+                location_y, 
+                length ).toString(), 
+            length));
     length = 2;
     trajectories.add( 
-        new Tuple( piece, gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), location_y, length ), length));
+        new Tuple( piece, 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), 
+                location_y, 
+                length ).toString(), 
+            length));
     
     piece = factory.createBishop( Color.BLACK );
     length = 2;
     trajectories.add( 
-        new Tuple( piece, gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), location_y, length ), length));
+        new Tuple( piece, 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), 
+                location_y, 
+                length ).toString(), 
+            length));
     length = 3;
     trajectories.add( 
-        new Tuple( piece, gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), location_y, length ), length));
+        new Tuple( piece, 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), 
+                location_y, 
+                length ).toString(), 
+            length));
     
     piece = factory.createKnight( Color.BLACK );
     length = 3;
     trajectories.add( 
-        new Tuple( piece, gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), location_y, length ), length));
+        new Tuple( piece, 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), 
+                location_y, 
+                length ).toString(), 
+            length));
     length = 5;
     trajectories.add( 
-        new Tuple( piece, gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), location_y, length ), length));
+        new Tuple( piece, 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), 
+                location_y, 
+                length ).toString(), 
+            length));
     
     piece = factory.createQueen( Color.BLACK );
     length = 1;
     trajectories.add( 
-        new Tuple( piece, gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), location_y, length ), length));
+        new Tuple( piece, 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), 
+                location_y, 
+                length ).toString(), 
+            length));
     length = 2;
     trajectories.add( 
-        new Tuple( piece, gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), location_y, length ), length));
+        new Tuple( piece, 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), 
+                location_y, 
+                length ).toString(), 
+            length));
     
     piece = factory.createKing( Color.BLACK );
     length = 3;
     trajectories.add( 
-        new Tuple( piece, gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), location_y, length ), length));
+        new Tuple( piece, 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), 
+                location_y, 
+                length ).toString(), 
+            length));
     length = 4;
     trajectories.add( 
-        new Tuple( piece, gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), location_y, length ), length));
+        new Tuple( piece, 
+            gt2.GenerateTrajectory( 
+                new GamePiece( piece, location_x ), 
+                location_y, 
+                length ).toString(), 
+            length));
 
     Iterator<Tuple> it = trajectories.iterator();
     while( it.hasNext() ){
       Tuple next = it.next();
       System.out.println( "Piece: " + next.piece.getName() + 
           " (" + next.piece.getColor().toString()+ ")" + " Length: " + next.length );
-      System.out.println( next.trajectory.toString() + "\n" );
+      System.out.println( next.trajectory + "\n" );
       //System.out.println("Press enter to continue...");
       //enter_to_continue.nextLine();
     }

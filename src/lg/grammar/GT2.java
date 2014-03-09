@@ -83,11 +83,16 @@ public class GT2 {
     return trajectory;
   }
   
+  @Override
+  public String toString(){
+    return trajectory.toString();
+  }
+  
   /**
    * Prints the last trajectory to System out
    */
   public void printTrajectory(){
-    System.out.println( trajectory.toString() );
+    System.out.print( toString() );
   }
   
   private Integer lmed( Location start_location, 

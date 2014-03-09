@@ -37,7 +37,7 @@ public class Trajectory {
       return "Invalid trajectory.";
     } else {
       for( Location location : trajactory_list ){
-        trajectory_string += location.toString();
+        trajectory_string += "a" + location.toString();
       }
       return trajectory_string;
     }
