@@ -54,6 +54,10 @@ public class AbstractBoardGame implements ABG_Functions {
   public Integer getDimZ(){
     return abstract_board.getZ();
   }
+  
+  public Integer size(){
+    return getDimX()*getDimY()*getDimZ();
+  }
 
   /**
    * Sets new abstract board. Removes any gameMap no longer in range.

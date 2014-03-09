@@ -309,12 +309,12 @@ public class LgREPL extends REPL {
             if( args.length == 10 ){
               try{
                 GT2 gt2 = new GT2( abg );
-                gt2.GenerateTrajectory( new GamePiece(
+                gt2.generateTrajectory( 
                     pieceFactory.createPiece( args[1], 
                     Color.get( args[2] ) ),
                     new Location( Integer.parseInt( args[3] ), 
                         Integer.parseInt( args[4] ), 
-                        Integer.parseInt( args[5] ) )), 
+                        Integer.parseInt( args[5] ) ), 
                     new Location( Integer.parseInt( args[6] ), 
                         Integer.parseInt( args[7] ), 
                         Integer.parseInt( args[8] ) ),

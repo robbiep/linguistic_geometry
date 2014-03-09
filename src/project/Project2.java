@@ -45,16 +45,18 @@ public class Project2 {
     Integer length = 3;
     trajectories.add( 
         new Tuple( piece, 
-            gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), 
+            gt2.generateTrajectory( 
+                piece, 
+                location_x , 
                 location_y, 
                 length ).toString(), 
             length));
     length = 4;
     trajectories.add( 
         new Tuple( piece, 
-            gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), 
+            gt2.generateTrajectory( 
+                piece, 
+                location_x , 
                 location_y, 
                 length ).toString(), 
             length));
@@ -63,88 +65,98 @@ public class Project2 {
     length = 1;
     trajectories.add( 
         new Tuple( piece, 
-            gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), 
+            gt2.generateTrajectory( 
+                piece, 
+                location_x , 
                 location_y, 
                 length ).toString(), 
             length));
     length = 2;
     trajectories.add( 
         new Tuple( piece, 
-            gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), 
+            gt2.generateTrajectory( 
+                piece, 
+                location_x , 
                 location_y, 
-                length ).toString(), 
+                length ).toString(),
             length));
     
     piece = factory.createBishop( Color.BLACK );
     length = 2;
     trajectories.add( 
         new Tuple( piece, 
-            gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), 
+            gt2.generateTrajectory( 
+                piece, 
+                location_x , 
                 location_y, 
-                length ).toString(), 
+                length ).toString(),
             length));
     length = 3;
     trajectories.add( 
         new Tuple( piece, 
-            gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), 
+            gt2.generateTrajectory( 
+                piece, 
+                location_x , 
                 location_y, 
-                length ).toString(), 
+                length ).toString(),
             length));
     
     piece = factory.createKnight( Color.BLACK );
     length = 3;
     trajectories.add( 
         new Tuple( piece, 
-            gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), 
+            gt2.generateTrajectory( 
+                piece, 
+                location_x , 
                 location_y, 
-                length ).toString(), 
+                length ).toString(),
             length));
     length = 5;
     trajectories.add( 
         new Tuple( piece, 
-            gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), 
+            gt2.generateTrajectory( 
+                piece, 
+                location_x , 
                 location_y, 
-                length ).toString(), 
+                length ).toString(),
             length));
     
     piece = factory.createQueen( Color.BLACK );
     length = 1;
     trajectories.add( 
         new Tuple( piece, 
-            gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), 
+            gt2.generateTrajectory( 
+                piece, 
+                location_x , 
                 location_y, 
-                length ).toString(), 
+                length ).toString(),
             length));
     length = 2;
     trajectories.add( 
         new Tuple( piece, 
-            gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), 
+            gt2.generateTrajectory( 
+                piece, 
+                location_x , 
                 location_y, 
-                length ).toString(), 
+                length ).toString(),
             length));
     
     piece = factory.createKing( Color.BLACK );
     length = 3;
     trajectories.add( 
         new Tuple( piece, 
-            gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), 
+            gt2.generateTrajectory( 
+                piece, 
+                location_x , 
                 location_y, 
-                length ).toString(), 
+                length ).toString(),
             length));
     length = 4;
     trajectories.add( 
         new Tuple( piece, 
-            gt2.GenerateTrajectory( 
-                new GamePiece( piece, location_x ), 
+            gt2.generateTrajectory( 
+                piece, 
+                location_x , 
                 location_y, 
                 length ).toString(), 
             length));
