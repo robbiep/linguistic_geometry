@@ -236,6 +236,20 @@ public class TestABG_Functions {
     assertTrue( locations.size() == 3 );
     assertTrue( locations.contains( new Location( 7, 6, 0 ) ));
   }
+  
+  @Test
+  public void testAbg_SUM_case3(){
+    abg = MockData.flatAbstractBoardGame();
+    Set<Location> locations = abg.abg_SUM( 
+        MockData.pieceFactory().createPawn( Color.WHITE ), 
+        MockData.flatCenterLocation(),
+        new Location( 7, 0, 0 ),
+        7 );
+    assertTrue( locations.size() == 8 );
+    for( int i = 0; i < 8; ++ i ){
+      assertTrue( locations.contains( new Location( 7, i, 0 ) ));
+    }
+  }
 
   /**
    * Test method for {@link lg.abstract_board_game.ABG_Functions#abg_MOVE(lg.data_objects.Piece, lg.data_objects.Location, lg.data_objects.Location, lg.data_objects.Location, java.lang.Integer, java.lang.Integer)}.

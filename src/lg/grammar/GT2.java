@@ -5,6 +5,7 @@ import java.util.Set;
 import lg.abstract_board_game.AbstractBoardGame;
 import lg.data_objects.Location;
 import lg.data_structures.GamePiece;
+import lg.trajectory.Trajectory;
 
 // TODO implement with a parser and manage like a real grammar
 public class GT2 {
@@ -13,69 +14,80 @@ public class GT2 {
   private GamePiece game_piece;
   private Location y0;
   private Integer total_length;
-  private String trajectory;
+  
+  private Trajectory trajectory;
   
   public GT2( AbstractBoardGame abg ) {
     super();
     this.abg = abg;
   }
   
-  public String GenerateTrajectory( GamePiece game_piece, Location target_location, Integer length){
+  public Trajectory GenerateTrajectory( GamePiece game_piece, Location target_location, Integer length){
     this.game_piece = game_piece;
     this.y0 = target_location;
     this.total_length = length;
-    trajectory = "";
+    trajectory = new Trajectory( game_piece.piece );
     try{
       S( game_piece.location, target_location, length );
     } catch (Exception e){
-      trajectory = "FATAL ERROR: Trajectory invalid.";
+      trajectory.getTrajectoryList().clear();
     }
     return trajectory;
   }
  
 
-  public void S( Location start_location, Location target_location, Integer length) throws Exception{
+  private void S( Location start_location, Location target_location, Integer length) throws Exception{
+    // Q1 = (MAPx,p(y) ≤ l) ∧ (l < 2n)
     if( abg.abg_MAP( game_piece.piece, start_location, target_location ) <= length &&
         length < 2*(abg.getDimX()*abg.getDimY()*abg.getDimZ()) ){
-      A2( start_location, target_location, length );
+      A_2( start_location, target_location, length );
     } else {
       throw new Exception();
     }
   }
   
   // TODO add index
-  public void A2( Location start_location, Location target_location, Integer length){
+  private void A_2( Location start_location, Location target_location, Integer length){
+    // Q2 = (MAPx,p(y) ≠ l) 
     if( abg.abg_MAP( game_piece.piece, start_location, target_location ) != length ){
-      A( start_location, med(start_location, target_location, length), lmed(start_location, target_location, length) );
-      A( med(start_location, target_location, length), target_location, length - lmed(start_location, target_location, length) );
+      A_3_4_5( start_location, med(start_location, target_location, length), lmed(start_location, target_location, length) );
+      A_3_4_5( med(start_location, target_location, length), target_location, length - lmed(start_location, target_location, length) );
     } else {
-      A( start_location, target_location, length );
+      A_3_4_5( start_location, target_location, length );
     }
   }
 
   // TODO add index
-  public void A( Location start_location, Location target_location, Integer length){
+  private void A_3_4_5( Location start_location, Location target_location, Integer length){
+    // Q3 = (MAPx,p(y) = l) ∧ (l ≥ 1)
     if( abg.abg_MAP( game_piece.piece, start_location, target_location ) == length && 
-        length > 1 ){
+        length >= 1 ){
       a(start_location);
-      A(next(start_location,length), target_location, f(length));
-    } else if ( target_location == y0 ){
+      A_3_4_5(next(start_location,length), target_location, f(length));
+    } 
+    // Q4 = (y = yo)
+    else if ( target_location == y0 ){
       a( target_location );
-    } else {
+    } 
+    // Q4 = (y ≠ yo)
+    else {
       // Do nothing
     }
   }
 
-  public void a( Location target_location){
-    trajectory += "a" + target_location.toString();
+  private void a( Location target_location){
+    trajectory.addLocation( target_location );
   }
   
-  public String getTrajectory(){
+  public Trajectory getTrajectory(){
     return trajectory;
   }
   
+  /**
+   * Prints the last trajectory to System out
+   */
   public void printTrajectory(){
-    System.out.println( trajectory );
+    System.out.println( trajectory.toString() );
   }
   
   private Integer lmed( Location start_location, 
