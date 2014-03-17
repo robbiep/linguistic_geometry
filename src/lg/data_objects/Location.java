@@ -9,22 +9,25 @@ public class Location {
   private Integer y;
   private Integer z;
   
+  public Location(){
+    this.x = 0;
+    this.y = 0;
+    this.z = 0;
+  }
+  
   public Location(Integer x) {
-    super();
     this.x = x;
-    this.y = 1;
-    this.z = 1;
+    this.y = 0;
+    this.z = 0;
   }
   
   public Location(Integer x, Integer y) {
-    super();
     this.x = x;
     this.y = y;
-    this.z = 1;
+    this.z = 0;
   }
   
   public Location(Integer x, Integer y, Integer z) {
-    super();
     this.x = x;
     this.y = y;
     this.z = z;

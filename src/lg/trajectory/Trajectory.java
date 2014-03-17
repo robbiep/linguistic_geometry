@@ -42,4 +42,23 @@ public class Trajectory {
       return trajectory_string;
     }
   }
+  
+  @Override
+  public boolean equals( Object object ){
+    if( object != null && object instanceof Trajectory ){
+      Trajectory trajectory = (Trajectory) object;
+      return this.trajactory_list.equals(trajectory);
+    } else {
+      return false;
+    }
+  }
+  
+  @Override
+  public int hashCode(){
+    int hash_value = 0;
+    for( Location location : trajactory_list ){
+      hash_value += location.hashCode()/3;
+    }
+    return hash_value;
+  }
 }

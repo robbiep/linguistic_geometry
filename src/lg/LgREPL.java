@@ -2,6 +2,7 @@ package lg;
 
 import project.Project1;
 import project.Project2;
+import project.Project3;
 import repl.Command;
 import repl.REPL;
 import chess.ChessPieceFactory;
@@ -44,6 +45,7 @@ public class LgREPL extends REPL {
                       "Type \"help\" to for a list of commands.\n" +
                       "Type \"project 1\" to execute the reachailibty project\n" +
                       "Type \"project 2\" to execute the trajectory project\n" +
+                      "Type \"project 3\" to execute the zones project\n" +
                       "Don't use quotes in commands\n\n" );
     super.run();
   }
@@ -105,6 +107,9 @@ public class LgREPL extends REPL {
                   return;
                 } else if( Integer.parseInt( args[1] ) == 2 ){
                   Project2.run();
+                  return;
+                } else if( Integer.parseInt( args[1] ) == 3 ){
+                  Project3.run();
                   return;
                 }
               } catch (Exception e){
