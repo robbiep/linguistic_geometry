@@ -111,7 +111,7 @@ public class Project2 {
                 location_y, 
                 length ).toString(),
             length));
-    length = 5;
+    length = 4;
     trajectories.add( 
         new Tuple( piece, 
             gt2.generateTrajectory( 
