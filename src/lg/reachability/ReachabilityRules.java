@@ -2,7 +2,7 @@ package lg.reachability;
 
 import java.util.ArrayList;
 
-import lg.data_objects.Location;
+import lg.data_objects.location.Location;
 
 /**
  * These are the rules that define the movement of a LG piece

@@ -3,8 +3,8 @@ package test.lg.trajectory;
 import static org.junit.Assert.*;
 import lg.abstract_board_game.AbstractBoardGame;
 import lg.data_objects.Color;
-import lg.data_objects.Location;
-import lg.data_objects.Piece;
+import lg.data_objects.location.Location;
+import lg.data_objects.piece.Piece;
 import lg.data_structures.GamePiece;
 import lg.grammar.GT2;
 

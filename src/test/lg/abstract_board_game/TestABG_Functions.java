@@ -10,8 +10,8 @@ import java.util.Set;
 import lg.abstract_board_game.ABG_Functions;
 import lg.abstract_board_game.AbstractBoardGame;
 import lg.data_objects.Color;
-import lg.data_objects.Location;
-import lg.data_objects.Piece;
+import lg.data_objects.location.Location;
+import lg.data_objects.piece.Piece;
 import lg.reachability.ReachabilityTable;
 
 import org.junit.Before;
@@ -33,7 +33,7 @@ public class TestABG_Functions {
   }
 
   /**
-   * Test method for {@link lg.abstract_board_game.ABG_Functions#abg_R(lg.data_objects.Piece, lg.data_objects.Location, lg.data_objects.Location)}.
+   * Test method for {@link lg.abstract_board_game.ABG_Functions#abg_R(lg.data_objects.piece.Piece, lg.data_objects.location.Location, lg.data_objects.location.Location)}.
    */
   @Test
   public void testAbg_R() {
@@ -50,7 +50,7 @@ public class TestABG_Functions {
   }
 
   /**
-   * Test method for {@link lg.abstract_board_game.ABG_Functions#abg_ON(lg.data_objects.Piece)}.
+   * Test method for {@link lg.abstract_board_game.ABG_Functions#abg_ON(lg.data_objects.piece.Piece)}.
    */
   @Test
   public void testAbg_ON() {
@@ -60,7 +60,7 @@ public class TestABG_Functions {
   }
 
   /**
-   * Test method for {@link lg.abstract_board_game.ABG_Functions#abg_TR(lg.data_objects.Piece, lg.data_objects.Location, lg.data_objects.Location)}.
+   * Test method for {@link lg.abstract_board_game.ABG_Functions#abg_TR(lg.data_objects.piece.Piece, lg.data_objects.location.Location, lg.data_objects.location.Location)}.
    */
   @Test
   public void testAbg_TR() {
@@ -116,7 +116,7 @@ public class TestABG_Functions {
   }
 
   /**
-   * Test method for {@link lg.abstract_board_game.ABG_Functions#abg_MAP(lg.data_objects.Piece, lg.data_objects.Location, lg.data_objects.Location)}.
+   * Test method for {@link lg.abstract_board_game.ABG_Functions#abg_MAP(lg.data_objects.piece.Piece, lg.data_objects.location.Location, lg.data_objects.location.Location)}.
    */
   @Test
   public void testAbg_MAP() {
@@ -148,7 +148,7 @@ public class TestABG_Functions {
   }
 
   /**
-   * Test method for {@link lg.abstract_board_game.ABG_Functions#abg_ST(Piece, lg.data_objects.Location, java.lang.Integer)}.
+   * Test method for {@link lg.abstract_board_game.ABG_Functions#abg_ST(Piece, lg.data_objects.location.Location, java.lang.Integer)}.
    */
   @Test
   public void testAbg_ST() {
@@ -181,7 +181,7 @@ public class TestABG_Functions {
   }
 
   /**
-   * Test method for {@link lg.abstract_board_game.ABG_Functions#abg_SUM(lg.data_objects.Piece, lg.data_objects.Location, lg.data_objects.Location, java.lang.Integer)}.
+   * Test method for {@link lg.abstract_board_game.ABG_Functions#abg_SUM(lg.data_objects.piece.Piece, lg.data_objects.location.Location, lg.data_objects.location.Location, java.lang.Integer)}.
    */
   @Test
   public void testAbg_SUM() {
@@ -252,7 +252,7 @@ public class TestABG_Functions {
   }
 
   /**
-   * Test method for {@link lg.abstract_board_game.ABG_Functions#abg_MOVE(lg.data_objects.Piece, lg.data_objects.Location, lg.data_objects.Location, lg.data_objects.Location, java.lang.Integer, java.lang.Integer)}.
+   * Test method for {@link lg.abstract_board_game.ABG_Functions#abg_MOVE(lg.data_objects.piece.Piece, lg.data_objects.location.Location, lg.data_objects.location.Location, lg.data_objects.location.Location, java.lang.Integer, java.lang.Integer)}.
    */
   @Test
   public void testAbg_MOVE() {
@@ -298,7 +298,7 @@ public class TestABG_Functions {
   }
 
   /**
-   * Test method for {@link lg.abstract_board_game.ABG_Functions#abg_DOCK(lg.data_objects.Piece, lg.data_objects.Location, lg.data_objects.Location, java.lang.Integer)}.
+   * Test method for {@link lg.abstract_board_game.ABG_Functions#abg_DOCK(lg.data_objects.piece.Piece, lg.data_objects.location.Location, lg.data_objects.location.Location, java.lang.Integer)}.
    */
   @Test
   public void testAbg_DOCK() {

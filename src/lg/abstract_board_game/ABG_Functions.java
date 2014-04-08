@@ -2,8 +2,8 @@ package lg.abstract_board_game;
 
 import java.util.Set;
 
-import lg.data_objects.Location;
-import lg.data_objects.Piece;
+import lg.data_objects.location.Location;
+import lg.data_objects.piece.Piece;
 
 public interface ABG_Functions {
   

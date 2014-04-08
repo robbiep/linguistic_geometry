@@ -7,7 +7,7 @@ import java.util.Scanner;
 import chess.ChessPieceFactory;
 import lg.abstract_board_game.AbstractBoardGame;
 import lg.data_objects.Color;
-import lg.data_objects.Location;
+import lg.data_objects.location.Location;
 import lg.reachability.ReachabilityTable;
 
 

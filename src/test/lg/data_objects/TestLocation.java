@@ -1,7 +1,7 @@
 package test.lg.data_objects;
 
 import static org.junit.Assert.*;
-import lg.data_objects.Location;
+import lg.data_objects.location.Location;
 
 import org.junit.Test;
 

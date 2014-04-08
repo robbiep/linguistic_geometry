@@ -7,8 +7,8 @@ import org.junit.Test;
 import test.MockData;
 import chess.ChessConstants;
 import lg.data_objects.Color;
-import lg.data_objects.Piece;
-import lg.data_objects.PieceFactory;
+import lg.data_objects.piece.Piece;
+import lg.data_objects.piece.PieceFactory;
 import lg.reachability.ReachabilityRules;
 
 

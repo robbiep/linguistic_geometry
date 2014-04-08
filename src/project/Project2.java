@@ -6,11 +6,11 @@ import java.util.Scanner;
 
 import lg.abstract_board_game.AbstractBoardGame;
 import lg.data_objects.Color;
-import lg.data_objects.Location;
-import lg.data_objects.Piece;
+import lg.data_objects.location.Location;
+import lg.data_objects.piece.Piece;
+import lg.data_objects.trajectory.Trajectory;
 import lg.data_structures.GamePiece;
 import lg.grammar.GT2;
-import lg.trajectory.Trajectory;
 import chess.ChessPieceFactory;
 
 public class Project2 {

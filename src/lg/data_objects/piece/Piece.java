@@ -1,5 +1,7 @@
-package lg.data_objects;
+package lg.data_objects.piece;
 
+import lg.data_objects.Color;
+import lg.data_objects.location.Location;
 import lg.reachability.ReachabilityRules;
 
 /**

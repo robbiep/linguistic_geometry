@@ -4,9 +4,9 @@ import java.lang.Math;
 
 import lg.abstract_board_game.AbstractBoard;
 import lg.data_objects.Color;
-import lg.data_objects.Location;
-import lg.data_objects.Piece;
-import lg.data_objects.PieceFactory;
+import lg.data_objects.location.Location;
+import lg.data_objects.piece.Piece;
+import lg.data_objects.piece.PieceFactory;
 import lg.reachability.ReachabilityRules;
 import lg.reachability.ReachabilityRule;
 

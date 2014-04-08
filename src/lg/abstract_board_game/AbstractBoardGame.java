@@ -9,9 +9,9 @@ import java.util.Set;
 
 import chess.ChessPieceFactory;
 import lg.data_objects.Color;
-import lg.data_objects.Location;
-import lg.data_objects.Piece;
-import lg.data_objects.PieceFactory;
+import lg.data_objects.location.Location;
+import lg.data_objects.piece.Piece;
+import lg.data_objects.piece.PieceFactory;
 import lg.data_structures.GameMap;
 import lg.data_structures.GamePiece;
 import lg.reachability.ReachabilityTable;

@@ -1,8 +1,11 @@
-package lg.zone;
+package lg.data_objects.zone;
 
-import lg.trajectory.Trajectory;
+import lg.data_objects.trajectory.Trajectory;
 
 // TODO make getters and setters
+/**
+ * A piece's trajectory tupled with time constraints
+ */
 public class ZoneTrajectory {
   public Trajectory trajectory;
   public Integer time;

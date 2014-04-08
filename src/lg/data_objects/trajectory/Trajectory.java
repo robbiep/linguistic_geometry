@@ -1,33 +1,33 @@
-package lg.trajectory;
+package lg.data_objects.trajectory;
 
 import java.util.ArrayList;
 
-import lg.data_objects.Location;
-import lg.data_objects.Piece;
+import lg.data_objects.location.Location;
+import lg.data_objects.piece.Piece;
 
 public class Trajectory {
   Piece piece;
-  ArrayList<Location> trajactory_list;
+  ArrayList<Location> trajactory_path;
   
   public Trajectory( Piece piece ) {
     this.piece = piece;
-    trajactory_list = new ArrayList<Location>();
+    trajactory_path = new ArrayList<Location>();
   }
   
   public void addLocation( Location location ){
-    trajactory_list.add( location );
+    trajactory_path.add( location );
   }
 
   public Piece getPiece(){
     return piece;
   }
   
-  public ArrayList<Location> getTrajectoryList(){
-    return trajactory_list;
+  public ArrayList<Location> getTrajectoryPath(){
+    return trajactory_path;
   }
   
   public int size(){
-    return trajactory_list.size();
+    return trajactory_path.size();
   }
   
   @Override
@@ -36,7 +36,7 @@ public class Trajectory {
     if( size() == 0 ){
       return "Invalid trajectory.";
     } else {
-      for( Location location : trajactory_list ){
+      for( Location location : trajactory_path ){
         trajectory_string += "a" + location.toString();
       }
       return trajectory_string;
@@ -47,7 +47,7 @@ public class Trajectory {
   public boolean equals( Object object ){
     if( object != null && object instanceof Trajectory ){
       Trajectory trajectory = (Trajectory) object;
-      return this.trajactory_list.equals(trajectory);
+      return this.trajactory_path.equals(trajectory);
     } else {
       return false;
     }
@@ -56,7 +56,7 @@ public class Trajectory {
   @Override
   public int hashCode(){
     int hash_value = 0;
-    for( Location location : trajactory_list ){
+    for( Location location : trajactory_path ){
       hash_value += location.hashCode()/3;
     }
     return hash_value;

@@ -4,7 +4,7 @@ import chess.ChessPieceFactory;
 import lg.abstract_board_game.AbstractBoard;
 import lg.abstract_board_game.AbstractBoardGame;
 import lg.data_objects.Color;
-import lg.data_objects.Location;
+import lg.data_objects.location.Location;
 
 /**
  * Creates singleton objects for reuse in testing
@@ -79,9 +79,14 @@ public class MockData {
     return flat_abstract_board_game;
   }
   
-  public static AbstractBoardGame chessGame(){
+  public static AbstractBoardGame emptyChestGame(){
     AbstractBoardGame abg = new AbstractBoardGame(  abstractBoardChess(), 
-                                                    pieceFactory() );
+        pieceFactory() );
+    return abg;
+  }
+  
+  public static AbstractBoardGame chessGame(){
+    AbstractBoardGame abg = emptyChestGame();
     // Pawns
     for( int i = 0; i < CHESS_DIMENSION; ++ i ){
       abg.addPiece( pieceFactory().createPawn( Color.WHITE ),

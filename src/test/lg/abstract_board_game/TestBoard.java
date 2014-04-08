@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import lg.abstract_board_game.AbstractBoard;
-import lg.data_objects.Location;
+import lg.data_objects.location.Location;
 
 import org.junit.Test;
 

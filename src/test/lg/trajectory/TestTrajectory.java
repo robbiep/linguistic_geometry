@@ -2,8 +2,8 @@ package test.lg.trajectory;
 
 import static org.junit.Assert.*;
 import lg.data_objects.Color;
-import lg.data_objects.Location;
-import lg.trajectory.Trajectory;
+import lg.data_objects.location.Location;
+import lg.data_objects.trajectory.Trajectory;
 
 import org.junit.Test;
 

@@ -3,8 +3,8 @@ package test.chess;
 import static org.junit.Assert.*;
 import lg.abstract_board_game.AbstractBoard;
 import lg.data_objects.Color;
-import lg.data_objects.Piece;
-import lg.data_objects.PieceFactory;
+import lg.data_objects.piece.Piece;
+import lg.data_objects.piece.PieceFactory;
 
 import org.junit.Before;
 import org.junit.Test;

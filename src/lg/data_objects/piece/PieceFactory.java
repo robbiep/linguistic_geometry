@@ -1,4 +1,6 @@
-package lg.data_objects;
+package lg.data_objects.piece;
+
+import lg.data_objects.Color;
 
 public abstract class PieceFactory {
   

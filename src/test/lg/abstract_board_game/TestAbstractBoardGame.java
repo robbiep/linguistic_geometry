@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 import lg.abstract_board_game.AbstractBoard;
 import lg.abstract_board_game.AbstractBoardGame;
 import lg.data_objects.Color;
-import lg.data_objects.Location;
-import lg.data_objects.Piece;
+import lg.data_objects.location.Location;
+import lg.data_objects.piece.Piece;
 import lg.data_structures.GamePiece;
 
 import org.junit.Before;

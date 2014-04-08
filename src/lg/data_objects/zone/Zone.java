@@ -1,8 +1,8 @@
-package lg.zone;
+package lg.data_objects.zone;
 
 import java.util.HashSet;
 
-import lg.trajectory.Trajectory;
+import lg.data_objects.trajectory.Trajectory;
 
 public class Zone {
   ZoneTrajectory main_zone_trajectory;

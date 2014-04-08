@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-import lg.data_objects.Location;
+import lg.data_objects.location.Location;
 import lg.reachability.ReachabilityRules;
 import lg.reachability.ReachabilityRule;
 

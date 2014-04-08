@@ -1,6 +1,6 @@
 package lg.abstract_board_game;
 
-import lg.data_objects.Location;
+import lg.data_objects.location.Location;
 
 /**
  * Represents a 1 to 3 dimensional board of locations.

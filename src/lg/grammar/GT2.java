@@ -1,12 +1,14 @@
 package lg.grammar;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import lg.abstract_board_game.AbstractBoardGame;
-import lg.data_objects.Location;
-import lg.data_objects.Piece;
+import lg.data_objects.location.Location;
+import lg.data_objects.location.LocationBundle;
+import lg.data_objects.piece.Piece;
+import lg.data_objects.trajectory.Trajectory;
 import lg.data_structures.GamePiece;
-import lg.trajectory.Trajectory;
 
 // TODO implement with a parser and manage like a real grammar
 public class GT2 {
@@ -19,6 +21,7 @@ public class GT2 {
   private Integer total_length;
   
   private Trajectory trajectory;
+  
   
   public GT2( AbstractBoardGame abg ) {
     super();
@@ -52,7 +55,7 @@ public class GT2 {
   
   private void validateTrajectory(){
     if( trajectory.size() != total_length + 1 ){
-      trajectory.getTrajectoryList().clear();
+      trajectory.getTrajectoryPath().clear();
     }
   }
 
@@ -107,7 +110,7 @@ public class GT2 {
   }
 
   private void a( Location target){
-    if( !trajectory.getTrajectoryList().contains( target ) ){
+    if( !trajectory.getTrajectoryPath().contains( target ) ){
       trajectory.addLocation( target );
     }
   }
@@ -151,6 +154,22 @@ public class GT2 {
     }
   }
 
+  private LocationBundle nextBundle( Location current_location, Integer remaining_length ){
+    Set<Location> move = abg.abg_MOVE(  piece, 
+        x0, 
+        y0, 
+        current_location, 
+        sub_length, 
+        remaining_length );
+    LocationBundle locationBundle = new LocationBundle();
+    if( move.size() > 0 ){
+      locationBundle.addAll( move );
+    } else {
+      locationBundle.add( current_location );
+    }
+    return locationBundle;
+  }
+  
   // TODO add index
   private Location next( Location current_location, Integer remaining_length ){
     Set<Location> move = abg.abg_MOVE(  piece, 

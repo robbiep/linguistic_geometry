@@ -1,4 +1,4 @@
-package lg.data_objects;
+package lg.data_objects.location;
 
 /**
  *  Represents a discrete location in 3-dimensional space

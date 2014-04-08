@@ -9,9 +9,9 @@ import chess.ChessPieceFactory;
 import lg.abstract_board_game.AbstractBoard;
 import lg.abstract_board_game.AbstractBoardGame;
 import lg.data_objects.Color;
-import lg.data_objects.Location;
-import lg.data_objects.Piece;
-import lg.data_objects.PieceFactory;
+import lg.data_objects.location.Location;
+import lg.data_objects.piece.Piece;
+import lg.data_objects.piece.PieceFactory;
 import lg.data_structures.GamePiece;
 import lg.grammar.GT2;
 
@@ -113,7 +113,8 @@ public class LgREPL extends REPL {
                   return;
                 }
               } catch (Exception e){
-                // Do nothing
+                println( "Error: " + e.getMessage() );
+                return;
               }
             }
          // Invalid command format
