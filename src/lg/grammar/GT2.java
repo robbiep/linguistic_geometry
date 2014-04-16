@@ -8,6 +8,7 @@ import lg.data_objects.location.Location;
 import lg.data_objects.location.LocationBundle;
 import lg.data_objects.piece.Piece;
 import lg.data_objects.trajectory.Trajectory;
+import lg.data_objects.trajectory.TrajectoryBundle;
 import lg.data_structures.GamePiece;
 
 // TODO implement with a parser and manage like a real grammar
@@ -20,7 +21,8 @@ public class GT2 {
   private Integer sub_length;
   private Integer total_length;
   
-  private Trajectory trajectory;
+  private TrajectoryBundle trajectory_bundle;
+  private Trajectory current_trajectory;
   
   
   public GT2( AbstractBoardGame abg ) {
@@ -28,14 +30,14 @@ public class GT2 {
     this.abg = abg;
   }
   
-  public Trajectory generateTrajectory( Piece piece, 
-                                        Location start,
-                                        Location target, 
-                                        Integer length){
+  public TrajectoryBundle generateTrajectory( Piece piece, 
+                                              Location start,
+                                              Location target, 
+                                              Integer length){
     init( piece, start, target, length );
     S( start, target, length );
     validateTrajectory();
-    return trajectory;
+    return trajectory_bundle;
   }
 
   private void init(  Piece piece, 
@@ -44,7 +46,7 @@ public class GT2 {
                       Integer length ){
     this.piece = piece;
     this.total_length = length;
-    trajectory = new Trajectory( piece );
+    current_trajectory = new Trajectory( piece );
   }
 
   private void subsectionInit( Location start, Location target, Integer length ){
@@ -54,8 +56,8 @@ public class GT2 {
   }
   
   private void validateTrajectory(){
-    if( trajectory.size() != total_length + 1 ){
-      trajectory.getTrajectoryPath().clear();
+    if( current_trajectory.size() != total_length + 1 ){
+      current_trajectory.getTrajectoryPath().clear();
     }
   }
 
@@ -73,14 +75,19 @@ public class GT2 {
   private void A_2( Location start, Location target, Integer length ){
     // Q2 = (MAPx,p(y) ≠ l) 
     if( abg.abg_MAP( piece, start, target ) != length ){
-      subsectionInit( start, med(start, target, length), lmed(start, target, length) );
+      subsectionInit( start, 
+                      med( start, target, length ), 
+                      lmed( start, target, length ));
       A_3_4_5(  x0, 
                 y0, 
                 sub_length );
-      subsectionInit( med(start, target, length), target, length - lmed(start, target, length) );
+      subsectionInit( med( start, target, length ), 
+                      target, 
+                      length - lmed( start, target, length ));
       A_3_4_5(  x0, 
                 y0, 
                 sub_length );
+    // Q2 = F
     } else {
       subsectionInit( start, target, length );
       A_3_4_5( start, target, sub_length );
@@ -93,9 +100,12 @@ public class GT2 {
     if( abg.abg_MAP( piece, start, target ) == length && 
         length >= 1 ){
       a(start);
-      A_3_4_5(  next(start,length), 
-                target, 
-                f(length) );
+      for( Location next : nextBundle( start, length ) ){
+        A_3_4_5(  next, 
+                  target, 
+                  f( length ));
+      }
+      
     } 
     
     // Q4 = (y = yo)
@@ -110,18 +120,18 @@ public class GT2 {
   }
 
   private void a( Location target){
-    if( !trajectory.getTrajectoryPath().contains( target ) ){
-      trajectory.addLocation( target );
+    if( !current_trajectory.getTrajectoryPath().contains( target ) ){
+      current_trajectory.addLocation( target );
     }
   }
   
   public Trajectory getTrajectory(){
-    return trajectory;
+    return current_trajectory;
   }
   
   @Override
   public String toString(){
-    return trajectory.toString();
+    return current_trajectory.toString();
   }
   
   /**
