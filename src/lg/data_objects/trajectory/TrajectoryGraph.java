@@ -26,13 +26,12 @@ public class TrajectoryGraph {
   public boolean add( Location parent, Location next ){
     if( graph_nodes.containsKey( parent ) ){
       TrajectoryGraphNode parent_node = graph_nodes.get( parent );
-      parent_node.children.
       return true;
     } else {
       return false;
     }
   }
-  
+  /*
   public int size(){
     if( tail != null ){
       return tail.depth;
@@ -44,5 +43,5 @@ public class TrajectoryGraph {
   public TrajectoryBundle getBundle(){
     return null;
   }
-
+*/
 }

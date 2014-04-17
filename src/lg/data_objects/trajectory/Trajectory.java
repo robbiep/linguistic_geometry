@@ -17,6 +17,12 @@ public class Trajectory {
   public void addLocation( Location location ){
     trajactory_path.add( location );
   }
+  
+  public void popLocation(){
+    if( trajactory_path.size() > 1 ){
+      trajactory_path.remove( trajactory_path.size() - 1 );
+    }
+  }
 
   public Piece getPiece(){
     return piece;
