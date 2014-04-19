@@ -119,10 +119,8 @@ public class GT2 {
     }
   }
 
-  private void a( Location target){
-    if( !current_trajectory.getTrajectoryPath().contains( target ) ){
-      current_trajectory.addLocation( target );
-    }
+  private void a( Location target ){
+    current_trajectory.addLocation( target );
   }
   
   public Trajectory getTrajectory(){
