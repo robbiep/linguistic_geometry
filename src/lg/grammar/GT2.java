@@ -8,6 +8,7 @@ import lg.data_objects.location.Location;
 import lg.data_objects.location.LocationBundle;
 import lg.data_objects.piece.Piece;
 import lg.data_objects.trajectory.Trajectory;
+import lg.data_objects.trajectory.TrajectoryAdjacencyMatrix;
 import lg.data_objects.trajectory.TrajectoryBundle;
 import lg.data_structures.GamePiece;
 
@@ -24,10 +25,13 @@ public class GT2 {
   private TrajectoryBundle trajectory_bundle;
   private Trajectory current_trajectory;
   
+  private TrajectoryAdjacencyMatrix adjMatrix;
+  
   
   public GT2( AbstractBoardGame abg ) {
     super();
     this.abg = abg;
+    adjMatrix = new TrajectoryAdjacencyMatrix( abg );
   }
   
   public TrajectoryBundle generateTrajectory( Piece piece, 
@@ -78,30 +82,34 @@ public class GT2 {
       subsectionInit( start, 
                       med( start, target, length ), 
                       lmed( start, target, length ));
-      A_3_4_5(  x0, 
+      A_3_4_5(  null,
+                x0, 
                 y0, 
                 sub_length );
+      Location bridge_y0 = y0;
       subsectionInit( med( start, target, length ), 
                       target, 
                       length - lmed( start, target, length ));
-      A_3_4_5(  x0, 
+      A_3_4_5(  bridge_y0,
+                x0, 
                 y0, 
                 sub_length );
     // Q2 = F
     } else {
       subsectionInit( start, target, length );
-      A_3_4_5( start, target, sub_length );
+      A_3_4_5( null, start, target, sub_length );
     }
   }
 
   // TODO add index
-  private void A_3_4_5( Location start, Location target, Integer length){
+  private void A_3_4_5( Location parent, Location start, Location target, Integer length){
     // Q3 = (MAPx,p(y) = l) ∧ (l ≥ 1)
     if( abg.abg_MAP( piece, start, target ) == length && 
         length >= 1 ){
-      a(start);
+      a( parent, start );
       for( Location next : nextBundle( start, length ) ){
-        A_3_4_5(  next, 
+        A_3_4_5(  start, 
+                  next, 
                   target, 
                   f( length ));
       }
@@ -110,7 +118,7 @@ public class GT2 {
     
     // Q4 = (y = yo)
     else if ( target.equals(y0) ){
-      a( target );
+      a( parent, target );
     } 
     
     // Q5 = (y ≠ yo)
@@ -119,8 +127,8 @@ public class GT2 {
     }
   }
 
-  private void a( Location target ){
-    current_trajectory.addLocation( target );
+  private void a( Location parent, Location child ){
+    adjMatrix.addPath( parent, child );
   }
   
   public Trajectory getTrajectory(){
