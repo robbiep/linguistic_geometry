@@ -63,6 +63,22 @@ public class TestGT2 {
         length );
     System.out.print( bundle.toString() );
   }
+  @Test
+  public void testKingAdmissable1b(){
+    ChessPieceFactory factory = new ChessPieceFactory();
+    AbstractBoardGame abg = new AbstractBoardGame( 8, 8, 1, factory );
+    Location location_x = new Location( 0, 4, 0 );
+    Location location_y = new Location( 7, 4, 0 );
+    GT2 gt2 = new GT2( abg );
+    Piece piece = factory.createKing( Color.WHITE );
+    Integer length = 7;
+    TrajectoryBundle bundle = gt2.generateTrajectory( piece, 
+        location_x, 
+        location_y, 
+        length );
+    System.out.println( bundle.toString() );
+    System.out.println( "Bundle size = " + bundle.size() );
+  }
   
   @Test
   public void testKingAdmissable2(){

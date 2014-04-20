@@ -69,21 +69,24 @@ public class GT2 {
   private void A_2( Location start, Location target, Integer length ){
     // Q2 = (MAPx,p(y) ≠ l) 
     if( abg.abg_MAP( piece, start, target ) != length ){
-      subsectionInit( start, 
-                      med( start, target, length ), 
-                      lmed( start, target, length ));
-      A_3_4_5(  null,
-                x0, 
-                y0, 
-                sub_length );
-      Location bridge_y0 = y0;
-      subsectionInit( med( start, target, length ), 
-                      target, 
-                      length - lmed( start, target, length ));
-      A_3_4_5(  bridge_y0,
-                x0, 
-                y0, 
-                sub_length );
+      for( Location med : medBundle( start, target, length )){
+        Integer lmed = lmedKnownTarget( start, med );
+        subsectionInit( start, 
+                        med, 
+                        lmed);
+        A_3_4_5(  null,
+                  x0, 
+                  y0, 
+                  sub_length );
+        Location bridge_y0 = y0;
+        subsectionInit( med, 
+                        target, 
+                        length - lmed);
+        A_3_4_5(  bridge_y0,
+                  x0, 
+                  y0, 
+                  sub_length );
+      }
     // Q2 = F
     } else {
       subsectionInit( start, target, length );
@@ -127,6 +130,13 @@ public class GT2 {
   }
   
   
+  private Integer lmedKnownTarget( Location start, 
+                                   Location target ){
+  return abg.abg_MAP( piece, 
+        start, 
+        target );
+  }
+  
   private Integer lmed( Location start, 
                         Location target,
                         Integer length ){
@@ -149,6 +159,24 @@ public class GT2 {
       return start;
     }
   }
+  
+  private LocationBundle medBundle( Location start, 
+                              Location target,
+                              Integer length ){
+    Set<Location> dock = abg.abg_DOCK(  piece, 
+                          start, 
+                          target, 
+                          length );
+    LocationBundle locationBundle = new LocationBundle();
+    if( dock.size() > 0 ){
+      locationBundle.addAll( dock );
+    } else {
+      locationBundle.add( start );
+    }
+    return locationBundle;
+  }
+  
+  
 
   private LocationBundle nextBundle( Location current_location, Integer remaining_length ){
     Set<Location> move = abg.abg_MOVE(  piece, 
