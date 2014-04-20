@@ -14,8 +14,17 @@ public class Trajectory {
     trajactory_path = new ArrayList<Location>();
   }
   
+  public Trajectory( Trajectory trajectory ) {
+    this.piece = trajectory.piece;
+    this.trajactory_path = new ArrayList<Location>(trajectory.trajactory_path);
+  }
+
   public void addLocation( Location location ){
-    trajactory_path.add( location );
+    try{
+      trajactory_path.add( location );
+    } catch( StackOverflowError e ){
+      e.printStackTrace();
+    }
   }
   
   public void popLocation(){

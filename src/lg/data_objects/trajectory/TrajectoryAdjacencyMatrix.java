@@ -26,24 +26,54 @@ public class TrajectoryAdjacencyMatrix {
     adjacencyMatrix = new int[dim][dim];
   }
   
-  public void addPath( Location parent, Location child ){
-    if( parent == null || child == null ){
+  /**
+   * Adds a path from start to end (one direction).
+   */
+  public void addPath( Location start, Location end ){
+    if( start == null || end == null ){
       return;
     }
-    adjacencyMatrix[locationToIndex( parent )][locationToIndex( child )] = 1;
+    adjacencyMatrix[locationToIndex( start )][locationToIndex( end )] = 1;
   }
   
-  public boolean hasPath( Location parent, Location child ){
-    if( parent == null || child == null ){
+  /**
+   * @return True if path exists from start to end
+   */
+  public boolean hasPath( Location start, Location end ){
+    if( start == null || end == null ){
       return false;
     }
-    return( adjacencyMatrix[locationToIndex( parent )][locationToIndex( child )] == 1 );
+    return( adjacencyMatrix[locationToIndex( start )][locationToIndex( end )] == 1 );
   }
   
-  private int locationToIndex( Location location ){
+  /**
+   * Returns the value at location [from][to] in the adjacenecy matrix
+   */
+  public int valueAt( int from, int to ){
+    return adjacencyMatrix[from][to];
+  }
+  
+  /**
+   * Converts a location to the approriate offset for the adjacency matrix
+   */
+  public int locationToIndex( Location location ){
     return location.getX() 
             + location.getY() * x_dim 
             + location.getZ() * x_dim * y_dim;
+  }
+  
+  /**
+   * @return Number of elements of one dimension of the adjacenct matrix
+   */
+  public int length(){
+    return dim;
+  }
+  
+  /**
+   * @return Number of elements in entire adjacency matrix
+   */
+  public int size(){
+    return dim*dim;
   }
   
   public TrajectoryBundle getTrajectoryBundle(){
@@ -51,10 +81,21 @@ public class TrajectoryAdjacencyMatrix {
     Trajectory trajectory = new Trajectory( piece );
     int root_offset = locationToIndex( root );
     for( int i = 0; i < dim; ++ i ){
-      //root_offset
+      if( i == root_offset ){
+        continue;
+      } else {
+        
+      }
     }
     
     return trajectoryBundle;
+  }
+
+  public Location indexToLocation( int index ){
+    int x = index % x_dim;
+    int y = ((index - x) > 0 ) ? (index - x) / x_dim : 0;
+    int z = ((index - x - y*x_dim) > 0) ? (index - x - y) / x_dim*y_dim : 0;
+    return new Location( x, y, z );
   }
   
 }

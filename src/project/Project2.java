@@ -141,7 +141,7 @@ public class Project2 {
                 length ).toString(),
             length));
     
-    piece = factory.createKing( Color.BLACK );
+    piece = factory.createKing( Color.WHITE );
     length = 3;
     trajectories.add( 
         new Tuple( piece, 
@@ -151,6 +151,7 @@ public class Project2 {
                 location_y, 
                 length ).toString(),
             length));
+            
     length = 4;
     trajectories.add( 
         new Tuple( piece, 
@@ -160,7 +161,7 @@ public class Project2 {
                 location_y, 
                 length ).toString(), 
             length));
-
+    
     Iterator<Tuple> it = trajectories.iterator();
     while( it.hasNext() ){
       Tuple next = it.next();

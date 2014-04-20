@@ -10,6 +10,7 @@ import lg.data_objects.piece.Piece;
 import lg.data_objects.trajectory.Trajectory;
 import lg.data_objects.trajectory.TrajectoryAdjacencyMatrix;
 import lg.data_objects.trajectory.TrajectoryBundle;
+import lg.data_objects.trajectory.TrajectoryBundleGenerator;
 import lg.data_structures.GamePiece;
 
 // TODO implement with a parser and manage like a real grammar
@@ -22,16 +23,12 @@ public class GT2 {
   private Integer sub_length;
   private Integer total_length;
   
-  private TrajectoryBundle trajectory_bundle;
-  private Trajectory current_trajectory;
-  
   private TrajectoryAdjacencyMatrix adjMatrix;
   
   
   public GT2( AbstractBoardGame abg ) {
     super();
     this.abg = abg;
-    adjMatrix = new TrajectoryAdjacencyMatrix( abg );
   }
   
   public TrajectoryBundle generateTrajectory( Piece piece, 
@@ -40,29 +37,22 @@ public class GT2 {
                                               Integer length){
     init( piece, start, target, length );
     S( start, target, length );
-    validateTrajectory();
-    return trajectory_bundle;
+    return TrajectoryBundleGenerator.generateTrajectoryBundle( adjMatrix, start, piece, length );
   }
 
   private void init(  Piece piece, 
                       Location start,
                       Location target,
                       Integer length ){
+    adjMatrix = new TrajectoryAdjacencyMatrix( abg );
     this.piece = piece;
     this.total_length = length;
-    current_trajectory = new Trajectory( piece );
   }
 
   private void subsectionInit( Location start, Location target, Integer length ){
     this.x0 = start;
     this.y0 = target;
     this.sub_length = length;
-  }
-  
-  private void validateTrajectory(){
-    if( current_trajectory.size() != total_length + 1 ){
-      current_trajectory.getTrajectoryPath().clear();
-    }
   }
 
   private void S( Location start, Location target, Integer length ){
@@ -127,25 +117,15 @@ public class GT2 {
     }
   }
 
+  /**
+   * Stores a directed edge from parent to child in adjacency matrix
+   * @param parent
+   * @param child
+   */
   private void a( Location parent, Location child ){
     adjMatrix.addPath( parent, child );
   }
   
-  public Trajectory getTrajectory(){
-    return current_trajectory;
-  }
-  
-  @Override
-  public String toString(){
-    return current_trajectory.toString();
-  }
-  
-  /**
-   * Prints the last trajectory to System out
-   */
-  public void printTrajectory(){
-    System.out.print( toString() );
-  }
   
   private Integer lmed( Location start, 
                         Location target,
