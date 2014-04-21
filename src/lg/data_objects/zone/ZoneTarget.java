@@ -3,8 +3,11 @@ package lg.data_objects.zone;
 import lg.data_objects.location.Location;
 
 /**
- * Tuple that contains a location x that should target location y within
- * atleast l moves.
+ * Triple tuple that contains a location x that should target 
+ * location y within at least l moves.<br>
+ * <b>var</b> Location x<br>
+ * <b>var</b> Location y<br>
+ * <b>var</b> length l<br>
  */
 public class ZoneTarget {
   public Location x;

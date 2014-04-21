@@ -34,6 +34,9 @@ public class TrajectoryBundleGenerator {
   private static void nextNode( Location location ){
     _currentTrajectory.addLocation( location );
     ++ _depth; 
+    if( _depth > _length + 1 ){
+      return; // This is an erroneous state.
+    }
     boolean pathFound = false;
     int currentLocationOffset = _adjacencyMatrix.locationToIndex( location );
     for( int i = 0; i < _adjacencyMatrix.length(); ++ i ){

@@ -19,7 +19,11 @@ public class Project3 {
     AbstractBoardGame abg = new AbstractBoardGame( 8, 8, 1, factory );
     Piece p0 = factory.createBishop( Color.WHITE );
     Piece q  = factory.createPawn( Color.BLACK );
+    Location location_x = new Location( 2, 0, 0 );
+    Location location_y = new Location( 2, 2, 0 );
+    abg.addPiece( p0, location_x );
+    abg.addPiece( q, location_y );
     GZ gz = new GZ( abg, p0, q );
-    gz.S( new ZoneTarget( new Location( 0, 0, 0 ), new Location( 0, 2, 0), 2 ) );
+    gz.S( new ZoneTarget( location_x, location_y, 2 ) );
   }
 }
