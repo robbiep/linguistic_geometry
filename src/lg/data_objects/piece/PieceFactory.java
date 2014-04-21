@@ -16,5 +16,9 @@ public abstract class PieceFactory {
   
   public abstract Piece createPiece( String name, Color color );
   
-  public abstract Piece createOpposite( Piece piece );
+  public Piece createOpposite( Piece piece ){
+    return createPiece( 
+        piece.getName(), 
+        Color.getOpposite( piece.getColor() ));
+  }
 }

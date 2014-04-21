@@ -162,11 +162,4 @@ public class ChessPieceFactory extends PieceFactory {
     return piece;
   }
 
-  @Override
-  public Piece createOpposite( Piece piece ){
-    return createPiece( 
-        piece.getName(), 
-        Color.getOpposite( piece.getColor() ));
-  }
-
 }

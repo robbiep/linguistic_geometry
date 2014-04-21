@@ -276,4 +276,46 @@ public class TestReachabilityTable {
     map_y0.printReachabilityTable(7);
     piece.setColor( Color.getOpposite( piece.getColor() ));
   }
+  
+  @Test
+  public void testReachIrregular(){
+    abg = new AbstractBoardGame( 2, 8, 2, new ChessPieceFactory() );
+    ReachabilityRules rules = new ReachabilityRules();
+    Piece piece = new Piece( 
+        "Irregular", 
+        Color.BLACK, 
+        1, 
+        rules );
+    rules.addRule( new ReachabilityRule() {
+      
+      @Override
+      public Boolean rule( Location x, Location y ){
+        int direction_value =  3;
+        return( (x.getY() + direction_value == y.getY() &&
+                x.getX() == y.getX() &&
+                x.getZ() == y.getZ()) ||
+                (x.getY() - 1 == y.getY() &&
+                x.getX() == y.getX() &&
+                x.getZ() == y.getZ()) ||
+                (x.getY() == y.getY() &&
+                Math.abs(x.getX() - y.getX()) == 1 &&
+                x.getZ() == y.getZ()) ||
+                (x.getY() == y.getY() &&
+                Math.abs(x.getZ() - y.getZ()) == 1 &&
+                x.getX() == y.getX())
+                );
+      }
+    });
+    
+    Integer[][][] table = new Integer[2][8][2];
+    for( int i = 0; i < 2; ++ i ){
+      for( int j = 0; j < 8; ++ j ){
+        for( int k = 0; k < 2; ++ k){
+          table[i][j][k] = ReachabilityTable.INFINITY;
+        }
+      }
+    }
+    abg.getReachabilityTable( piece, new Location(0,0,0) ).printReachabilityTable( );
+    assert( true );
+  }
 }

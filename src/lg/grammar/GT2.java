@@ -36,8 +36,12 @@ public class GT2 {
                                               Location target, 
                                               Integer length){
     init( piece, start, target, length );
-    S( start, target, length );
-    return TrajectoryBundleGenerator.generateTrajectoryBundle( adjMatrix, start, piece, length );
+    boolean trajectoryExists = S( start, target, length );
+    if( trajectoryExists ){
+      return TrajectoryBundleGenerator.generateTrajectoryBundle( adjMatrix, start, piece, length );
+    } else {
+      return new TrajectoryBundle();
+    }
   }
 
   private void init(  Piece piece, 
@@ -55,13 +59,14 @@ public class GT2 {
     this.sub_length = length;
   }
 
-  private void S( Location start, Location target, Integer length ){
+  private boolean S( Location start, Location target, Integer length ){
     // Q1 = (MAPx,p(y) ≤ l) ∧ (l < 2n)
     if( abg.abg_MAP( piece, start, target ) <= length &&
         length < 2*abg.size() ){
       A_2( start, target, length );
+      return true;
     } else {
-      return;
+      return false;
     }
   }
   
