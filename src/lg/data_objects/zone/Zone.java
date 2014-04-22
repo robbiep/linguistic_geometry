@@ -1,17 +1,14 @@
 package lg.data_objects.zone;
 
-import java.util.HashSet;
-
 import lg.data_objects.trajectory.Trajectory;
 
 public class Zone {
   ZoneTrajectory main_zone_trajectory;
-  HashSet<ZoneTrajectory> zone_trajectories;
+  ZoneTrajectories zone_trajectories;
   
   public Zone( Trajectory main_trajectory, Integer time ){
-    this.main_zone_trajectory.trajectory = main_trajectory;
-    this.main_zone_trajectory.time = time;
-    zone_trajectories = new HashSet<ZoneTrajectory>();
+    main_zone_trajectory = new ZoneTrajectory( main_trajectory, time );
+    zone_trajectories = new ZoneTrajectories();
     zone_trajectories.add( main_zone_trajectory );
   }
   
@@ -23,9 +20,20 @@ public class Zone {
     return main_zone_trajectory;
   }
   
-  public HashSet<ZoneTrajectory> getZoneTrajectories(){
+  public ZoneTrajectories getZoneTrajectories(){
     return zone_trajectories;
   }
   
-
+  @Override
+  public String toString(){
+    if( zone_trajectories.size() == 0 ){
+      return "No trajectories in zone.";
+    } else {
+      String toString = new String();
+      for( ZoneTrajectory zoneTrajectory : zone_trajectories ){
+        toString += zoneTrajectory.toString() + "\n";
+      }
+      return toString;
+    }
+  }
 }

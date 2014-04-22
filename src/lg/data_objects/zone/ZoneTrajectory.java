@@ -1,5 +1,6 @@
 package lg.data_objects.zone;
 
+import lg.data_objects.piece.Piece;
 import lg.data_objects.trajectory.Trajectory;
 
 // TODO make getters and setters
@@ -7,8 +8,8 @@ import lg.data_objects.trajectory.Trajectory;
  * A piece's trajectory tupled with time constraints
  */
 public class ZoneTrajectory {
-  public Trajectory trajectory;
-  public Integer time;
+  private Trajectory trajectory;
+  private Integer time;
   
   public ZoneTrajectory(){}
   
@@ -16,5 +17,19 @@ public class ZoneTrajectory {
     this.trajectory = trajectory;
     this.time = time;
   }
+  
+  public Piece getPiece(){
+    return trajectory.getPiece();
+  }
+  
+  public int getTime(){
+    return time;
+  }
+  
+  @Override
+  public String toString(){
+    return "(" + trajectory.getPiece().getName() + ":" + trajectory.getPiece().getColor() + "," + trajectory.toString() + "," + time + ")";
+  }
+  
   
 }

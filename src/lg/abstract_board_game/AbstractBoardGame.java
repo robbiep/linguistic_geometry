@@ -87,11 +87,23 @@ public class AbstractBoardGame implements ABG_Functions {
     return game_map.remove( location );
   }
 
-  public GamePiece[] getAll( ){
+  public GamePiece[] getAllPieces( ){
     return game_map.getAll();
   }
   
-  public GamePiece[] getAllByColor( Color color ){
+  public GamePiece[] getAllPiecesNotColor( Color color ){
+    ArrayList<GamePiece> gamePieces = new ArrayList<GamePiece>();
+    Iterator<Map.Entry<Location,Piece>> it = game_map.entrySet().iterator();
+    while( it.hasNext() ){
+      Map.Entry<Location,Piece> entry = it.next();
+      if( entry.getValue().getColor() != color ){
+        gamePieces.add( new GamePiece( entry.getValue(), entry.getKey() )); 
+      }
+    }
+    return gamePieces.toArray( new GamePiece[gamePieces.size()] );
+  }
+  
+  public GamePiece[] getAllPiecesByColor( Color color ){
     ArrayList<GamePiece> gamePieces = new ArrayList<GamePiece>();
     Iterator<Map.Entry<Location,Piece>> it = game_map.entrySet().iterator();
     while( it.hasNext() ){
@@ -127,6 +139,10 @@ public class AbstractBoardGame implements ABG_Functions {
  
   public Boolean validLocation( Location location ){
     return( abstract_board.validLocation( location ) );
+  }
+  
+  public Boolean lastLocation( Location location ){
+    return( abstract_board.lastLocation( location ) );
   }
   
   public Boolean emptyLocation( Location location ){

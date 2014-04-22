@@ -14,6 +14,9 @@ public class ZoneTarget {
   public Location y;
   public Integer l;
   
+  /**
+   * Defaults to x = (0,0,0), y = (0,0,0), l = 0
+   */
   public ZoneTarget(){
     this.x = new Location();
     this.y = new Location();
@@ -24,5 +27,10 @@ public class ZoneTarget {
     this.x = x;
     this.y = y;
     this.l = l;
+  }
+  
+  @Override
+  public String toString(){
+    return "(" + x.toString() + ", " + y.toString() + ", " + l + ")";
   }
 }

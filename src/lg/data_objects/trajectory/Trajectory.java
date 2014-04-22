@@ -7,16 +7,16 @@ import lg.data_objects.piece.Piece;
 
 public class Trajectory {
   Piece piece;
-  ArrayList<Location> trajactory_path;
+  TrajectoryPath trajactory_path;
   
   public Trajectory( Piece piece ) {
     this.piece = piece;
-    trajactory_path = new ArrayList<Location>();
+    trajactory_path = new TrajectoryPath();
   }
   
   public Trajectory( Trajectory trajectory ) {
     this.piece = trajectory.piece;
-    this.trajactory_path = new ArrayList<Location>(trajectory.trajactory_path);
+    this.trajactory_path = new TrajectoryPath(trajectory.trajactory_path);
   }
 
   public void addLocation( Location location ){
@@ -32,12 +32,19 @@ public class Trajectory {
       trajactory_path.remove( trajactory_path.size() - 1 );
     }
   }
+  
+  /**
+   * @return Location at index from trajectory
+   */
+  public Location get( int index ){
+    return trajactory_path.get( index );
+  }
 
   public Piece getPiece(){
     return piece;
   }
   
-  public ArrayList<Location> getTrajectoryPath(){
+  public TrajectoryPath getTrajectoryPath(){
     return trajactory_path;
   }
   

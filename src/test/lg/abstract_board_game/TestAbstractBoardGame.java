@@ -81,14 +81,14 @@ public class TestAbstractBoardGame {
 
   @Test
   public void testGetAllByColor(){
-    GamePiece[] game_piece = abg.getAllByColor( Color.WHITE );
+    GamePiece[] game_piece = abg.getAllPiecesByColor( Color.WHITE );
     assertTrue( game_piece.length == 16 );
   }
 
   @Test
   public void testClearAllByColor(){
     abg.clearAllByColor( Color.WHITE );
-    assertTrue( abg.getAllByColor( Color.WHITE ).length == 0 );
+    assertTrue( abg.getAllPiecesByColor( Color.WHITE ).length == 0 );
   }
 
   @Test

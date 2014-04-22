@@ -5,6 +5,7 @@ import java.util.HashSet;
 
 import lg.abstract_board_game.AbstractBoard;
 import lg.abstract_board_game.AbstractBoardGame;
+import lg.data_objects.Color;
 import lg.data_objects.location.Location;
 import lg.data_objects.piece.Piece;
 import lg.data_structures.GamePiece;
@@ -137,8 +138,8 @@ public class Reachability {
   private static void updateBlockedLocations( Piece piece, 
                                               Location current_location ){
     blocked_locations.clear();
-    GamePiece[] game_pieces = abg.getAll();
-    
+    GamePiece[] game_pieces = abg.getAllPiecesNotColor( Color.getOpposite( piece.getColor() ));
+        
     for( int i = 0; i < game_pieces.length; ++ i ){
       
       Location blocked_location = game_pieces[i].location;

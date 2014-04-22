@@ -79,7 +79,7 @@ public class LgREPL extends REPL {
             System.out.print( "\nCenter: " + 
                               center.toString() );
             System.out.print( "\nObstacles: " );
-            GamePiece[] obstacles = abg.getAllByColor( Color.OBSTACLE );
+            GamePiece[] obstacles = abg.getAllPiecesByColor( Color.OBSTACLE );
             if( obstacles.length > 0 ){
               for( GamePiece obstacle : obstacles ){
                 System.out.print( "(" + obstacle.location.getX() + 

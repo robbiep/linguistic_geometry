@@ -189,6 +189,14 @@ public class TestPieceReachTable {
   }
   
   @Test
+  public void testBishopReach2(){
+    
+    piece = chessPieceFactory.createBishop( Color.BLACK );
+    ReachabilityTable r_table = Reachability.generateTable( abg, piece, new Location(2,0,0) );
+    assert( r_table.getValue( new Location(2,2,0)).equals(2) );
+  }
+  
+  @Test
   public void testQueenReach(){
     
     piece = chessPieceFactory.createQueen( Color.BLACK );

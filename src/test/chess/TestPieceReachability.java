@@ -180,6 +180,13 @@ public class TestPieceReachability {
   }
   
   @Test
+  public void testBishopReachability2(){
+    Piece piece = factory.createBishop( Color.BLACK );
+    valid_locations.clear();
+    assert( piece.isReachable( new Location(0,0,0), new Location(0,2,0) ) );
+  }
+  
+  @Test
   public void testQueenReachability(){
     Piece piece = factory.createQueen( Color.BLACK );
     valid_locations.clear();
