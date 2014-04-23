@@ -3,21 +3,18 @@ package lg.data_objects.zone;
 import lg.data_objects.trajectory.Trajectory;
 
 public class Zone {
-  ZoneTrajectory main_zone_trajectory;
   ZoneTrajectories zone_trajectories;
   
-  public Zone( Trajectory main_trajectory, Integer time ){
-    main_zone_trajectory = new ZoneTrajectory( main_trajectory, time );
+  public Zone() {
     zone_trajectories = new ZoneTrajectories();
-    zone_trajectories.add( main_zone_trajectory );
   }
-  
+
   public void addTrajectory( Trajectory trajectory, Integer time ){
     zone_trajectories.add( new ZoneTrajectory(trajectory, time) );
   }
   
   public ZoneTrajectory getMainTrajectory(){
-    return main_zone_trajectory;
+    return zone_trajectories.get( 0 );
   }
   
   public ZoneTrajectories getZoneTrajectories(){

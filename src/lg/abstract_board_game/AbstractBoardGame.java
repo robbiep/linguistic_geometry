@@ -181,7 +181,12 @@ public class AbstractBoardGame implements ABG_Functions {
 
   @Override
   public Piece abg_ON( Location location ){
-    return getByLocation( location );
+    Piece piece = getByLocation( location );
+    if( piece != null && piece.getColor() == Color.OBSTACLE ){
+      return null;
+    } else {
+      return piece;
+    }
   }
 
   @Override

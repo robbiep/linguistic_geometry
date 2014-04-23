@@ -13,7 +13,7 @@ public class ZoneTrajectory {
   
   public ZoneTrajectory(){}
   
-  public ZoneTrajectory(Trajectory trajectory, Integer time) {
+  public ZoneTrajectory( Trajectory trajectory, Integer time ){
     this.trajectory = trajectory;
     this.time = time;
   }
@@ -24,6 +24,10 @@ public class ZoneTrajectory {
   
   public int getTime(){
     return time;
+  }
+  
+  public Trajectory getTrajectory(){
+    return trajectory;
   }
   
   @Override

@@ -49,10 +49,9 @@ public class GZ {
   private void A2( ZoneTarget u, int[][][] v, int[][][] w) {
     // Q2 = T
     Trajectory main_trajectory = h(u);
-    zone = new Zone( main_trajectory, u.l );
     t( main_trajectory, u.l + 1);
     distTime( main_trajectory );
-    A3( new ZoneTarget(), g( h(u), v ), w );
+    A3( new ZoneTarget(), g( main_trajectory, v ), w );
   }
 
   private void A3( ZoneTarget u, int[][][] v, int[][][] w) {
@@ -60,7 +59,6 @@ public class GZ {
     if( !isLastLocation(u.x) || !isLastLocation(u.y) ){
       
       ZoneTarget new_u = f(u,v);
-      System.out.println( new_u.toString() );
       initTime(u);
       A4( new_u, v, w );
       
@@ -72,6 +70,8 @@ public class GZ {
   }
 
   private void A4( ZoneTarget u, int[][][] v, int[][][] w) {
+    //System.out.println(u.toString());
+    
     if((( abg.abg_ON(u.x) != null && 
           u.l > 0 &&
           !u.x.equals(x0) &&
@@ -84,21 +84,24 @@ public class GZ {
              abg.abg_OPPOSE(p0, abg.abg_ON(u.x) ) &&
              abg.abg_MAP(abg.abg_ON(u.x), u.x, u.y) <= u.l )
         ))){
-      t(h(u), time[u.y.getX()][u.y.getY()][u.y.getZ()]);
-      int[][][] new_w = g( h(u), w );
-      alphaTime( u.y, h(u),  valueAtLocation( time, u.y ) - u.l + 1);
-      A3( u, v, new_w );
-      
+      Trajectory new_trajectory = h(u);
+      if( new_trajectory != null && !selfDefend( new_trajectory ) ){
+        t(new_trajectory, valueAtLocation( time, u.y ));
+        int[][][] new_w = g( new_trajectory, w );
+        alphaTime( new_trajectory,  valueAtLocation( time, u.y ) - u.l + 1);
+        A3( u, v, new_w );
+      } else {
+        A3( u, v, w );
+      }
     } else {
-      
       A3( u, v, w );
-      
     }
   }
 
   private void A5(ZoneTarget u, int[][][] v, int[][][] w) {
     if( !isEmptyTable(w) ){
       
+      time = next_time;
       A3( new ZoneTarget(), w, minTable() );
       
     } else {
@@ -108,6 +111,7 @@ public class GZ {
   }
   
   private void initializeGZ( ZoneTarget u ){
+    zone  = new Zone();
     zones = new ZoneBundle();
     x0 = u.x;
     y0 = u.y;
@@ -183,23 +187,33 @@ public class GZ {
     if( tracks.size() == 0 ){
       return null;
     } else {
-      return tracks.get(0);
+      for( int i = 0; i < tracks.size(); ++ i ){
+        if( !trajectoryOverlap( tracks.get( i ) ) ){
+          return tracks.get( i );
+        }
+      }
+      return null;
     }
   }
-  
+
   private void t( Trajectory trajectory, int time ){
     if( trajectory != null ){
-      zone.addTrajectory( trajectory, time );
+      zone.addTrajectory( new Trajectory( trajectory ), time );
     }
   }
   
-  private void alphaTime( Location location, Trajectory trajectory, int turnTime) {
-    if( trajectory != null && trajectory.size() < abg.size() && valueAtLocation( next_time, location ) < abg.size() ){
-      setNextTime( location, Math.max( valueAtLocation(next_time, location), turnTime ) );
-    } else if( trajectory.size() < abg.size() && valueAtLocation( next_time, location ) >= abg.size() ){
-      setNextTime( location, turnTime );
-    } else {
-      // Do nothing
+  private void alphaTime( Trajectory trajectory, int turnTime) {
+    if( trajectory != null && trajectory.size() < abg.size() ){
+      for( int i = 1; i < trajectory.size() - 1; ++ i ){
+        Location location = trajectory.get(i);
+        if( valueAtLocation( next_time, location ) < abg.size() ){
+          setNextTime( location, Math.max( valueAtLocation(next_time, location), turnTime ) );
+        } else if( valueAtLocation( next_time, location ) >= abg.size() ){
+          setNextTime( location, turnTime );
+        } else {
+          // Do nothing
+        }
+      }
     }
   }
 
@@ -208,9 +222,8 @@ public class GZ {
   }
   
   private void distTime( Trajectory trajectory ){
-    TrajectoryPath trajectoryPath = trajectory.getTrajectoryPath();
     for( int i = 1; i < trajectory.size(); ++ i ){
-      setTime( trajectoryPath.get(i), trajectory.size() );
+      setTime( trajectory.get(i), i + 1 );
     }
   }
   
@@ -219,7 +232,6 @@ public class GZ {
   }
 
   private void initTime( ZoneTarget u ){
-    // TODO Auto-generated method stub
     
   }
   
@@ -252,6 +264,32 @@ public class GZ {
   
   private boolean isLastLocation( Location location ){
     return abg.lastLocation( location );
+  }
+  
+  private boolean trajectoryOverlap( Trajectory trajectory ){
+    if( zone != null ){
+      for( ZoneTrajectory zoneTrajectory : zone.getZoneTrajectories()){
+        if( zoneTrajectory.getPiece().equals( trajectory.getPiece() ) ){
+          if( trajectory.getTrajectoryPath().contains( zoneTrajectory.getTrajectory().getTrajectoryPath().get( zoneTrajectory.getTrajectory().getTrajectoryPath().size() - 1 ) )){
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  private boolean selfDefend( Trajectory track ){
+    if( zone != null ){
+      for( ZoneTrajectory zoneTrajectory : zone.getZoneTrajectories()){
+        if( zoneTrajectory.getPiece().equals( track.getPiece() ) ){
+          if( zoneTrajectory.getTrajectory().getTrajectoryPath().contains( track.get( track.size() - 1 ) )){
+            return true;
+          }
+        }
+      }
+    }
+    return false;
   }
   
 }

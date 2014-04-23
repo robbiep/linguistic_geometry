@@ -10,6 +10,8 @@ public class TrajectoryPath extends ArrayList<Location> {
   }
   
   public TrajectoryPath( TrajectoryPath trajectoryPath ) {
-    super( trajectoryPath );
+    for( Location location : trajectoryPath ){
+      add( new Location(location) );
+    }
   }
 }

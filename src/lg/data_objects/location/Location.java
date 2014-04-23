@@ -14,6 +14,11 @@ public class Location {
     this.y = 0;
     this.z = 0;
   }
+  public Location( Location location ){
+    this.x = location.x;
+    this.y = location.y;
+    this.z = location.z;
+  }
   
   public Location(Integer x) {
     this.x = x;
