@@ -290,6 +290,19 @@ public class AbstractBoardGame implements ABG_Functions {
       return piece.getColor() != piece2.getColor();
     }
   }
+
+  public Location indexToLocation( int index ){
+    int x = index % getDimX();
+    int y = ((index - x) > 0 ) ? (index - x) / getDimX() : 0;
+    int z = ((index - x - y*getDimX()) > 0) ? (index - x - y) / getDimX()*getDimY() : 0;
+    return new Location( x, y, z );
+  }
+
+  public int locationToIndex(Location location) {
+    return location.getX() 
+        + location.getY() * getDimX() 
+        + location.getZ() * getDimX() * getDimY();
+  }
   
 
 }

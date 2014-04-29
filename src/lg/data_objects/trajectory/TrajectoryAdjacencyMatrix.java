@@ -8,22 +8,11 @@ public class TrajectoryAdjacencyMatrix {
   Piece piece;
   Location root;
   int[][] adjacencyMatrix;
-  int x_dim;
-  int y_dim;
-  int z_dim;
-  int dim;
+  private final AbstractBoardGame abg;
   
   public TrajectoryAdjacencyMatrix( AbstractBoardGame abg ){
-    this( abg.getDimX(), abg.getDimY(), abg.getDimZ() );
-  }
-  
-  public TrajectoryAdjacencyMatrix( int x_dim, int y_dim, int z_dim ){
-    this.x_dim = x_dim;
-    this.y_dim = y_dim;
-    this.z_dim = z_dim;
-    
-    dim = x_dim*y_dim*z_dim;
-    adjacencyMatrix = new int[dim][dim];
+    this.abg = abg;
+    adjacencyMatrix = new int[length()][length()];
   }
   
   /**
@@ -54,33 +43,24 @@ public class TrajectoryAdjacencyMatrix {
   }
   
   /**
-   * Converts a location to the approriate offset for the adjacency matrix
-   */
-  public int locationToIndex( Location location ){
-    return location.getX() 
-            + location.getY() * x_dim 
-            + location.getZ() * x_dim * y_dim;
-  }
-  
-  /**
    * @return Number of elements of one dimension of the adjacenct matrix
    */
   public int length(){
-    return dim;
+    return abg.size();
   }
   
   /**
    * @return Number of elements in entire adjacency matrix
    */
   public int size(){
-    return dim*dim;
+    return length()*length();
   }
   
   public TrajectoryBundle getTrajectoryBundle(){
     TrajectoryBundle trajectoryBundle = new TrajectoryBundle();
     Trajectory trajectory = new Trajectory( piece );
     int root_offset = locationToIndex( root );
-    for( int i = 0; i < dim; ++ i ){
+    for( int i = 0; i < length(); ++ i ){
       if( i == root_offset ){
         continue;
       } else {
@@ -90,12 +70,16 @@ public class TrajectoryAdjacencyMatrix {
     
     return trajectoryBundle;
   }
+  
+  /**
+   * Converts a location to the approriate offset for the adjacency matrix
+   */
+  public int locationToIndex( Location location ){
+    return abg.locationToIndex( location );
+  }
 
   public Location indexToLocation( int index ){
-    int x = index % x_dim;
-    int y = ((index - x) > 0 ) ? (index - x) / x_dim : 0;
-    int z = ((index - x - y*x_dim) > 0) ? (index - x - y) / x_dim*y_dim : 0;
-    return new Location( x, y, z );
+    return abg.indexToLocation( index );
   }
   
 }

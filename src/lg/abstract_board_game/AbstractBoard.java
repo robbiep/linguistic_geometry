@@ -19,7 +19,7 @@ public class AbstractBoard {
   
   public AbstractBoard( Integer x_dim, 
                         Integer y_dim, 
-                        Integer z_dim ) {
+                        Integer z_dim ){
     super();
     this.x_dim = x_dim;
     this.y_dim = y_dim;
@@ -56,10 +56,10 @@ public class AbstractBoard {
             location.getZ() < z_dim && location.getZ() >= 0 );
   }
 
-  public Boolean lastLocation(Location location) {
+  public Boolean lastLocation( Location location ){
     return( location.getX() >= x_dim - 1 && 
             location.getY() >= y_dim - 1 && 
-            location.getZ() >= z_dim - 1);
+            location.getZ() >= z_dim - 1 );
   }
   
   

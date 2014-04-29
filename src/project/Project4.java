@@ -5,17 +5,16 @@ import lg.data_objects.Color;
 import lg.data_objects.location.Location;
 import lg.data_objects.piece.Piece;
 import lg.data_objects.piece.PieceFactory;
-import lg.data_objects.zone.ZoneBundle;
-import lg.data_objects.zone.ZoneTarget;
-import lg.grammar.G_Z;
+import lg.data_objects.translations.Translations;
+import lg.grammar.G_RS;
 import chess.ChessPieceFactory;
 
-public class Project3 {
+public class Project4 {
   public static void run(){
     System.out.println( 
-        "\nLG Project 3\n" +
+        "\nLG Project 4\n" +
         "------------\n" +
-        "Generates zones for two different ABG configurations.\n");
+        "Implementation of grammar of reduced searches.\n");
     
     ChessPieceFactory factory = new ChessPieceFactory();
     AbstractBoardGame abg = new AbstractBoardGame( 8, 8, 1, factory );
@@ -36,9 +35,9 @@ public class Project3 {
     abg.addPiece( PieceFactory.createObstacle(), new Location( 5, 1, 0 ) );
     abg.addPiece( PieceFactory.createObstacle(), new Location( 6, 5, 0 ) );
     abg.addPiece( PieceFactory.createObstacle(), new Location( 6, 4, 0 ) );
-    G_Z gz = new G_Z( abg, q0, p0, location_q0, location_p0 );
-   // ZoneBundle zones = gz.executeGrammar();
-    ZoneBundle zones = gz.S( new ZoneTarget( location_q0, location_p0, 4 ) );
-    System.out.println( zones.toString() );
+    
+    G_RS g_rs = new G_RS( abg, q0, p0, location_q0, location_p0 );
+    Translations translations = g_rs.executeGrammar();
+    System.out.println( translations.toString() );
   }
 }

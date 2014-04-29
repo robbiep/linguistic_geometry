@@ -13,7 +13,7 @@ import lg.data_objects.location.Location;
 import lg.data_objects.piece.Piece;
 import lg.data_objects.piece.PieceFactory;
 import lg.data_structures.GamePiece;
-import lg.grammar.GT2;
+import lg.grammar.G_T2;
 
 public class LgREPL extends REPL {
 
@@ -314,7 +314,7 @@ public class LgREPL extends REPL {
           public void execute( String[] args ){
             if( args.length == 10 ){
               try{
-                GT2 gt2 = new GT2( abg );
+                G_T2 gt2 = new G_T2( abg );
                 gt2.generateTrajectory( 
                     pieceFactory.createPiece( args[1], 
                     Color.get( args[2] ) ),

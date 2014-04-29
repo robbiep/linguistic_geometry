@@ -7,6 +7,7 @@ import org.junit.Test;
 import project.Project1;
 import project.Project2;
 import project.Project3;
+import project.Project4;
 
 public class TestProject {
 
@@ -23,6 +24,11 @@ public class TestProject {
   @Test
   public void testProject_3(){
     Project3.run();
+  }
+  
+  @Test
+  public void testProject_4(){
+    Project4.run();
   }
 
 }

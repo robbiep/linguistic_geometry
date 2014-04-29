@@ -12,7 +12,7 @@ import lg.data_objects.piece.PieceFactory;
 import lg.data_objects.trajectory.Trajectory;
 import lg.data_objects.trajectory.TrajectoryBundle;
 import lg.data_structures.GamePiece;
-import lg.grammar.GT2;
+import lg.grammar.G_T2;
 import lg.reachability.ReachabilityRule;
 import lg.reachability.ReachabilityRules;
 import chess.ChessPieceFactory;
@@ -33,7 +33,7 @@ public class Project2 {
   static Scanner keyboard;
   static ChessPieceFactory factory = new ChessPieceFactory();
   static AbstractBoardGame abg = new AbstractBoardGame( 8, 8, 1, factory );
-  static GT2 gt2 = new GT2( abg );
+  static G_T2 gt2 = new G_T2( abg );
   static Location location_x = new Location( 5, 5, 0 );
   static Location location_y = new Location( 5, 2, 0 );
   static ArrayList<Tuple> trajectories = new ArrayList<Tuple>();
@@ -62,7 +62,7 @@ public class Project2 {
     keyboard.nextLine();
     
     abg = new AbstractBoardGame( 8, 8, 1, factory );
-    gt2 = new GT2( abg );
+    gt2 = new G_T2( abg );
     piece = factory.createKing( Color.WHITE );
     location_x = new Location( 0, 4, 0 );
     location_y = new Location( 7, 4, 0 );
@@ -92,7 +92,7 @@ public class Project2 {
     trajectories.clear();
     abg = new AbstractBoardGame( 8, 8, 1, factory );
     abg.addPiece( PieceFactory.createObstacle(), new Location(5,3,0) );
-    gt2 = new GT2( abg );
+    gt2 = new G_T2( abg );
     
     piece = factory.createPawn( Color.WHITE );
     length = 3;
@@ -369,7 +369,7 @@ public class Project2 {
   private static void genIrregularTrajecotry(){
     IrregularPieceFactory irregularPieceFactory = new IrregularPieceFactory();
     abg = new AbstractBoardGame( 2, 8, 2, irregularPieceFactory );
-    gt2 = new GT2( abg );
+    gt2 = new G_T2( abg );
     trajectories.clear();
     location_x = new Location( 0, 0, 0 );
     location_y = new Location( 0, 7, 0 );

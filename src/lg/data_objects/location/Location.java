@@ -94,6 +94,6 @@ public class Location {
   
   @Override
   public int hashCode(){
-    return (this.x * 7) + (this.y * 37) + (this.z * 373);
+    return (this.x) + (this.y * 37) + (this.z * 373);
   }
 }

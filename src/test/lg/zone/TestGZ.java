@@ -3,8 +3,9 @@ package test.lg.zone;
 import static org.junit.Assert.*;
 import lg.abstract_board_game.AbstractBoardGame;
 import lg.data_objects.Color;
+import lg.data_objects.location.Location;
 import lg.data_objects.piece.Piece;
-import lg.grammar.GZ;
+import lg.grammar.G_Z;
 
 import org.junit.Test;
 
@@ -19,7 +20,9 @@ public class TestGZ {
     AbstractBoardGame abg = MockData.emptyChestGame();
     Piece p0 = factory.createBishop( Color.WHITE );
     Piece q  = factory.createPawn( Color.BLACK );
-    GZ gz = new GZ( abg, p0, q );
+    Location x = new Location();
+    Location y = new Location();
+    G_Z gz = new G_Z( abg, p0, q, x, y );
   }
 
 }

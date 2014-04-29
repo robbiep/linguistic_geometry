@@ -12,8 +12,9 @@ import lg.data_objects.zone.Zone;
 import lg.data_objects.zone.ZoneBundle;
 import lg.data_objects.zone.ZoneTarget;
 import lg.data_objects.zone.ZoneTrajectory;
+import lg.reachability.Reachability;
 
-public class GZ {
+public class G_Z {
   
   AbstractBoardGame abg;
   Piece p0;
@@ -25,10 +26,22 @@ public class GZ {
   int[][][] time;
   int[][][] next_time;
   
-  public GZ( AbstractBoardGame abg, Piece p0, Piece q ){
+  public G_Z( AbstractBoardGame abg, Piece p0, Piece q, Location x0, Location y0 ){
     this.abg  = abg;
     this.p0   = p0;
     this.q    = q;
+    this.x0   = x0;
+    this.y0   = y0;
+  }
+  
+  public ZoneBundle executeGrammar() {
+    Reachability reachability = new Reachability();
+    int distance = reachability.getDistance( abg, p0, x0, y0 );
+    if( distance <= abg.size()*2 && distance > 0 ){
+      return S( new ZoneTarget( x0, y0, distance) );
+    } else {
+      return new ZoneBundle();
+    }
   }
 
   public ZoneBundle S( ZoneTarget u ){
@@ -182,7 +195,7 @@ public class GZ {
    * @return Trajectory for u
    */
   private Trajectory h( ZoneTarget u ){
-    GT2 gt2 = new GT2( abg );
+    G_T2 gt2 = new G_T2( abg );
     TrajectoryBundle tracks = gt2.generateTrajectory( abg.abg_ON(u.x), u.x, u.y, u.l );
     if( tracks.size() == 0 ){
       return null;
@@ -291,5 +304,4 @@ public class GZ {
     }
     return false;
   }
-  
 }

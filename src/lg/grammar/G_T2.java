@@ -14,7 +14,7 @@ import lg.data_objects.trajectory.TrajectoryBundleGenerator;
 import lg.data_structures.GamePiece;
 
 // TODO implement with a parser and manage like a real grammar
-public class GT2 {
+public class G_T2 {
   
   private AbstractBoardGame abg;
   private Piece piece;
@@ -26,7 +26,7 @@ public class GT2 {
   private TrajectoryAdjacencyMatrix adjMatrix;
   
   
-  public GT2( AbstractBoardGame abg ) {
+  public G_T2( AbstractBoardGame abg ) {
     super();
     this.abg = abg;
   }
