@@ -57,7 +57,7 @@ public class AbstractBoard {
   }
 
   public Boolean lastLocation( Location location ){
-    return( location.getX() >= x_dim - 1 && 
+    return( location.getX() >= x_dim - 1 &&
             location.getY() >= y_dim - 1 && 
             location.getZ() >= z_dim - 1 );
   }

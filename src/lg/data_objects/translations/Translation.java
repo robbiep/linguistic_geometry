@@ -12,10 +12,23 @@ public class Translation {
   public boolean equals( Object object ){
     if (object != null && object instanceof Translation ){
       Translation translation = (Translation) object;
-      return this.transition.equals( translation );
+      if( this.transition != null && translation.transition != null ){
+        return this.transition.equals( translation );
+      } else {
+        return false;
+      }
     } else {
       return false;
     }
+  }
+  
+  @Override
+  public String toString(){
+    String transitionStr = (transition != null) ? transition.toString() : "ROOT";
+    return "( " + transition.toString() 
+        + ", PARENT=" + parent 
+        + ", CHILD=" + child 
+        + ", SIBLING=" + sibling + " )";
   }
   
 }

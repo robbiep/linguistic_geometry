@@ -26,12 +26,12 @@ public class G_Z {
   int[][][] time;
   int[][][] next_time;
   
-  public G_Z( AbstractBoardGame abg, Piece p0, Piece q, Location x0, Location y0 ){
+  public G_Z( AbstractBoardGame abg, Piece p0, Piece q ){
     this.abg  = abg;
     this.p0   = p0;
     this.q    = q;
-    this.x0   = x0;
-    this.y0   = y0;
+    this.x0   = abg.getByPiece(p0);
+    this.y0   = abg.getByPiece(q);
   }
   
   public ZoneBundle executeGrammar() {

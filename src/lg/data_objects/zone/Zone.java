@@ -13,6 +13,10 @@ public class Zone {
     zone_trajectories.add( new ZoneTrajectory(trajectory, time) );
   }
   
+  public void addTrajectory( ZoneTrajectory zoneTrajectory ){
+    zone_trajectories.add( zoneTrajectory );
+  }
+  
   public ZoneTrajectory getMainTrajectory(){
     return zone_trajectories.get( 0 );
   }

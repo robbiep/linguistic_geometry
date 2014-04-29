@@ -128,12 +128,30 @@ public class TestAbstractBoardGame {
 
   @Test
   public void testAbg_TR(){
-    fail( "Not yet implemented" ); // TODO
+    abg = MockData.abstractBoardGame();
+    Piece p = MockData.pieceFactory().createPawn( Color.BLACK );
+    Location l1 = new Location( 7, 7, 0 );
+    Location l2 = new Location( 7, 6, 0 );
+    abg.addPiece( p, l1 );
+    
+    abg.abg_TR(p, l1, l2 );
+    assert( abg.getByLocation( l1 ) == null );
+    assert( abg.getByLocation( l2 ).equals( p ) );
   }
 
   @Test
   public void testAbg_MAP(){
     fail( "Not yet implemented" ); // TODO
+  }
+  
+  @Test
+  public void testGetPieceLocation(){
+    abg = MockData.abstractBoardGame();
+    Piece p = MockData.pieceFactory().createPawn( Color.BLACK );
+    Location l = new Location( 7, 7, 0 );
+    abg.addPiece( p, l );
+    assert( abg.getByLocation( l ).equals( p ) );
+    assert( abg.getByPiece( p ).equals( l ) );
   }
 
 }

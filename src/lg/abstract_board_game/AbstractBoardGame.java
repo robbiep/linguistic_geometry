@@ -12,6 +12,7 @@ import lg.data_objects.Color;
 import lg.data_objects.location.Location;
 import lg.data_objects.piece.Piece;
 import lg.data_objects.piece.PieceFactory;
+import lg.data_objects.translations.Transition;
 import lg.data_structures.GameMap;
 import lg.data_structures.GamePiece;
 import lg.reachability.ReachabilityTable;
@@ -79,6 +80,9 @@ public class AbstractBoardGame implements ABG_Functions {
   // GamePiece FUNCTIONS
   ///////////////////////////////////////////
   
+  /**
+   * @return piece at <b>location<b>, or null if none found
+   */
   public Piece getByLocation( Location location ){
     return game_map.get( location );
   }
@@ -207,6 +211,10 @@ public class AbstractBoardGame implements ABG_Functions {
     } 
     return false;
   }
+  
+  public Boolean abg_TR( Transition transition ){
+    return abg_TR( transition.piece, transition.x, transition.y );
+  }
 
   @Override
   public Integer abg_MAP( Piece piece, 
@@ -302,6 +310,18 @@ public class AbstractBoardGame implements ABG_Functions {
     return location.getX() 
         + location.getY() * getDimX() 
         + location.getZ() * getDimX() * getDimY();
+  }
+
+  public Location getByPiece( Piece piece ) {
+    Piece p;
+    Iterator<Entry<Location,Piece>> it = game_map.entrySet().iterator();
+    while( it.hasNext() ){
+      Entry<Location, Piece> entry = it.next();
+      if( piece == entry.getValue() ){
+        return entry.getKey();
+      }
+    }
+    return null;
   }
   
 

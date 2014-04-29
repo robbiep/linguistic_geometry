@@ -36,9 +36,9 @@ public class Project3 {
     abg.addPiece( PieceFactory.createObstacle(), new Location( 5, 1, 0 ) );
     abg.addPiece( PieceFactory.createObstacle(), new Location( 6, 5, 0 ) );
     abg.addPiece( PieceFactory.createObstacle(), new Location( 6, 4, 0 ) );
-    G_Z gz = new G_Z( abg, q0, p0, location_q0, location_p0 );
-   // ZoneBundle zones = gz.executeGrammar();
-    ZoneBundle zones = gz.S( new ZoneTarget( location_q0, location_p0, 4 ) );
+    G_Z gz = new G_Z( abg, q0, p0 );
+    ZoneBundle zones = gz.executeGrammar();
+   // ZoneBundle zones = gz.S( new ZoneTarget( location_q0, location_p0, 4 ) );
     System.out.println( zones.toString() );
   }
 }
