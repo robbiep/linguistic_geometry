@@ -8,12 +8,12 @@ import lg.data_objects.piece.Piece;
 
 public class Translations extends HashMap<Integer,Translation> {
 
-  public boolean containsMove( Translation translation ){
-    for( Translation _translation : this.values() ){
-      if( _translation.equals( translation ) ){
-        return true;
-      }
+  @Override
+  public Translation put( Integer K, Translation V ){
+    if( !containsValue( V )){
+      return super.put( K, V );
+    } else {
+      return null;
     }
-    return false;
   }
 }
