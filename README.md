@@ -15,3 +15,24 @@ Project 1
 
 Generates reachability tables for all chess pieces - these tables represent the
 number of movements a chess piece needs to make to reach a certain location.
+
+Project 2
+---------
+
+Generate trajectories for a board with and without obstacles.
+Generate trajectories for a king from a5 to h5.
+
+Project 3
+---------
+
+Generate zones of trajectories for two different chess board setups.
+
+Project 4
+---------
+
+Generate translations utilizing grammar of reduced searches.
+
+Project 5
+---------
+
+Solve the Reti endgame and display state space.
