@@ -24,11 +24,14 @@ public class Translation {
   
   @Override
   public String toString(){
-    String transitionStr = (transition != null) ? transition.toString() : "ROOT";
-    return "( " + transition.toString() 
-        + ", PARENT=" + parent 
-        + ", CHILD=" + child 
-        + ", SIBLING=" + sibling + " )";
+    if( transition == null ){
+      return "";
+    } else {
+      return "( " + transition.toString()
+          + ", PARENT=" + parent 
+          + ", CHILD=" + child 
+          + ", SIBLING=" + sibling + " )";
+    }
   }
   
 }

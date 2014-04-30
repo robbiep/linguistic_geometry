@@ -79,5 +79,18 @@ public class TestTranslation {
     assert( translations.put( 1, tl3 ) == null );
     assert( translations.size() == 2 );
   }
+  
+  @Test
+  public void testTransitionToString() {
+    Piece p1 = MockData.pieceFactory().createPawn( Color.BLACK );
+    Location x1 = new Location( 0, 0, 0 );
+    Location y1 = new Location( 0, 1, 0 );
+    Transition t1 = new Transition( p1, x1, y1 );
+    System.out.println( t1.toString() );
+    Translation tl = new Translation();
+    System.out.println( tl.toString() );
+    tl.transition = t1;
+    System.out.println( tl.toString() );
+  }
 
 }

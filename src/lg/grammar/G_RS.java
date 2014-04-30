@@ -70,9 +70,9 @@ public class G_RS {
       ++ END;
       ++ d;
       SIGN = SIGN * -1;
-      A2( END );
+      A2( i + 1 );
       pi( END );
-      A2( END );
+      A2( i );
     } else {
       A3( i );
     }
@@ -111,6 +111,11 @@ public class G_RS {
   private void pi( int i ){
     // TODO Auto-generated method stub
     
+  }
+  
+  @Override
+  public String toString(){
+    return translations.toString();
   }
 
 }
