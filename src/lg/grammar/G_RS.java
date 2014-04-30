@@ -79,6 +79,18 @@ public class G_RS {
     
   }
 
+  private void A3( int i ){
+    if( d > 0 ){
+      SIGN = -1 * SIGN;
+      //d = d - 1;
+    }
+  }
+
+  private void pi( int i ){
+    // TODO Auto-generated method stub
+    
+  }
+  
   private Transition NEWMOVE( ZoneBundle zoneBundle ){
     ZoneBundle subZone = null;
     if( SIGN == 1 ){
@@ -99,18 +111,6 @@ public class G_RS {
     }
     
     return null;
-  }
-
-  private void A3( int i ){
-    if( d > 0 ){
-      SIGN = -1 * SIGN;
-      //d = d - 1;
-    }
-  }
-
-  private void pi( int i ){
-    // TODO Auto-generated method stub
-    
   }
   
   @Override

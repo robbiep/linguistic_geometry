@@ -13,7 +13,10 @@ public class Translation {
     if (object != null && object instanceof Translation ){
       Translation translation = (Translation) object;
       if( this.transition != null && translation.transition != null ){
-        return this.transition.equals( translation );
+        return this.transition.equals( translation )
+            && this.child == translation.child
+            && this.parent == translation.parent
+            && this.sibling == translation.sibling;
       } else {
         return false;
       }
