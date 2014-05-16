@@ -1,5 +1,7 @@
 package lg;
 
+import java.util.ArrayList;
+
 import project.Project1;
 import project.Project2;
 import project.Project3;
@@ -79,8 +81,8 @@ public class LgREPL extends REPL {
             System.out.print( "\nCenter: " + 
                               center.toString() );
             System.out.print( "\nObstacles: " );
-            GamePiece[] obstacles = abg.getAllPiecesByColor( Color.OBSTACLE );
-            if( obstacles.length > 0 ){
+            ArrayList<GamePiece> obstacles = abg.getAllPiecesByColor( Color.OBSTACLE );
+            if( obstacles.size() > 0 ){
               for( GamePiece obstacle : obstacles ){
                 System.out.print( "(" + obstacle.location.getX() + 
                                   ", " + obstacle.location.getY() + 

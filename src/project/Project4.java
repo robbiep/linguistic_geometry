@@ -6,6 +6,7 @@ import lg.data_objects.location.Location;
 import lg.data_objects.piece.Piece;
 import lg.data_objects.piece.PieceFactory;
 import lg.data_objects.translations.Translations;
+import lg.data_objects.zone.MV;
 import lg.grammar.G_RS;
 import chess.ChessPieceFactory;
 
@@ -18,25 +19,27 @@ public class Project4 {
     
     ChessPieceFactory factory = new ChessPieceFactory();
     AbstractBoardGame abg = new AbstractBoardGame( 8, 8, 1, factory );
-    Piece q2 = factory.createBishop( Color.WHITE );
-    Piece q1 = factory.createKing( Color.WHITE );
-    Piece q0 = factory.createPawn( Color.BLACK );
-    Piece p0 = factory.createPawn( Color.WHITE );
-    Location location_q2 = new Location( 3, 1, 0 );
-    Location location_q1 = new Location( 5, 2, 0 );
-    Location location_q0 = new Location( 7, 3, 0 );
-    Location location_p0 = new Location( 7, 7, 0 );
-    abg.addPiece( q2, location_q2 );
-    abg.addPiece( q1, location_q1 );
-    abg.addPiece( q0, location_q0 );
-    abg.addPiece( p0, location_p0 );
-    abg.addPiece( PieceFactory.createObstacle(), new Location( 3, 3, 0 ) );
-    abg.addPiece( PieceFactory.createObstacle(), new Location( 4, 2, 0 ) );
-    abg.addPiece( PieceFactory.createObstacle(), new Location( 5, 1, 0 ) );
-    abg.addPiece( PieceFactory.createObstacle(), new Location( 6, 5, 0 ) );
-    abg.addPiece( PieceFactory.createObstacle(), new Location( 6, 4, 0 ) );
+    Piece whiteKing = factory.createKing( Color.WHITE );
+    Piece whitePawn = factory.createPawn( Color.WHITE );
+    Piece whiteTarget = factory.createTarget( Color.WHITE );
+    Piece blackKing = factory.createKing( Color.BLACK );
+    Piece blackPawn = factory.createPawn( Color.BLACK );
+    Piece blackTarget = factory.createTarget( Color.BLACK );
+    Location location_whiteKing = new Location( 7, 0, 0 );
+    Location location_whitePawn = new Location( 2, 2, 0 );
+    Location location_whiteTarget = new Location( 7, 7, 0 );
+    Location location_blackKing = new Location( 0, 2, 0 );
+    Location location_blackPawn = new Location( 7, 2, 0 );
+    Location location_blackTarget = new Location( 2, 0, 0 );
+    abg.addPiece( whiteKing, location_whiteKing );
+    abg.addPiece( whitePawn, location_whitePawn );
+    abg.addPiece( whiteTarget, location_whiteTarget );
+    abg.addPiece( blackKing, location_blackKing );
+    abg.addPiece( blackPawn, location_blackPawn );
+    abg.addPiece( blackTarget, location_blackTarget );
     
-    G_RS g_rs = new G_RS( abg, q0, p0, location_q0, location_p0 );
+    G_RS g_rs = new G_RS( abg, blackPawn, whiteTarget, location_blackPawn, location_whiteTarget );
+    g_rs.setMV( new MV( Project4_MV.retiTransitions() ) );
     Translations translations = g_rs.executeGrammar();
     System.out.println( translations.toString() );
   }

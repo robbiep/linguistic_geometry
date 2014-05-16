@@ -4,6 +4,7 @@ import java.util.Set;
 
 import lg.data_objects.location.Location;
 import lg.data_objects.piece.Piece;
+import lg.data_structures.GamePiece;
 
 public interface ABG_Functions {
   
@@ -20,7 +21,7 @@ public interface ABG_Functions {
   /**
    * @return True if piece successfully moved to new Location
    */
-  public Boolean              abg_TR  ( Piece piece, 
+  public GamePiece              abg_TR  ( Piece piece, 
                                         Location current_location, 
                                         Location target_location );
   /**

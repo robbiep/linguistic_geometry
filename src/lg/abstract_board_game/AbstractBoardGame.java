@@ -1,6 +1,7 @@
 package lg.abstract_board_game;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
@@ -91,7 +92,7 @@ public class AbstractBoardGame implements ABG_Functions {
     return game_map.remove( location );
   }
 
-  public GamePiece[] getAllPieces( ){
+  public ArrayList<GamePiece> getAllPieces( ){
     return game_map.getAll();
   }
   
@@ -107,7 +108,7 @@ public class AbstractBoardGame implements ABG_Functions {
     return gamePieces.toArray( new GamePiece[gamePieces.size()] );
   }
   
-  public GamePiece[] getAllPiecesByColor( Color color ){
+  public ArrayList<GamePiece> getAllPiecesByColor( Color color ){
     ArrayList<GamePiece> gamePieces = new ArrayList<GamePiece>();
     Iterator<Map.Entry<Location,Piece>> it = game_map.entrySet().iterator();
     while( it.hasNext() ){
@@ -116,7 +117,7 @@ public class AbstractBoardGame implements ABG_Functions {
         gamePieces.add( new GamePiece( entry.getValue(), entry.getKey() )); 
       }
     }
-    return gamePieces.toArray( new GamePiece[gamePieces.size()] );
+    return gamePieces;
   }
   
   public void clearAllByColor( Color color ){
@@ -194,25 +195,24 @@ public class AbstractBoardGame implements ABG_Functions {
   }
 
   @Override
-  public Boolean abg_TR(  Piece piece, 
+  public GamePiece abg_TR(  Piece piece, 
                           Location current_location,
                           Location target_location ){
     
     if( abg_ON( current_location ) != null &&
-        abg_ON( current_location ).equals(piece) &&
-        abg_R( piece, current_location, target_location ) ){
+        abg_ON( current_location ).equals( piece ) ){
         if( abg_ON( target_location ) == null || 
             abg_OPPOSE( piece,  abg_ON( target_location ) )){
           removeByLocation( target_location );
-          removeByLocation( current_location );
+          GamePiece removedPiece = new GamePiece( removeByLocation( current_location ),current_location );
           addPiece( piece, target_location );
-          return true;
+          return removedPiece;
         }
     } 
-    return false;
+    return null;
   }
   
-  public Boolean abg_TR( Transition transition ){
+  public GamePiece abg_TR( Transition transition ){
     return abg_TR( transition.piece, transition.x, transition.y );
   }
 
@@ -313,16 +313,60 @@ public class AbstractBoardGame implements ABG_Functions {
   }
 
   public Location getByPiece( Piece piece ) {
-    Piece p;
     Iterator<Entry<Location,Piece>> it = game_map.entrySet().iterator();
     while( it.hasNext() ){
       Entry<Location, Piece> entry = it.next();
-      if( piece == entry.getValue() ){
+      if( piece.equals(entry.getValue()) ){
         return entry.getKey();
       }
     }
     return null;
   }
   
+  @Override
+  public String toString(){
+    String toString = new String();
+    for( int z = 0; z < abstract_board.getZ(); ++ z ){
+      toString += toString( z ) + "\n";
+    }
+    return toString;
+  }
+  
+  public String toString( int z ){
+    String toString = new String();
+    int pieceId = 0;
+    boolean obstacle = false;
+    ArrayList<Piece> gamePieces = new ArrayList<Piece>();
+    toString += "Z-dimension: " + z + "\n";
+    for( int y = 0; y < abstract_board.getY(); ++ y ){
+      for( int x = 0; x < abstract_board.getX(); ++ x ){
+        Piece piece = getByLocation( new Location( x, y, z ) );
+        if( piece != null ){
+          if( !piece.getColor().equals( Color.OBSTACLE) ){
+            gamePieces.add( piece );
+            toString += pieceId + " ";
+            pieceId ++;
+          } else {
+            obstacle = true;
+            toString += "# ";
+          }
+        } else {
+          toString += "x ";
+        }
+      }
+      toString += "\n";
+    }
+    if( gamePieces.size() > 0 || obstacle ){
+      toString += "\nPieces at dimension (" + z + "):";
+      if( obstacle ){
+        toString += "\n# = Obstacle";
+      }
+      for( int i = 0; i < gamePieces.size(); ++ i ){
+        toString += "\n" + i + " = " + gamePieces.get( i ).toString();
+      }
+      toString += "\n";
+    }
+    return toString;
+  }
 
 }

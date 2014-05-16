@@ -62,58 +62,58 @@ public class TestABG_Functions {
   /**
    * Test method for {@link lg.abstract_board_game.ABG_Functions#abg_TR(lg.data_objects.piece.Piece, lg.data_objects.location.Location, lg.data_objects.location.Location)}.
    */
-  @Test
-  public void testAbg_TR() {
-    abg.addPiece( MockData.pieceFactory().createPawn( Color.WHITE ), MockData.centerLocation() );
-    Location location2 = new Location( 7, 6, 7 );
-    
-    // Move piece to valid empty location
-    assertTrue(
-        abg.abg_TR( MockData.pieceFactory().createPawn( Color.WHITE ), 
-                    MockData.centerLocation(), 
-                    location2 )
-        );
-    assertTrue( abg.abg_ON( location2 ).equals( 
-        MockData.pieceFactory().createPawn( Color.WHITE ) ));
-    
-    // Move piece to non-reachable empty location
-    assertFalse(
-        abg.abg_TR( MockData.pieceFactory().createPawn( Color.WHITE ), 
-                    location2, 
-                    MockData.centerLocation() )
-        );
-    assertTrue( abg.abg_ON( location2 ).equals( 
-        MockData.pieceFactory().createPawn( Color.WHITE ) ));
-    
-    // No piece to move
-    assertFalse(
-        abg.abg_TR( MockData.pieceFactory().createPawn( Color.WHITE ), 
-                    MockData.centerLocation(), 
-                    location2 )
-        );
-    assertTrue( abg.abg_ON( location2 ).equals( 
-        MockData.pieceFactory().createPawn( Color.WHITE ) ));
-    
- // Move piece to enemy location
-    abg.addPiece( MockData.pieceFactory().createQueen( Color.BLACK ), MockData.centerLocation() );
-    assertTrue(
-        abg.abg_TR( MockData.pieceFactory().createQueen( Color.BLACK ), 
-                    MockData.centerLocation(), 
-                    location2 )
-        );
-    assertTrue( abg.abg_ON( location2 ).equals( 
-        MockData.pieceFactory().createQueen( Color.BLACK ) ));
-    
- // Move piece to friendly location
-    abg.addPiece( MockData.pieceFactory().createQueen( Color.BLACK ), MockData.centerLocation() );
-    assertFalse(
-        abg.abg_TR( MockData.pieceFactory().createQueen( Color.BLACK ), 
-                    MockData.centerLocation(), 
-                    location2 )
-        );
-    assertTrue( abg.abg_ON( location2 ).equals( 
-        MockData.pieceFactory().createQueen( Color.BLACK ) ));
-  }
+//  @Test
+//  public void testAbg_TR() {
+//    abg.addPiece( MockData.pieceFactory().createPawn( Color.WHITE ), MockData.centerLocation() );
+//    Location location2 = new Location( 7, 6, 7 );
+//    
+//    // Move piece to valid empty location
+//    assertTrue(
+//        abg.abg_TR( MockData.pieceFactory().createPawn( Color.WHITE ), 
+//                    MockData.centerLocation(), 
+//                    location2 )
+//        );
+//    assertTrue( abg.abg_ON( location2 ).equals( 
+//        MockData.pieceFactory().createPawn( Color.WHITE ) ));
+//    
+//    // Move piece to non-reachable empty location
+//    assertFalse(
+//        abg.abg_TR( MockData.pieceFactory().createPawn( Color.WHITE ), 
+//                    location2, 
+//                    MockData.centerLocation() )
+//        );
+//    assertTrue( abg.abg_ON( location2 ).equals( 
+//        MockData.pieceFactory().createPawn( Color.WHITE ) ));
+//    
+//    // No piece to move
+//    assertFalse(
+//        abg.abg_TR( MockData.pieceFactory().createPawn( Color.WHITE ), 
+//                    MockData.centerLocation(), 
+//                    location2 )
+//        );
+//    assertTrue( abg.abg_ON( location2 ).equals( 
+//        MockData.pieceFactory().createPawn( Color.WHITE ) ));
+//    
+// // Move piece to enemy location
+//    abg.addPiece( MockData.pieceFactory().createQueen( Color.BLACK ), MockData.centerLocation() );
+//    assertTrue(
+//        abg.abg_TR( MockData.pieceFactory().createQueen( Color.BLACK ), 
+//                    MockData.centerLocation(), 
+//                    location2 )
+//        );
+//    assertTrue( abg.abg_ON( location2 ).equals( 
+//        MockData.pieceFactory().createQueen( Color.BLACK ) ));
+//    
+// // Move piece to friendly location
+//    abg.addPiece( MockData.pieceFactory().createQueen( Color.BLACK ), MockData.centerLocation() );
+//    assertFalse(
+//        abg.abg_TR( MockData.pieceFactory().createQueen( Color.BLACK ), 
+//                    MockData.centerLocation(), 
+//                    location2 )
+//        );
+//    assertTrue( abg.abg_ON( location2 ).equals( 
+//        MockData.pieceFactory().createQueen( Color.BLACK ) ));
+//  }
 
   /**
    * Test method for {@link lg.abstract_board_game.ABG_Functions#abg_MAP(lg.data_objects.piece.Piece, lg.data_objects.location.Location, lg.data_objects.location.Location)}.

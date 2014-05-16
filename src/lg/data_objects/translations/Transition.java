@@ -31,6 +31,10 @@ public class Transition {
       return false;
     }
   }
+  
+  public Transition reverse(){
+    return new Transition( piece, y, x );
+  }
 
   
 }

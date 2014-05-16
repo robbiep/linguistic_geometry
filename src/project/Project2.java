@@ -78,9 +78,8 @@ public class Project2 {
         " (" + piece.getColor().toString()+ ")" + " Length: " + length );
     System.out.println( kingA5H5.toString() );
     System.out.println( "The grammar generated a total of: " +  kingA5H5.size() 
-        + " trajectories for the KING." );
+        + " trajectories for the KING.\n\n" );
     
-    keyboard.close();
   }
 
   private static void genTrajectoriesWithObstacle(){

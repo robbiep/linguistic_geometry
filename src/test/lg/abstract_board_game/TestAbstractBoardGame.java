@@ -1,6 +1,9 @@
 package test.lg.abstract_board_game;
 
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+
 import lg.abstract_board_game.AbstractBoard;
 import lg.abstract_board_game.AbstractBoardGame;
 import lg.data_objects.Color;
@@ -81,14 +84,14 @@ public class TestAbstractBoardGame {
 
   @Test
   public void testGetAllByColor(){
-    GamePiece[] game_piece = abg.getAllPiecesByColor( Color.WHITE );
-    assertTrue( game_piece.length == 16 );
+    ArrayList<GamePiece> game_piece = abg.getAllPiecesByColor( Color.WHITE );
+    assertTrue( game_piece.size() == 16 );
   }
 
   @Test
   public void testClearAllByColor(){
     abg.clearAllByColor( Color.WHITE );
-    assertTrue( abg.getAllPiecesByColor( Color.WHITE ).length == 0 );
+    assertTrue( abg.getAllPiecesByColor( Color.WHITE ).size() == 0 );
   }
 
   @Test
@@ -152,6 +155,23 @@ public class TestAbstractBoardGame {
     abg.addPiece( p, l );
     assert( abg.getByLocation( l ).equals( p ) );
     assert( abg.getByPiece( p ).equals( l ) );
+  }
+  
+  @Test
+  public void testToString(){
+    abg = new AbstractBoardGame( 8,8,2, MockData.pieceFactory() );
+    Piece p = MockData.pieceFactory().createPawn( Color.BLACK );
+    Location l = new Location( 7, 7, 0 );
+    abg.addPiece( p, l );
+    p = MockData.pieceFactory().createKing( Color.BLACK );
+    l = new Location( 2, 3, 0 );
+    abg.addPiece( p, l );
+    p = MockData.pieceFactory().createObstacle();
+    l = new Location( 1, 6, 0 );
+    abg.addPiece( p, l );
+    System.out.print( abg.toString() );
+    
+    System.out.print( abg.toString(0) );
   }
 
 }

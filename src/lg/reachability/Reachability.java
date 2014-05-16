@@ -138,11 +138,11 @@ public class Reachability {
   private static void updateBlockedLocations( Piece piece, 
                                               Location current_location ){
     blocked_locations.clear();
-    GamePiece[] game_pieces = abg.getAllPiecesByColor( Color.OBSTACLE );
+    ArrayList<GamePiece> game_pieces = abg.getAllPiecesByColor( Color.OBSTACLE );
         
-    for( int i = 0; i < game_pieces.length; ++ i ){
+    for( int i = 0; i < game_pieces.size(); ++ i ){
       
-      Location blocked_location = game_pieces[i].location;
+      Location blocked_location = game_pieces.get(i).location;
       blocked_locations.add( blocked_location );
       
       int x_inc = incValue( blocked_location.getX() - current_location.getX() );

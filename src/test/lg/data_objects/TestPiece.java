@@ -27,9 +27,9 @@ public class TestPiece {
   @Test
   public void testPieceFactoryObstacle(){
     Piece piece = MockData.pieceFactory().createObstacle();
-    assertEquals( "Set/Get 'name'", MockData.pieceFactory().OBSTACLE, piece.getName() );
-    assertEquals( "Set/Get 'group'", MockData.pieceFactory().COLOR, piece.getColor() );
-    assertEquals( "Set/Get 'value'", MockData.pieceFactory().VALUE, piece.getValue() );
+    assertEquals( "Set/Get 'name'", MockData.pieceFactory().OBSTACLE_NAME, piece.getName() );
+    assertEquals( "Set/Get 'group'", MockData.pieceFactory().OBSTACLE_COLOR, piece.getColor() );
+    assertEquals( "Set/Get 'value'", MockData.pieceFactory().OBSTACLE_VALUE, piece.getValue() );
     assertTrue( "Reachability", piece.isReachable( null, null ) == null );
   }
   
